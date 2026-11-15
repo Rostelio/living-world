@@ -531,3 +531,15 @@ The look follows the time of day: bright and bold by day, warm and painterly at 
 - **Holy wars:** the head of a faith calls the faithful to retake a holy site held by unbelievers, and co-religionists join the war. At most one holy war per faith every 25 years; the AI calls them too.
 - **Reform the Faith:** a decision from the Renaissance that founds a Reformed faith (+8% knowledge) at −15 stability.
 - The faith card in the Government panel shows all of this.
+
+**Creatures and hero quests:**
+- **Creatures:** dragons, giants, trolls and wyverns keep lairs in the wild, away from towns. You can see them on the map, a dragon circling over its cave.
+- **Raids:** creatures raid nearby towns, killing people and carrying off gold to their hoard; dragons set fires. Walls, castles and nearby armies drive them off.
+- **Storming a lair:** march an army onto it to storm it and win the hoard.
+- **Quests:** in the Court panel, heroes can be sent to:
+  - Slay the Beast: its hoard, and a chance of an artifact (best odds with a dragon).
+  - Seek Lost Treasure: gold, and a small chance of an artifact.
+  - Search the Ruins: research.
+  - Success depends on the hero's kind and past deeds. Heroes may never come back.
+- **Artifacts:** six legendary artifacts with permanent bonuses: the Sunblade, Crown of Ages, the Star Atlas, Horn of Plenty, the Golden Scale and the Dragon-bone Bow.
+- New beasts move into empty wilds over time, and AI heroes go questing too.

@@ -415,3 +415,41 @@ export function caravan16(color, frame) {
   outline(c);
   return c;
 }
+
+// Phase 22: creatures of the wild and their lairs
+export function lair16() {
+  return sprite('lair', 16, 12, (P) => {
+    const R = ramp('#7a7068');
+    for (let i = 0; i < 10; i++) { const half = Math.round(i * 0.75) + 1; P(8 - half, 2 + i, half * 2, 1, i < 3 ? R.lt : R.mid); }
+    P(5, 6, 6, 6, '#120c08'); P(6, 5, 4, 1, '#120c08');
+    P(2, 11, 2, 1, '#e8e0d0'); P(12, 10, 2, 1, '#e8e0d0'); P(11, 11, 1, 1, '#e8e0d0'); P(7, 11, 2, 1, '#e6c068');
+  });
+}
+export function creature16(kind, frame) {
+  const key = `cr:${kind}:${frame}`;
+  if (cache.has(key)) return cache.get(key);
+  const c = sprite(key, 24, 18, (P) => {
+    const f = frame % 2;
+    if (kind === 'dragon') {
+      const R = ramp('#b8382a');
+      P(7, 8, 10, 5, R.mid); P(7, 8, 10, 1, R.lt); P(16, 6, 5, 4, R.mid); P(20, 7, 2, 1, '#ffd060'); P(21, 9, 2, 1, '#f0e8d8');
+      P(2, 10, 5, 2, R.dk); P(0, 9, 2, 2, R.dk); // tail
+      const wy = f ? 1 : 4; P(8, wy, 8, 4 - (f ? 0 : 2), R.dk); P(9, wy - 1, 6, 1, R.lt); // wings
+      P(9, 13, 2, 2, R.dk); P(14, 13, 2, 2, R.dk);
+    } else if (kind === 'wyvern') {
+      const R = ramp('#4a8a5a');
+      P(8, 8, 8, 4, R.mid); P(15, 6, 4, 3, R.mid); P(18, 7, 1, 1, '#ffe060'); P(3, 9, 5, 2, R.dk);
+      const wy = f ? 2 : 5; P(7, wy, 9, 3, R.dk); P(8, wy - 1, 7, 1, R.lt);
+    } else if (kind === 'giant') {
+      const R = ramp('#a88a6a');
+      P(9, 2, 6, 5, R.mid); P(10, 3, 1, 1, '#1a1010'); P(13, 3, 1, 1, '#1a1010'); P(8, 7, 8, 7, '#6a5a44'); P(8, 7, 8, 1, '#8a7a5a');
+      P(9 + f, 14, 2, 4, R.dk); P(13 - f, 14, 2, 4, R.dk); P(16, 6, 2, 9, '#5a3a1e'); P(15, 5, 4, 2, '#7a5a3a'); // club
+    } else {
+      const R = ramp('#5a7a4a');
+      P(8, 5, 8, 9, R.mid); P(8, 5, 8, 1, R.lt); P(9, 3, 6, 3, R.mid); P(10, 4, 1, 1, '#ffd060'); P(13, 4, 1, 1, '#ffd060'); P(11, 6, 2, 1, '#f0e8d8');
+      P(9 + f, 14, 2, 4, R.dk); P(13 - f, 14, 2, 4, R.dk); P(6, 7, 2, 6, R.dk); P(16, 7, 2, 6, R.dk);
+    }
+  });
+  outline(c);
+  return c;
+}

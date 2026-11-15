@@ -1,3 +1,4 @@
+import { ensureMonsters } from './monsters.js';
 import { ensureReligion } from './religion.js';
 import { ensurePhase21 } from './depth.js';
 import { ensurePhase19 } from './latebalance.js';
@@ -17,5 +18,6 @@ export function ensurePhase12(st, opts = null) {
   ensurePhase19(st);
   ensurePhase21(st);
   ensureReligion(st);
+  ensureMonsters(st);
   st.version = Math.max(st.version || 0, 14);
 }

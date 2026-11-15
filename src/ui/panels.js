@@ -1,4 +1,5 @@
 import { HERO_KINDS } from '../sim/stories.js';
+import { QUESTS, QUEST_LIST, canQuest, questOdds, monstersNear, CREATURES, ARTIFACTS } from '../sim/monsters.js';
 import { holySitesOf, siteHolder, devotion, headOf, isHead, canCallHolyWar } from '../sim/religion.js';
 import { ROUTE_NAMES, canOpenRoute, routeBetween, linkedForTrade } from '../sim/markets.js';
 import { MISSIONS, DECISIONS, DECISION_LIST, canTakeDecision, decisionCost, SCHEMES, SCHEME_LIST, schemeCost, schemeOdds, canScheme, spymaster, spiedOn, escortCost, routeRaided } from '../sim/depth.js';
@@ -1057,6 +1058,15 @@ function court(civ) {
     h += '<h3>Heroes & Legends</h3>';
     if (!hs.length) h += '<div class="small muted">No heroes have risen yet. Stable, advanced realms — and brave deeds in hard times — give birth to legends.</div>';
     for (const x of live) { const K = HERO_KINDS[x.kind]; h += `<div class="card small"><b>${K.icon} ${E(x.name)} ${E(x.epithet)}</b> — ${K.name}, age ${Math.floor((st.day - x.born) / 360) + 20}<div class="muted">${Object.entries(K.fx).map(([k, v]) => `${v > 0 ? '+' : ''}${Math.abs(v) < 1 ? Math.round(v * 100) + '%' : v} ${k}`).join(', ')}</div>${x.deeds.length ? `<div>${x.deeds.map((d) => '• ' + E(d)).join('<br>')}</div>` : ''}</div>`; }
+    // Phase 22: quests for living heroes, artifacts, beasts nearby
+    for (const x of live) {
+      const q = (st.quests || []).find((qq) => qq.hero === x.id);
+      if (q) { h += `<div class="small" style="margin:-2px 0 6px 10px">${QUESTS[q.kind].icon} On a quest: <b>${E(QUESTS[q.kind].name)}</b> · returns in ${Math.max(0, Math.ceil((q.due - st.day) / 30))} months · ${Math.round(q.odds * 100)}% chance of success</div>`; continue; }
+      h += `<div class="row" style="flex-wrap:wrap;gap:3px;margin:-2px 0 6px 10px">${QUEST_LIST.map((k) => { const ok = canQuest(civ, x.id, k); return `<button class="btn sm" ${ok.ok ? `data-action="quest" data-hero="${x.id}" data-k="${k}"` : 'disabled'} title="${E(QUESTS[k].desc + (ok.ok ? ` ${QUESTS[k].months} months, ${Math.round(questOdds(civ, x.id, k) * 100)}% chance of success.` : ' ' + ok.reason))}">${QUESTS[k].icon} ${E(QUESTS[k].name)}</button>`; }).join('')}</div>`;
+    }
+    const near = monstersNear(civ);
+    if (near.length) h += `<div class="small muted" style="margin-top:4px">Beasts near our lands: ${near.map((m) => `${CREATURES[m.kind].icon} ${CREATURES[m.kind].name} (hoard ${m.hoard})`).join(' · ')}. March an army onto a lair to storm it, or send a hero.</div>`;
+    if (civ.artifacts?.length) h += `<div class="small" style="margin-top:4px">Artifacts: ${civ.artifacts.map((id) => { const a = ARTIFACTS.find((z) => z.id === id); return a ? `<b>✦ ${E(a.name)}</b> (${E(a.desc)})` : ''; }).join(' · ')}</div>`;
     for (const x of dead) h += `<div class="small muted">† ${HERO_KINDS[x.kind].icon} ${E(x.name)} ${E(x.epithet)} — remembered${x.deeds[0] ? ' for ' + E(x.deeds[0]) : ''}</div>`;
   }
   // Spouse

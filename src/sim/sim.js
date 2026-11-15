@@ -23,6 +23,8 @@ import { lateMonthly, lateYearly } from './latebalance.js';
 import { depthMonthly } from './depth.js';
 import * as REL from './religion.js';
 import { religionMonthly, religionYearly } from './religion.js';
+import { monstersMonthlyAll } from './monsters.js';
+import * as MON from './monsters.js';
 import { updateContacts } from './tech.js';
 import { dailyArmies, militaryMonthly, aiRecruit, aiArmies } from './military.js';
 import { diplomacyMonthly, diplomacyYearly } from './diplomacy.js';
@@ -42,6 +44,7 @@ G.ai = AI;
 G.politics = POLITICS;
 G.characters = CHARS;
 G.religion = REL; // Phase 22
+G.monsters = MON;
 G.addWarScore = addWarScore;
 G.diplo = { makePeace, rel };
 G.succeed = succeed;
@@ -129,6 +132,7 @@ function monthly() {
   timed('markets', marketsMonthly);
   timed('depth', depthMonthly); // Phase 21: caravans, missions, schemes
   timed('religion', religionMonthly); // Phase 22: missionaries
+  timed('monsters', monstersMonthlyAll); // Phase 22: creatures and quests
   timed('plays', PLAYS.playsMonthly);
   timed('civilWars', civilWarsMonthly);
   timed('diplomacy', diplomacyMonthly);

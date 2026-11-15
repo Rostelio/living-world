@@ -2230,3 +2230,23 @@ UK_PATTERNS.unshift(
   [/^⚔✝ HOLY WAR! (.+) calls the faithful of (.+) to retake (.+) from (.+?)( — (.+) answer the call)?!$/, (m, t) => `⚔✝ СВЯЩЕННА ВІЙНА! ${m[1]} закликає вірних (${t(m[2])}) повернути ${m[3]} у ${m[4]}${m[6] ? ` — на заклик відгукуються ${m[6]}` : ''}!`],
   [/^Missionaries from (.+) win over (.+): it turns from (.+) to (.+)\.$/, (m) => `Місіонери з ${m[1]} навертають ${m[2]}: воно переходить від ${m[3]} до ${m[4]}.`],
 );
+// ---------------- Phase 22: creatures & quests ----------------
+Object.assign(UK, {
+  Dragon: 'Дракон', Giant: 'Велетень', Troll: 'Троль', Wyvern: 'Віверна',
+  'Slay the Beast': 'Вбити чудовисько', 'Seek Lost Treasure': 'Шукати втрачений скарб', 'Search the Ruins': 'Обшукати руїни',
+  'No creature lairs near our lands': 'Поблизу наших земель немає лігв чудовиськ', 'Already on a quest': 'Вже в поході',
+  'The Sunblade': 'Сонячний клинок', 'Crown of Ages': 'Корона віків', 'The Star Atlas': 'Зоряний атлас', 'Horn of Plenty': 'Ріг достатку', 'The Golden Scale': 'Золота луска', 'Dragon-bone Bow': 'Лук із драконячої кістки',
+});
+UK_PATTERNS.unshift(
+  [/^On a quest: (.+) · returns in (\d+) months · (\d+)% chance of success$/, (m, t) => `У поході: ${t(m[1])} · повернеться за ${m[2]} міс. · шанс успіху ${m[3]}%`],
+  [/^Beasts near our lands: (.+)\. March an army onto a lair to storm it, or send a hero\.$/, (m) => `Чудовиська поблизу: ${m[1].replace(/Dragon/g, 'Дракон').replace(/Giant/g, 'Велетень').replace(/Troll/g, 'Троль').replace(/Wyvern/g, 'Віверна').replace(/hoard/g, 'скарб')}. Поведіть армію на лігво або пошліть героя.`],
+  [/^Artifacts: (.+)$/, (m) => `Артефакти: ${m[1]}`],
+  [/^(\S+) A (dragon|giant|troll|wyvern) raids (.+)! (\d+) people are lost( and (\d+) gold carried off)?\.$/, (m) => `${m[1]} ${{ dragon: 'Дракон', giant: 'Велетень', troll: 'Троль', wyvern: 'Віверна' }[m[2]]} нападає на ${m[3]}! Загинуло ${m[4]} людей${m[6] ? `, викрадено ${m[6]} золота` : ''}.`],
+  [/^(\S+) A (dragon|giant|troll|wyvern) came for (.+), but the defenders drove it off\.$/, (m) => `${m[1]} ${{ dragon: 'Дракон', giant: 'Велетень', troll: 'Троль', wyvern: 'Віверна' }[m[2]]} прийшов по ${m[3]}, але захисники його прогнали.`],
+  [/^(\S+) (.+)'s army storms the lair: the (\w+) is slain and (\d+) gold of hoard won!$/, (m) => `${m[1]} Армія держави ${m[2]} штурмує лігво: чудовисько вбито, здобуто ${m[4]} золота!`],
+  [/^(\S+) The (\w+) beats back (.+)'s army from its lair\.$/, (m) => `${m[1]} Чудовисько відкидає армію держави ${m[3]} від свого лігва.`],
+  [/^(\S+) Quest fulfilled: (.+?) (slew|followed|uncovered|found) (.+) — (.+)!$/, (m) => `${m[1]} Похід успішний: ${m[2]} ${{ slew: 'вбив(ла)', followed: 'пішов(ла) за', uncovered: 'відкрив(ла)', found: 'знайшов(ла)' }[m[3]]} ${m[4]} — ${m[5].replace(/gold of hoard/, 'золота зі скарбу').replace(/gold/, 'золота').replace(/research/, 'досліджень')}!`],
+  [/^(\S+) (.+) never returned from the quest: (the beast was too strong|the wilds swallowed them)\.$/, (m) => `${m[1]} ${m[2]} не повернувся(лася) з походу: ${m[3] === 'the beast was too strong' ? 'чудовисько виявилося сильнішим' : 'дика глушина поглинула'}.`],
+  [/^(\S+) (.+) returns empty-handed from the quest, but alive\.$/, (m) => `${m[1]} ${m[2]} повертається з походу з порожніми руками, але живим.`],
+  [/^(\S+) Shepherds whisper of a (\w+) that has made its lair in the wilds\.$/, (m) => `${m[1]} Пастухи шепочуться про чудовисько, що влаштувало лігво в глушині.`],
+);

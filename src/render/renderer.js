@@ -15,7 +15,7 @@ import { Tiles16 } from './tiles16.js';
 import { bakeAtlas, drawCompass, APX } from './atlas.js';
 import { battleScene, formation, siegeCamp, siegeAngle, isBreached, seaClash, armyCamp } from './warfx.js';
 import { setSun, castShadow, snowCap } from './pixelkit.js';
-import { yard16, path16, bridge16, plaza16, wall16, tower16, gate16, prop16, PROPS_BY_RACE, treehouse16, hillhome16, tent16, stilt16, boardwalk16, ropeBridge, fence16, pixelRing, townhouse16, work16, campTent8, windmill16, caravan16 } from './town16.js';
+import { yard16, path16, bridge16, plaza16, wall16, tower16, gate16, prop16, PROPS_BY_RACE, treehouse16, hillhome16, tent16, stilt16, boardwalk16, ropeBridge, fence16, pixelRing, townhouse16, work16, campTent8, windmill16, caravan16, lair16, creature16 } from './town16.js';
 import { findPath } from '../sim/pathfind.js';
 import { TerrainGL } from './terrainGL.js';
 import { seasonKey } from './tiles16.js';
@@ -553,6 +553,20 @@ export class Renderer {
     this.atmo.drawLife(ctx, view);
     this.atmo.drawNature(ctx, view); // Phase 20: dawn mist, fireflies, stars on water
     if (z >= 0.9 && SETTINGS.ambientLife) this.drawCaravans(ctx, view, simRunning); // Phase 21
+    // Phase 22: creatures of the wild — a lair, and its beast prowling (or circling) near it
+    if (z >= 0.8 && st.monsters) for (const m of st.monsters) {
+      if (!m.alive || !isExplored(m.lair)) continue;
+      const lx = (m.lair % W.w) * TILE + 4, ly = ((m.lair / W.w) | 0) * TILE + 4;
+      if (lx < x0 - 30 || lx > x1 + 30 || ly < y0 - 30 || ly > y1 + 30) continue;
+      ctx.drawImage(lair16(), lx - 4, ly - 4, 8, 6);
+      const fly = m.kind === 'dragon' || m.kind === 'wyvern';
+      const a = this.time * (fly ? 0.6 : 0.25) + m.id;
+      const mx = Math.round((lx + Math.cos(a) * (fly ? 16 : 5)) * 2) / 2, my = Math.round((ly + Math.sin(a) * (fly ? 9 : 3) - (fly ? 10 : 2)) * 2) / 2;
+      if (fly) { ctx.fillStyle = 'rgba(20,14,30,0.25)'; ctx.fillRect(mx - 4, my + 12, 8, 2); }
+      ctx.save(); if (Math.cos(a + Math.PI / 2) < 0) { ctx.translate(mx * 2, 0); ctx.scale(-1, 1); }
+      ctx.drawImage(creature16(m.kind, Math.floor(this.time * (fly ? 4 : 2) + m.id)), mx - 6, my - 4.5, 12, 9);
+      ctx.restore();
+    }
     // Phase 22: holy sites — a small shrine in the faith's colour
     if (z >= 0.45 && st.holySites) for (const h of st.holySites) {
       const P = W.provinces[h.prov]; if (!P) continue;
