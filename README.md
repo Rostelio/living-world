@@ -494,3 +494,15 @@ The look follows the time of day: bright and bold by day, warm and painterly at 
 - New tutorial steps (open a caravan route, follow your missions) and new encyclopedia guides: great works, inflation and administration; ambitions, coalitions and crises; trade routes; missions and decisions; schemes; the advisor.
 
 **Project:** now under git (`main` branch).
+
+## Phase 22
+
+**Bug hunt:** `tests/bughunt.js` plays long games while clicking every enabled button, changing selects, switching language and checking the state for broken numbers. Three seeds, about 6,800 clicks across 61 kinds of action and up to 136 game years: no errors found.
+
+**Graphics card terrain** (hybrid WebGL)
+- From zoom 2 inward, a shader on the graphics card paints the ground and water every frame, with the same look as before: painted dithered ground, wandering biome edges, lit slopes and ridges, marsh pools, snow, banded water, wet sand and surf.
+- It renders once per art pixel and is scaled up crisply.
+- Terrain no longer pops in when you pan, and the water moves: drifting wave strokes, shimmering shallows and pulsing surf.
+- Trees, rocks and rivers are still baked, now in half the time, and drawn on top.
+- Far out, the cached terrain is still used because it's cheaper there.
+- It can be turned off in Settings.

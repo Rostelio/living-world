@@ -17,6 +17,8 @@ import { battleScene, formation, siegeCamp, siegeAngle, isBreached, seaClash, ar
 import { setSun, castShadow, snowCap } from './pixelkit.js';
 import { yard16, path16, bridge16, plaza16, wall16, tower16, gate16, prop16, PROPS_BY_RACE, treehouse16, hillhome16, tent16, stilt16, boardwalk16, ropeBridge, fence16, pixelRing, townhouse16, work16, campTent8, windmill16, caravan16 } from './town16.js';
 import { findPath } from '../sim/pathfind.js';
+import { TerrainGL } from './terrainGL.js';
+import { seasonKey } from './tiles16.js';
 import { house16, special16, field16 } from './buildings16.js';
 import { fogOn, isExplored, isVisible, fogArrays, fogRev, knowsRealm } from '../sim/fog.js';
 import { SETTINGS } from '../ui/settings.js';
@@ -57,6 +59,8 @@ export class Renderer {
     this.overlays = new Overlays(world);
     this.atmo.setWorld(world);
     this.tiles16 = new Tiles16(world);
+    // Phase 22: the GPU paints the close-up ground and water (falls back to baked chunks)
+    try { this.gl = SETTINGS.gpuTerrain === false ? null : new TerrainGL(world); if (this.gl && !this.gl.ok) this.gl = null; if (this.gl) this.gl.setData(this.atmo.water); } catch (e) { console.warn('GPU terrain unavailable', e); this.gl = null; }
     this.atlas = null; // baked lazily the first time we zoom far out
     this.people.reset();
     this.layouts.clear(); this.streetTiles = new Set();
@@ -222,6 +226,7 @@ export class Renderer {
     this.miniDirty = true;
     this.layouts.clear(); this.streetTiles = new Set();
     this.tiles16?.invalidate(tiles);
+    this.gl?.setData(this.atmo.water);
     this.atlas = null;
   }
 
@@ -465,10 +470,18 @@ export class Renderer {
     const x0 = Math.max(0, this.cam.x), y0 = Math.max(0, this.cam.y);
     const x1 = Math.min(W.w * TILE, this.cam.x + this.vw / z), y1 = Math.min(W.h * TILE, this.cam.y + this.vh / z);
     if (x1 <= x0 || y1 <= y0) return;
-    ctx.drawImage(this.terrain, x0, y0, x1 - x0, y1 - y0, x0, y0, x1 - x0, y1 - y0);
+    const hd = z >= HD_ZOOM && SETTINGS.hdTiles !== false;
+    const useGL = hd && this.gl && SETTINGS.gpuTerrain !== false && z * dpr >= 3; // far out the cached blocks are cheaper
+    if (useGL) {
+      // the GPU ground goes down first, aligned to the same whole-pixel camera as everything else
+      const zd = z * dpr, txp = Math.round((-this.cam.x * z + shx) * dpr), typ = Math.round((-this.cam.y * z + shy) * dpr);
+      const sk = seasonKey(st.day);
+      const g = this.gl.render(this.canvas.width, this.canvas.height, -txp / zd, -typ / zd, zd, sk.season, sk.snow, this.atmo.time, W.seed);
+      ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.imageSmoothingEnabled = false; ctx.drawImage(g.img, Math.round(g.x), Math.round(g.y), Math.round(g.w), Math.round(g.h)); ctx.restore();
+    } else ctx.drawImage(this.terrain, x0, y0, x1 - x0, y1 - y0, x0, y0, x1 - x0, y1 - y0);
+    if (this.tiles16 && this.tiles16.objectsOnly !== !!useGL) { this.tiles16.objectsOnly = !!useGL; this.tiles16.last?.clear(); }
     const tx0 = Math.floor(x0 / TILE), ty0 = Math.floor(y0 / TILE);
     const tx1 = Math.ceil(x1 / TILE), ty1 = Math.ceil(y1 / TILE);
-    const hd = z >= HD_ZOOM && SETTINGS.hdTiles !== false;
     VIEW.hd = hd;
     const view = { x0, y0, x1, y1, tx0, ty0, tx1, ty1, z, dpr, dayFrac, hd };
     if (hd) this.tiles16.draw(ctx, view, st.day);

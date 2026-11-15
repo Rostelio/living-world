@@ -18,6 +18,7 @@ export const SETTINGS = {
   shadows: true, // Phase 20: buildings cast shadows from the sun
   sunbeams: true, // Phase 20: light shafts in the golden hours
   advisor: true, // Phase 21: the advisor's card
+  gpuTerrain: true, // Phase 22: ground and water painted on the graphics card
   statusMarkers: true,
   atlas: true,
   screenShake: true,

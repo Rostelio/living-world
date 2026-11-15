@@ -641,6 +641,7 @@ export function settingsModal() {
     ${tog('shadows', 'Shadows from the sun')}
     ${tog('sunbeams', 'Sunbeams at dawn and dusk')}
     ${tog('advisor', 'Show the advisor')}
+    ${tog('gpuTerrain', 'Graphics card terrain (faster, animated water)')}
     ${tog('atlas', 'Illustrated atlas when zoomed far out')}
     ${tog('detailTrees', 'Detailed seasonal trees when zoomed in')}
     ${tog('seasons', 'Seasons (autumn colours, winter snow)')}

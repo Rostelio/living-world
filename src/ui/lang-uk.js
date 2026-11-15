@@ -2200,3 +2200,4 @@ UK_PATTERNS.unshift(
   [/^(.+) is big enough to send settlers\. Right-click a free province nearby to found a new town\.$/, (m) => `${m[1]} досить велике, щоб відправити поселенців. Клацніть правою кнопкою на вільній провінції поруч, щоб заснувати нове місто.`],
   [/^👁 Spies: (treasury|regiments|schemes)$/, (m) => `👁 Шпигуни: ${{ treasury: 'скарбниця', regiments: 'полки', schemes: 'змови' }[m[1]]}`],
 );
+Object.assign(UK, { 'Graphics card terrain (faster, animated water)': 'Рельєф на відеокарті (швидше, анімована вода)' });

@@ -373,7 +373,8 @@ export class Tiles16 {
     const hillshade = (gx, gy) => clamp((Hs(gx - 5, gy - 5) - Hs(gx + 5, gy + 5)) * 5.5, -0.32, 0.32);
     // --- ground pass (per pixel, jittered sampling for organic biome edges)
     const anySnow = snow > 0;
-    for (let py = 0; py < PX; py++) {
+    const objectsOnly = !!this.objectsOnly; // Phase 22: the GPU paints the ground; only rivers and standing things are baked
+    for (let py = 0; py < (objectsOnly ? 0 : PX); py++) {
       if ((py & 31) === 0 && py) yield null; // spread the work over several frames
       let j1 = 0, j2 = 0;
       for (let px = 0; px < PX; px++) {
@@ -435,7 +436,7 @@ export class Tiles16 {
     yield null;
     // --- shorelines (per pixel, following the jittered coast): wet sand on land, foam on water
     const sand = hex('#f0dca2'), wet = hex('#d2bd84'), foam = [238, 247, 255];
-    const put = (x, y, c, a = 1) => { if (x < 0 || y < 0 || x >= PX || y >= PX) return; const o = (y * PX + x) * 4; d[o] = d[o] * (1 - a) + c[0] * a; d[o + 1] = d[o + 1] * (1 - a) + c[1] * a; d[o + 2] = d[o + 2] * (1 - a) + c[2] * a; };
+    const put = (x, y, c, a = 1) => { if (x < 0 || y < 0 || x >= PX || y >= PX) return; const o = (y * PX + x) * 4; if (!d[o + 3]) { d[o] = c[0]; d[o + 1] = c[1]; d[o + 2] = c[2]; d[o + 3] = Math.round(a * 255); return; } d[o] = d[o] * (1 - a) + c[0] * a; d[o + 1] = d[o + 1] * (1 - a) + c[1] * a; d[o + 2] = d[o + 2] * (1 - a) + c[2] * a; d[o + 3] = Math.max(d[o + 3], Math.round(a * 255)); };
     const sampleAt = warpTile;
     // only tiles on (or next to) a coastline need the per-pixel pass
     const coastal = new Uint8Array(CHUNK * CHUNK);
@@ -449,7 +450,7 @@ export class Tiles16 {
         if (isW(y2 * w + x2) !== wv) { coastal[ty * CHUNK + tx] = 1; break outer; }
       }
     }
-    for (let py = 0; py < PX; py++) {
+    for (let py = 0; py < (objectsOnly ? 0 : PX); py++) {
       if ((py & 63) === 0 && py) yield null;
       for (let px = 0; px < PX; px++) {
         if (!coastal[(py >> 4) * CHUNK + (px >> 4)]) continue;
@@ -543,7 +544,7 @@ export class Tiles16 {
     const cells = [], missing = [];
     for (let cy = cy0; cy <= cy1; cy++) for (let cx = cx0; cx <= cx1; cx++) {
       if (cx < 0 || cy < 0 || cx * CHUNK >= this.world.w || cy * CHUNK >= this.world.h) continue;
-      const k = `${cx},${cy}:${sk.key}`;
+      const k = `${cx},${cy}:${sk.key}${this.objectsOnly ? 'o' : ''}`;
       const c = this.cache.get(k);
       cells.push([cx, cy, k, c]);
       if (!c) missing.push([cx, cy, k]);
@@ -583,10 +584,27 @@ export class Tiles16 {
     // and paint the coming season a few days early, in spare time, so the change is instant
     if (!missing.length) {
       const nk = seasonKey(day + 8);
-      if (nk.key !== sk.key) bake(cells.map(([cx, cy]) => [cx, cy, `${cx},${cy}:${nk.key}`]).filter(([, , k]) => !this.cache.has(k)), nk, Math.min(budgetMs, 3));
+      if (nk.key !== sk.key) bake(cells.map(([cx, cy]) => [cx, cy, `${cx},${cy}:${nk.key}${this.objectsOnly ? 'o' : ''}`]).filter(([, , k]) => !this.cache.has(k)), nk, Math.min(budgetMs, 3));
     }
     // forget half-baked jobs far from view
     if (this.jobs.size > 24) this.jobs.clear();
     return missing.length;
   }
+}
+
+// Phase 22: the colour ramps for the GPU terrain (render/terrainGL.js) — one palette texture
+// row block per ramp set, 16 columns = biome ids
+export function terrainPalette() {
+  const rows = [];
+  const put = (ramps) => { for (let k = 0; k < 5; k++) { const row = []; for (let b = 0; b < 16; b++) row.push((ramps[b] || ramps[B.GRASS])[k]); rows.push(row); } };
+  put(R5);
+  const R5AF = {}; for (let b = 0; b < 16; b++) R5AF[b] = R5A[b] || R5[b] || R5[B.GRASS];
+  put(R5AF);
+  const R5SF = {}; for (let b = 0; b < 16; b++) R5SF[b] = R5S;
+  put(R5SF);
+  // row 15: sea bands (0..5), lake (8..11), mud/pool/poolhi (12..14)
+  const wrow = []; for (let i = 0; i < 16; i++) wrow.push([0, 0, 0]);
+  SEA5.forEach((c, i) => { wrow[i] = c; }); LAKE5.forEach((c, i) => { wrow[8 + i] = c; }); wrow[12] = MUD; wrow[13] = POOL; wrow[14] = POOLHI;
+  rows.push(wrow);
+  return rows; // 16 rows × 16 colours
 }
