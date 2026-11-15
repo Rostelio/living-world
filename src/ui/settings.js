@@ -25,6 +25,9 @@ export const SETTINGS = {
   effectsQuality: 2, // 1 low, 2 normal, 3 high
   edgePan: false,
   uiScale: 1,
+  textSize: 'normal', // Phase 22 readability: small | normal | large
+  highContrast: false,
+  reduceMotion: false,
   confirmWar: true,
   pauseOnBattle: false,
   tutorialDone: false,
@@ -48,5 +51,13 @@ export function saveSettings() {
 }
 export function applySettings() {
   document.documentElement.style.setProperty('--ui-scale', String(SETTINGS.uiScale));
+  // Phase 22: readability and accessibility
+  const b = document.body;
+  if (b) {
+    b.classList.toggle('text-small', SETTINGS.textSize === 'small');
+    b.classList.toggle('text-large', SETTINGS.textSize === 'large');
+    b.classList.toggle('high-contrast', !!SETTINGS.highContrast);
+    b.classList.toggle('reduce-motion', !!SETTINGS.reduceMotion);
+  }
   audio.setVolume({ master: SETTINGS.masterVolume, music: SETTINGS.musicVolume, sfx: SETTINGS.sfxVolume, ambience: SETTINGS.ambienceVolume ?? 0.8, muted: SETTINGS.muted });
 }

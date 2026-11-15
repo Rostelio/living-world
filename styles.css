@@ -657,3 +657,37 @@ body.skin20 .modal-box.parchment .btn.primary { color: #1a1208; }
 #scene .scene-title { font-family: var(--pixel); color: var(--gold); font-size: 18px; }
 #scene .scene-sub { color: var(--muted); font-size: 12px; }
 #scene .scene-hint { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); color: rgba(255, 245, 220, .7); font-size: 11px; text-shadow: 0 1px 0 #000; zoom: var(--ui-scale, 1); }
+
+/* ---------- Phase 22: readability & accessibility ---------- */
+:root { --muted: #bcab8c; } /* secondary text a little brighter than before */
+.panel-body { line-height: 1.42; }
+.stat { padding: 3px 0; }
+#tooltip { font-size: 12.5px; line-height: 1.45; max-width: 320px; padding: 8px 11px; }
+/* text size */
+body.text-large { font-size: 14.5px; }
+body.text-large .small, body.text-large .stat, body.text-large #log, body.text-large .adv-text { font-size: 13px !important; }
+body.text-large #tooltip { font-size: 14px; max-width: 360px; }
+body.text-large .panel-head h2 { font-size: 21px; }
+body.text-small { font-size: 12px; }
+body.text-small .small { font-size: 10.5px !important; }
+/* high contrast: solid panels, brighter text, firmer lines */
+body.high-contrast { --text: #ffffff; --muted: #e0d4bc; --line: #8a7454; --line2: #b8945c; }
+body.high-contrast .panel, body.high-contrast .modal-box:not(.parchment), body.high-contrast #log, body.high-contrast #advisor { background: #120d08 !important; }
+body.high-contrast .card { background: #1c150e !important; border-color: #6a5638 !important; }
+body.high-contrast .muted { color: #e0d4bc !important; }
+body.high-contrast canvas#map { filter: contrast(1.08); }
+/* reduce motion */
+body.reduce-motion .panel { animation: none !important; }
+body.reduce-motion * { transition: none !important; }
+/* small screens: keep the top bar and the menu tidy */
+@media (max-width: 1280px) {
+  .tb-sub { display: none; }
+  .chip small { display: none; }
+  #nav button { width: 118px; padding: 6px 8px; }
+}
+@media (max-width: 1100px), (max-height: 720px) {
+  #nav button { width: 40px; overflow: hidden; white-space: nowrap; }
+  #nav button kbd { display: none; }
+  #advisor { width: 280px; }
+}
+@media (max-height: 760px) { #advisor { bottom: 150px; } }

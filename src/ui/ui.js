@@ -228,6 +228,7 @@ function onClick(e) {
     case 'openChronicle': openChronicle(showModal); break;
     case 'battleReport': battleReportModal(+d.id); break;
     case 'gfxPreset': gfxPreset(d.p); break;
+    case 'textSize': SETTINGS.textSize = d.k; saveSettings(); document.querySelectorAll('[data-action="textSize"]').forEach((b) => b.classList.toggle('primary', b.dataset.k === d.k)); break;
     case 'bindKey': captureKey(d.id, a); break;
     case 'resetKeys': resetKeys(); saveSettings(); settingsModal(); break;
     case 'alertBuild': G.ui.buildSid = +d.sid; openPanel('construction'); break;
@@ -658,6 +659,9 @@ export function settingsModal() {
     <div class="slider-row"><span>Effects quality</span><select data-setting="effectsQuality" style="background:#120e0a;color:var(--text);border:1px solid var(--line2);padding:3px">${[[1, 'Low'], [2, 'Normal'], [3, 'High']].map(([v, l]) => `<option value="${v}" ${S_.effectsQuality === v ? 'selected' : ''}>${l}</option>`).join('')}</select><span></span></div>
     ${tog('edgePan', 'Pan the map when the mouse touches the screen edge')}
     ${tog('colorBlind', 'Colour-blind friendly map colours')}
+    <div class="row" style="gap:4px;margin:4px 0"><span class="small muted" style="align-self:center">Text size</span>${[['small', 'Small'], ['normal', 'Normal'], ['large', 'Large']].map(([k, l]) => `<button class="btn sm ${(S_.textSize || 'normal') === k ? 'primary' : ''}" data-action="textSize" data-k="${k}">${l}</button>`).join('')}</div>
+    ${tog('highContrast', 'High contrast (solid panels, brighter text)')}
+    ${tog('reduceMotion', 'Reduce motion (no screen shake, flashes or panel animations)')}
     <div class="slider-row"><span>Interface size</span><input type="range" min="0.8" max="1.4" step="0.05" value="${S_.uiScale}" data-setting="uiScale"><b>${Math.round(S_.uiScale * 100)}%</b></div>
     <h3>Key bindings</h3>
     <div class="keybinds">${KEY_ACTIONS.map(([id, label]) => `<div class="kb-row"><span>${label}</span><button class="btn sm kb" data-action="bindKey" data-id="${id}">${keyLabel(keyFor(id))}</button></div>`).join('')}</div>

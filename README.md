@@ -543,3 +543,9 @@ The look follows the time of day: bright and bold by day, warm and painterly at 
   - Success depends on the hero's kind and past deeds. Heroes may never come back.
 - **Artifacts:** six legendary artifacts with permanent bonuses: the Sunblade, Crown of Ages, the Star Atlas, Horn of Plenty, the Golden Scale and the Dragon-bone Bow.
 - New beasts move into empty wilds over time, and AI heroes go questing too.
+
+**Readability and accessibility:**
+- **Settings:** text size (Small, Normal or Large), High contrast (solid panels, brighter text, firmer lines) and Reduce motion (no screen shake, flashes or panel animations).
+- **Easier to read:** secondary text is brighter, and tooltips are larger with more line spacing.
+- **Small screens:** on narrow windows the realm subtitle and resource deltas hide, and the left menu shrinks to icons. The advisor moves up on short screens.
+- **Fix:** inflation now only applies to real hoards (above 1,500 gold plus 400 per settlement), so small young realms saving up are no longer charged +50% prices.

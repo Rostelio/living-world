@@ -119,7 +119,7 @@ export class Atmosphere {
     }
   }
 
-  shake(dur, amp) { if (!SETTINGS.screenShake) return; this.shakeT = Math.max(this.shakeT, dur); this.shakeA = Math.max(this.shakeA, amp); }
+  shake(dur, amp) { if (!SETTINGS.screenShake || SETTINGS.reduceMotion) return; this.shakeT = Math.max(this.shakeT, dur); this.shakeA = Math.max(this.shakeA, amp); }
   shakeOffset() {
     if (this.shakeT <= 0) return [0, 0];
     const a = this.shakeA * Math.min(1, this.shakeT);
@@ -775,7 +775,7 @@ export class Atmosphere {
       const fog = (month === 9 || month === 10 ? 0.16 : 0.025) * morning + rain * 0.06 + night * 0.07; // Phase 20: clear mornings except in autumn
       if (fog > 0.01) this.drawFogBanks(ctx, cw, ch, fog, z * dpr, night);
     }
-    if (this.flash > 0.01) { ctx.fillStyle = `rgba(255,250,235,${this.flash * 0.6})`; ctx.fillRect(0, 0, cw, ch); }
+    if (this.flash > 0.01 && !SETTINGS.reduceMotion) { ctx.fillStyle = `rgba(255,250,235,${this.flash * 0.6})`; ctx.fillRect(0, 0, cw, ch); }
     // soft vignette frames the scene
     if (SETTINGS.colorGrade !== false) {
       if (!this.vig || this.vig.w !== cw || this.vig.h !== ch) {

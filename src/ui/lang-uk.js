@@ -2250,3 +2250,4 @@ UK_PATTERNS.unshift(
   [/^(\S+) (.+) returns empty-handed from the quest, but alive\.$/, (m) => `${m[1]} ${m[2]} повертається з походу з порожніми руками, але живим.`],
   [/^(\S+) Shepherds whisper of a (\w+) that has made its lair in the wilds\.$/, (m) => `${m[1]} Пастухи шепочуться про чудовисько, що влаштувало лігво в глушині.`],
 );
+Object.assign(UK, { 'Text size': 'Розмір тексту', Small: 'Малий', Normal: 'Звичайний', Large: 'Великий', 'High contrast (solid panels, brighter text)': 'Високий контраст (суцільні панелі, яскравіший текст)', 'Reduce motion (no screen shake, flashes or panel animations)': 'Менше руху (без трусіння екрана, спалахів і анімацій панелей)' });

@@ -14,6 +14,7 @@ await sleep(3500);
 const ui = await import('./src/ui/ui.js');
 const I = await import('./src/ui/i18n.js');
 const { PANEL_ORDER } = await import('./src/ui/panels.js');
+const { sceneView } = await import('./src/render/scene.js');
 const G = window.LW.G;
 const found = new Map();
 const note = (kind, msg) => { const k = kind + ': ' + String(msg).slice(0, 220); found.set(k, (found.get(k) || 0) + 1); };
@@ -51,6 +52,7 @@ for (let it = 0; it < ITER; it++) {
   if (sels.length && rnd() < 0.3) { const s = pick(sels); try { if (s.tagName === 'SELECT' && s.options.length) { s.selectedIndex = Math.floor(rnd() * s.options.length); } else s.checked = !s.checked; s.dispatchEvent(new Event('change', { bubbles: true })); } catch (e) { note('input', e.message); } }
   if (rnd() < 0.05) { try { I.initI18n(rnd() < 0.5 ? 'uk' : 'en'); } catch (e) { note('lang', e.message); } }
   if (rnd() < 0.3) { try { ui.hideModal(); } catch (e) { note('hideModal', e.message); } }
+  if (sceneView.open) { try { sceneView.draw(0.05); } catch (e) { note('scene', e.message); } if (rnd() < 0.5) sceneView.hide(); }
   // invariants
   for (const c of G.state.civs) {
     if (!c.alive) continue;

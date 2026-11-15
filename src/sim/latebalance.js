@@ -25,7 +25,9 @@ export function adminShare(civ) {
 export function inflationMul(civ) { return 1 + (civ.inflation || 0) / 100; }
 function inflationMonthly(civ) {
   const months = civ.treasury / income(civ);
-  const target = clamp((months - 6) * 3, 0, 50);
+  // only a real hoard counts: small young realms saving up a few hundred gold are left alone
+  const floor = 1500 + 400 * civ.settlements.length;
+  const target = civ.treasury < floor ? 0 : clamp((months - 6) * 3, 0, 50) * Math.min(1, (civ.treasury - floor) / floor);
   const cur = civ.inflation || 0;
   civ.inflation = Math.round((target > cur ? Math.min(target, cur + 0.4) : Math.max(target, cur - 0.25)) * 100) / 100;
 }
