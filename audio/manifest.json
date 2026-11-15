@@ -1,0 +1,6 @@
+{
+  "about": "Recorded audio that replaces the generated sounds. Map a slot to a file in this folder (mp3, ogg or wav). Music tracks loop and crossfade by mood; ambience layers loop and follow the camera; sfx play once. Anything not listed stays generated.",
+  "music": {},
+  "ambience": {},
+  "sfx": {}
+}

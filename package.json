@@ -1,0 +1,63 @@
+{
+  "name": "living-world",
+  "productName": "Living World",
+  "version": "1.0.0",
+  "description": "A 2D pixel-art real-time grand strategy and civilization simulation.",
+  "main": "desktop/main.cjs",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "web": "python3 serve.py",
+    "icon": "node desktop/make-icon.cjs",
+    "smoke": "LW_SMOKE_TEST=1 electron .",
+    "dist:mac": "npm run icon && electron-builder --mac",
+    "dist:win": "npm run icon && electron-builder --win",
+    "dist": "npm run icon && electron-builder --mac --win"
+  },
+  "build": {
+    "appId": "com.livingworld.grandstrategy",
+    "productName": "Living World",
+    "files": [
+      "index.html",
+      "styles.css",
+      "src/**/*",
+      "art/**/*",
+      "audio/**/*",
+      "desktop/main.cjs",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "desktop/build"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
+      ],
+      "category": "public.app-category.strategy-games",
+      "icon": "desktop/build/icon.png"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "desktop/build/icon.png",
+      "signAndEditExecutable": false
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.3.2",
+    "electron-builder": "^26.18.0"
+  }
+}

@@ -1,0 +1,8 @@
+node_modules/
+dist/
+desktop/build/
+.DS_Store
+
+# test and tool output
+.claude/
+*.log

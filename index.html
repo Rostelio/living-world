@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'">
+  <link rel="icon" href="data:,">
+  <title>Living World — Grand Strategy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <canvas id="map"></canvas>
+
+    <header id="topbar" class="hidden">
+      <div class="tb-realm" data-action="open" data-panel="government" title="Government">
+        <img id="tbFlag" class="flag big" alt="">
+        <div>
+          <div id="tbName" class="tb-title"></div>
+          <div id="tbRuler" class="tb-sub"></div>
+        </div>
+      </div>
+      <div id="tbRes" class="tb-res"></div>
+      <div class="tb-right">
+        <div id="tbRank" class="chip rank" data-action="open" data-panel="ledger" title="Your rank by score — click for the Ledger"></div>
+        <div id="tbStab" class="chip" title="National stability"></div>
+        <div class="tb-time">
+          <div id="tbDate" class="tb-date"></div>
+          <div id="tbSpeed" class="speed"></div>
+        </div>
+        <button id="muteBtn" class="iconbtn" title="Sound on/off">♪</button>
+        <button id="menuBtn" class="iconbtn" title="Game menu (Esc)">☰</button>
+      </div>
+    </header>
+
+    <div id="alerts" class="hidden"></div>
+    <nav id="nav" class="hidden"></nav>
+    <section id="mainPanel" class="panel hidden"></section>
+    <section id="ctxPanel" class="panel hidden"></section>
+    <div id="log" class="hidden"></div>
+    <div id="godbar" class="hidden"></div>
+    <div id="bottomRight" class="hidden">
+      <div id="mapModes"></div>
+      <canvas id="minimap" width="240" height="150"></canvas>
+    </div>
+    <section id="editorPanel" class="panel hidden"></section>
+    <div id="editorHint" class="hidden">Left-drag: paint · Right-drag or Space+drag: pan · Scroll: zoom · Ctrl/Cmd+Z: undo · Ctrl/Cmd+S: save</div>
+    <div id="tooltip" class="hidden"></div>
+    <div id="ctxMenu" class="hidden"></div>
+    <div id="tutorial" class="hidden"></div>
+    <div id="searchBox" class="hidden"></div>
+    <div id="toasts"></div>
+    <div id="modal" class="modal hidden"></div>
+    <div id="loading" class="modal hidden"><div class="loading-box"><div class="spinner"></div><div id="loadingText">Shaping the world…</div></div></div>
+  </div>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,3029 @@
+{
+ "about": "Every sprite slot: size in pixels and a template drawn by the game. Draw a PNG of the same size (or exactly 2x/3x), save it in this folder and add it to manifest.json.",
+ "slots": {
+  "yard:2:false": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/yard_2_false.png"
+  },
+  "yard:0:false": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/yard_0_false.png"
+  },
+  "yard:1:false": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/yard_1_false.png"
+  },
+  "h:humans:0": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_humans_0.png"
+  },
+  "s:campfire:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_campfire_humans.png"
+  },
+  "prop:crate": {
+   "w": 8,
+   "h": 8,
+   "kind": "town",
+   "template": "templates/town/prop_crate.png"
+  },
+  "bw:false": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/bw_false.png"
+  },
+  "bw:true": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/bw_true.png"
+  },
+  "stilt:0": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/stilt_0.png"
+  },
+  "h:lizardfolk:0": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_lizardfolk_0.png"
+  },
+  "s:campfire:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_campfire_lizardfolk.png"
+  },
+  "prop:lamp": {
+   "w": 8,
+   "h": 8,
+   "kind": "town",
+   "template": "templates/town/prop_lamp.png"
+  },
+  "o:mound:3:4": {
+   "w": 16,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_mound_3_4.png"
+  },
+  "o:mound:3:5": {
+   "w": 16,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_mound_3_5.png"
+  },
+  "o:rock:3:0": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_rock_3_0.png"
+  },
+  "o:bush:3:0": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_bush_3_0.png"
+  },
+  "o:mound:3:1": {
+   "w": 16,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_mound_3_1.png"
+  },
+  "o:rock:3:1": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_rock_3_1.png"
+  },
+  "o:bush:3:5": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_bush_3_5.png"
+  },
+  "o:cactus:3:0": {
+   "w": 10,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_cactus_3_0.png"
+  },
+  "o:mound:3:0": {
+   "w": 16,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_mound_3_0.png"
+  },
+  "o:mound:3:2": {
+   "w": 16,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_mound_3_2.png"
+  },
+  "o:mound:3:3": {
+   "w": 16,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_mound_3_3.png"
+  },
+  "o:rock:3:3": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_rock_3_3.png"
+  },
+  "o:oak:3:3": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_3_3.png"
+  },
+  "o:oak:3:4": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_3_4.png"
+  },
+  "o:oak:3:0": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_3_0.png"
+  },
+  "o:oak:3:2": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_3_2.png"
+  },
+  "o:birch:3:0": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_3_0.png"
+  },
+  "o:pine:3:4": {
+   "w": 14,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_pine_3_4.png"
+  },
+  "o:birch:3:5": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_3_5.png"
+  },
+  "o:birch:3:1": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_3_1.png"
+  },
+  "o:bush:3:3": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_bush_3_3.png"
+  },
+  "o:bush:3:1": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_bush_3_1.png"
+  },
+  "o:rock:3:5": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_rock_3_5.png"
+  },
+  "o:oak:1:3": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_1_3.png"
+  },
+  "o:oak:1:1": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_1_1.png"
+  },
+  "o:birch:1:5": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_1_5.png"
+  },
+  "o:oak:1:0": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_1_0.png"
+  },
+  "o:pine:3:2": {
+   "w": 14,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_pine_3_2.png"
+  },
+  "o:pine:3:3": {
+   "w": 14,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_pine_3_3.png"
+  },
+  "o:pine:3:1": {
+   "w": 14,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_pine_3_1.png"
+  },
+  "o:oak:3:1": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_3_1.png"
+  },
+  "o:rock:3:2": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_rock_3_2.png"
+  },
+  "o:bush:3:4": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_bush_3_4.png"
+  },
+  "o:oak:1:4": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_1_4.png"
+  },
+  "o:birch:3:4": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_3_4.png"
+  },
+  "o:birch:3:2": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_3_2.png"
+  },
+  "o:bush:3:2": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_bush_3_2.png"
+  },
+  "o:oak:1:2": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_1_2.png"
+  },
+  "o:oak:1:5": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_1_5.png"
+  },
+  "o:birch:3:3": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_3_3.png"
+  },
+  "o:oak:3:5": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_3_5.png"
+  },
+  "o:palm:3:4": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_palm_3_4.png"
+  },
+  "o:palm:3:3": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_palm_3_3.png"
+  },
+  "o:pine:3:0": {
+   "w": 14,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_pine_3_0.png"
+  },
+  "o:rock:3:4": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_rock_3_4.png"
+  },
+  "o:reeds:3:3": {
+   "w": 10,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_reeds_3_3.png"
+  },
+  "o:reeds:3:5": {
+   "w": 10,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_reeds_3_5.png"
+  },
+  "o:pine:3:5": {
+   "w": 14,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_pine_3_5.png"
+  },
+  "o:reeds:3:1": {
+   "w": 10,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_reeds_3_1.png"
+  },
+  "o:reeds:3:0": {
+   "w": 10,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_reeds_3_0.png"
+  },
+  "o:birch:1:4": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_1_4.png"
+  },
+  "o:reeds:3:2": {
+   "w": 10,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_reeds_3_2.png"
+  },
+  "o:dead:3:1": {
+   "w": 12,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_dead_3_1.png"
+  },
+  "o:birch:1:1": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_1_1.png"
+  },
+  "o:dead:3:2": {
+   "w": 12,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_dead_3_2.png"
+  },
+  "o:reeds:3:4": {
+   "w": 10,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_reeds_3_4.png"
+  },
+  "o:dead:3:4": {
+   "w": 12,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_dead_3_4.png"
+  },
+  "o:birch:1:3": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_1_3.png"
+  },
+  "o:birch:1:0": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_1_0.png"
+  },
+  "o:birch:1:2": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_1_2.png"
+  },
+  "o:dead:3:5": {
+   "w": 12,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_dead_3_5.png"
+  },
+  "o:dead:3:0": {
+   "w": 12,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_dead_3_0.png"
+  },
+  "o:dead:3:3": {
+   "w": 12,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_dead_3_3.png"
+  },
+  "o:jungle:3:4": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_jungle_3_4.png"
+  },
+  "o:palm:3:2": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_palm_3_2.png"
+  },
+  "o:jungle:3:0": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_jungle_3_0.png"
+  },
+  "o:palm:3:1": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_palm_3_1.png"
+  },
+  "o:jungle:3:3": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_jungle_3_3.png"
+  },
+  "o:jungle:3:2": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_jungle_3_2.png"
+  },
+  "o:jungle:3:5": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_jungle_3_5.png"
+  },
+  "o:palm:3:0": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_palm_3_0.png"
+  },
+  "o:jungle:3:1": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_jungle_3_1.png"
+  },
+  "o:palm:3:5": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_palm_3_5.png"
+  },
+  "o:cactus:3:4": {
+   "w": 10,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_cactus_3_4.png"
+  },
+  "o:cactus:3:3": {
+   "w": 10,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_cactus_3_3.png"
+  },
+  "o:peak_snow:3:4": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_snow_3_4.png"
+  },
+  "o:peak_snow:3:5": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_snow_3_5.png"
+  },
+  "o:peak_snow:3:1": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_snow_3_1.png"
+  },
+  "o:peak_snow:3:2": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_snow_3_2.png"
+  },
+  "o:peak_snow:3:3": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_snow_3_3.png"
+  },
+  "o:peak_snow:3:0": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_snow_3_0.png"
+  },
+  "o:cactus:3:5": {
+   "w": 10,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_cactus_3_5.png"
+  },
+  "h:humans:1": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_humans_1.png"
+  },
+  "h:humans:2": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_humans_2.png"
+  },
+  "h:humans:3": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_humans_3.png"
+  },
+  "s:farm:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_farm_humans.png"
+  },
+  "s:pasture:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_pasture_humans.png"
+  },
+  "s:port:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_port_humans.png"
+  },
+  "s:lumber_camp:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_lumber_camp_humans.png"
+  },
+  "s:quarry:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_quarry_humans.png"
+  },
+  "s:mine:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_mine_humans.png"
+  },
+  "s:plantation:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_plantation_humans.png"
+  },
+  "s:smithy:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_smithy_humans.png"
+  },
+  "s:weaver:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_weaver_humans.png"
+  },
+  "s:carpenter:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_carpenter_humans.png"
+  },
+  "s:brewery:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_brewery_humans.png"
+  },
+  "s:paper_mill:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_paper_mill_humans.png"
+  },
+  "s:glassworks:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_glassworks_humans.png"
+  },
+  "s:jeweller:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_jeweller_humans.png"
+  },
+  "s:granary:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_granary_humans.png"
+  },
+  "s:warehouse:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_warehouse_humans.png"
+  },
+  "s:town_hall:humans": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_town_hall_humans.png"
+  },
+  "s:market:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_market_humans.png"
+  },
+  "s:bank:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_bank_humans.png"
+  },
+  "s:temple:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_temple_humans.png"
+  },
+  "s:library:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_library_humans.png"
+  },
+  "s:university:humans": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_university_humans.png"
+  },
+  "s:observatory:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_observatory_humans.png"
+  },
+  "s:hospital:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_hospital_humans.png"
+  },
+  "s:aqueduct:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_aqueduct_humans.png"
+  },
+  "s:road:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_road_humans.png"
+  },
+  "s:railway_station:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_railway_station_humans.png"
+  },
+  "s:barracks:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_barracks_humans.png"
+  },
+  "s:walls:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_walls_humans.png"
+  },
+  "s:castle:humans": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_castle_humans.png"
+  },
+  "s:star_fort:humans": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_star_fort_humans.png"
+  },
+  "s:textile_mill:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_textile_mill_humans.png"
+  },
+  "s:foundry:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_foundry_humans.png"
+  },
+  "s:factory:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_factory_humans.png"
+  },
+  "s:walls_tower:humans": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_walls_tower_humans.png"
+  },
+  "th:humans:2:0": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_humans_2_0.png"
+  },
+  "th:humans:2:1": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_humans_2_1.png"
+  },
+  "th:humans:3:0": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_humans_3_0.png"
+  },
+  "th:humans:3:1": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_humans_3_1.png"
+  },
+  "h:elves:0": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_elves_0.png"
+  },
+  "h:elves:1": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_elves_1.png"
+  },
+  "h:elves:2": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_elves_2.png"
+  },
+  "h:elves:3": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_elves_3.png"
+  },
+  "s:farm:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_farm_elves.png"
+  },
+  "s:pasture:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_pasture_elves.png"
+  },
+  "s:port:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_port_elves.png"
+  },
+  "s:lumber_camp:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_lumber_camp_elves.png"
+  },
+  "s:quarry:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_quarry_elves.png"
+  },
+  "s:mine:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_mine_elves.png"
+  },
+  "s:plantation:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_plantation_elves.png"
+  },
+  "s:smithy:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_smithy_elves.png"
+  },
+  "s:weaver:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_weaver_elves.png"
+  },
+  "s:carpenter:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_carpenter_elves.png"
+  },
+  "s:brewery:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_brewery_elves.png"
+  },
+  "s:paper_mill:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_paper_mill_elves.png"
+  },
+  "s:glassworks:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_glassworks_elves.png"
+  },
+  "s:jeweller:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_jeweller_elves.png"
+  },
+  "s:granary:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_granary_elves.png"
+  },
+  "s:warehouse:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_warehouse_elves.png"
+  },
+  "s:town_hall:elves": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_town_hall_elves.png"
+  },
+  "s:market:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_market_elves.png"
+  },
+  "s:bank:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_bank_elves.png"
+  },
+  "s:temple:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_temple_elves.png"
+  },
+  "s:library:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_library_elves.png"
+  },
+  "s:university:elves": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_university_elves.png"
+  },
+  "s:observatory:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_observatory_elves.png"
+  },
+  "s:hospital:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_hospital_elves.png"
+  },
+  "s:aqueduct:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_aqueduct_elves.png"
+  },
+  "s:road:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_road_elves.png"
+  },
+  "s:railway_station:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_railway_station_elves.png"
+  },
+  "s:barracks:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_barracks_elves.png"
+  },
+  "s:walls:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_walls_elves.png"
+  },
+  "s:castle:elves": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_castle_elves.png"
+  },
+  "s:star_fort:elves": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_star_fort_elves.png"
+  },
+  "s:textile_mill:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_textile_mill_elves.png"
+  },
+  "s:foundry:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_foundry_elves.png"
+  },
+  "s:factory:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_factory_elves.png"
+  },
+  "s:campfire:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_campfire_elves.png"
+  },
+  "s:walls_tower:elves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_walls_tower_elves.png"
+  },
+  "th:elves:2:0": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_elves_2_0.png"
+  },
+  "th:elves:2:1": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_elves_2_1.png"
+  },
+  "th:elves:3:0": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_elves_3_0.png"
+  },
+  "th:elves:3:1": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_elves_3_1.png"
+  },
+  "h:dwarves:0": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_dwarves_0.png"
+  },
+  "h:dwarves:1": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_dwarves_1.png"
+  },
+  "h:dwarves:2": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_dwarves_2.png"
+  },
+  "h:dwarves:3": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_dwarves_3.png"
+  },
+  "s:farm:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_farm_dwarves.png"
+  },
+  "s:pasture:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_pasture_dwarves.png"
+  },
+  "s:port:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_port_dwarves.png"
+  },
+  "s:lumber_camp:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_lumber_camp_dwarves.png"
+  },
+  "s:quarry:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_quarry_dwarves.png"
+  },
+  "s:mine:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_mine_dwarves.png"
+  },
+  "s:plantation:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_plantation_dwarves.png"
+  },
+  "s:smithy:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_smithy_dwarves.png"
+  },
+  "s:weaver:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_weaver_dwarves.png"
+  },
+  "s:carpenter:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_carpenter_dwarves.png"
+  },
+  "s:brewery:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_brewery_dwarves.png"
+  },
+  "s:paper_mill:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_paper_mill_dwarves.png"
+  },
+  "s:glassworks:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_glassworks_dwarves.png"
+  },
+  "s:jeweller:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_jeweller_dwarves.png"
+  },
+  "s:granary:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_granary_dwarves.png"
+  },
+  "s:warehouse:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_warehouse_dwarves.png"
+  },
+  "s:town_hall:dwarves": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_town_hall_dwarves.png"
+  },
+  "s:market:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_market_dwarves.png"
+  },
+  "s:bank:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_bank_dwarves.png"
+  },
+  "s:temple:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_temple_dwarves.png"
+  },
+  "s:library:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_library_dwarves.png"
+  },
+  "s:university:dwarves": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_university_dwarves.png"
+  },
+  "s:observatory:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_observatory_dwarves.png"
+  },
+  "s:hospital:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_hospital_dwarves.png"
+  },
+  "s:aqueduct:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_aqueduct_dwarves.png"
+  },
+  "s:road:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_road_dwarves.png"
+  },
+  "s:railway_station:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_railway_station_dwarves.png"
+  },
+  "s:barracks:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_barracks_dwarves.png"
+  },
+  "s:walls:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_walls_dwarves.png"
+  },
+  "s:castle:dwarves": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_castle_dwarves.png"
+  },
+  "s:star_fort:dwarves": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_star_fort_dwarves.png"
+  },
+  "s:textile_mill:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_textile_mill_dwarves.png"
+  },
+  "s:foundry:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_foundry_dwarves.png"
+  },
+  "s:factory:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_factory_dwarves.png"
+  },
+  "s:campfire:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_campfire_dwarves.png"
+  },
+  "s:walls_tower:dwarves": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_walls_tower_dwarves.png"
+  },
+  "th:dwarves:2:0": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_dwarves_2_0.png"
+  },
+  "th:dwarves:2:1": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_dwarves_2_1.png"
+  },
+  "th:dwarves:3:0": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_dwarves_3_0.png"
+  },
+  "th:dwarves:3:1": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_dwarves_3_1.png"
+  },
+  "h:orcs:0": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_orcs_0.png"
+  },
+  "h:orcs:1": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_orcs_1.png"
+  },
+  "h:orcs:2": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_orcs_2.png"
+  },
+  "h:orcs:3": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_orcs_3.png"
+  },
+  "s:farm:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_farm_orcs.png"
+  },
+  "s:pasture:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_pasture_orcs.png"
+  },
+  "s:port:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_port_orcs.png"
+  },
+  "s:lumber_camp:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_lumber_camp_orcs.png"
+  },
+  "s:quarry:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_quarry_orcs.png"
+  },
+  "s:mine:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_mine_orcs.png"
+  },
+  "s:plantation:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_plantation_orcs.png"
+  },
+  "s:smithy:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_smithy_orcs.png"
+  },
+  "s:weaver:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_weaver_orcs.png"
+  },
+  "s:carpenter:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_carpenter_orcs.png"
+  },
+  "s:brewery:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_brewery_orcs.png"
+  },
+  "s:paper_mill:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_paper_mill_orcs.png"
+  },
+  "s:glassworks:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_glassworks_orcs.png"
+  },
+  "s:jeweller:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_jeweller_orcs.png"
+  },
+  "s:granary:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_granary_orcs.png"
+  },
+  "s:warehouse:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_warehouse_orcs.png"
+  },
+  "s:town_hall:orcs": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_town_hall_orcs.png"
+  },
+  "s:market:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_market_orcs.png"
+  },
+  "s:bank:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_bank_orcs.png"
+  },
+  "s:temple:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_temple_orcs.png"
+  },
+  "s:library:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_library_orcs.png"
+  },
+  "s:university:orcs": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_university_orcs.png"
+  },
+  "s:observatory:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_observatory_orcs.png"
+  },
+  "s:hospital:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_hospital_orcs.png"
+  },
+  "s:aqueduct:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_aqueduct_orcs.png"
+  },
+  "s:road:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_road_orcs.png"
+  },
+  "s:railway_station:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_railway_station_orcs.png"
+  },
+  "s:barracks:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_barracks_orcs.png"
+  },
+  "s:walls:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_walls_orcs.png"
+  },
+  "s:castle:orcs": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_castle_orcs.png"
+  },
+  "s:star_fort:orcs": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_star_fort_orcs.png"
+  },
+  "s:textile_mill:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_textile_mill_orcs.png"
+  },
+  "s:foundry:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_foundry_orcs.png"
+  },
+  "s:factory:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_factory_orcs.png"
+  },
+  "s:campfire:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_campfire_orcs.png"
+  },
+  "s:walls_tower:orcs": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_walls_tower_orcs.png"
+  },
+  "th:orcs:2:0": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_orcs_2_0.png"
+  },
+  "th:orcs:2:1": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_orcs_2_1.png"
+  },
+  "th:orcs:3:0": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_orcs_3_0.png"
+  },
+  "th:orcs:3:1": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_orcs_3_1.png"
+  },
+  "h:lizardfolk:1": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_lizardfolk_1.png"
+  },
+  "h:lizardfolk:2": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_lizardfolk_2.png"
+  },
+  "h:lizardfolk:3": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_lizardfolk_3.png"
+  },
+  "s:farm:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_farm_lizardfolk.png"
+  },
+  "s:pasture:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_pasture_lizardfolk.png"
+  },
+  "s:port:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_port_lizardfolk.png"
+  },
+  "s:lumber_camp:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_lumber_camp_lizardfolk.png"
+  },
+  "s:quarry:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_quarry_lizardfolk.png"
+  },
+  "s:mine:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_mine_lizardfolk.png"
+  },
+  "s:plantation:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_plantation_lizardfolk.png"
+  },
+  "s:smithy:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_smithy_lizardfolk.png"
+  },
+  "s:weaver:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_weaver_lizardfolk.png"
+  },
+  "s:carpenter:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_carpenter_lizardfolk.png"
+  },
+  "s:brewery:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_brewery_lizardfolk.png"
+  },
+  "s:paper_mill:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_paper_mill_lizardfolk.png"
+  },
+  "s:glassworks:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_glassworks_lizardfolk.png"
+  },
+  "s:jeweller:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_jeweller_lizardfolk.png"
+  },
+  "s:granary:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_granary_lizardfolk.png"
+  },
+  "s:warehouse:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_warehouse_lizardfolk.png"
+  },
+  "s:town_hall:lizardfolk": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_town_hall_lizardfolk.png"
+  },
+  "s:market:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_market_lizardfolk.png"
+  },
+  "s:bank:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_bank_lizardfolk.png"
+  },
+  "s:temple:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_temple_lizardfolk.png"
+  },
+  "s:library:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_library_lizardfolk.png"
+  },
+  "s:university:lizardfolk": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_university_lizardfolk.png"
+  },
+  "s:observatory:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_observatory_lizardfolk.png"
+  },
+  "s:hospital:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_hospital_lizardfolk.png"
+  },
+  "s:aqueduct:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_aqueduct_lizardfolk.png"
+  },
+  "s:road:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_road_lizardfolk.png"
+  },
+  "s:railway_station:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_railway_station_lizardfolk.png"
+  },
+  "s:barracks:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_barracks_lizardfolk.png"
+  },
+  "s:walls:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_walls_lizardfolk.png"
+  },
+  "s:castle:lizardfolk": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_castle_lizardfolk.png"
+  },
+  "s:star_fort:lizardfolk": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_star_fort_lizardfolk.png"
+  },
+  "s:textile_mill:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_textile_mill_lizardfolk.png"
+  },
+  "s:foundry:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_foundry_lizardfolk.png"
+  },
+  "s:factory:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_factory_lizardfolk.png"
+  },
+  "s:walls_tower:lizardfolk": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_walls_tower_lizardfolk.png"
+  },
+  "th:lizardfolk:2:0": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_lizardfolk_2_0.png"
+  },
+  "th:lizardfolk:2:1": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_lizardfolk_2_1.png"
+  },
+  "th:lizardfolk:3:0": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_lizardfolk_3_0.png"
+  },
+  "th:lizardfolk:3:1": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_lizardfolk_3_1.png"
+  },
+  "h:halflings:0": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_halflings_0.png"
+  },
+  "h:halflings:1": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_halflings_1.png"
+  },
+  "h:halflings:2": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_halflings_2.png"
+  },
+  "h:halflings:3": {
+   "w": 16,
+   "h": 16,
+   "kind": "house",
+   "template": "templates/house/h_halflings_3.png"
+  },
+  "s:farm:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_farm_halflings.png"
+  },
+  "s:pasture:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_pasture_halflings.png"
+  },
+  "s:port:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_port_halflings.png"
+  },
+  "s:lumber_camp:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_lumber_camp_halflings.png"
+  },
+  "s:quarry:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_quarry_halflings.png"
+  },
+  "s:mine:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_mine_halflings.png"
+  },
+  "s:plantation:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_plantation_halflings.png"
+  },
+  "s:smithy:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_smithy_halflings.png"
+  },
+  "s:weaver:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_weaver_halflings.png"
+  },
+  "s:carpenter:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_carpenter_halflings.png"
+  },
+  "s:brewery:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_brewery_halflings.png"
+  },
+  "s:paper_mill:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_paper_mill_halflings.png"
+  },
+  "s:glassworks:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_glassworks_halflings.png"
+  },
+  "s:jeweller:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_jeweller_halflings.png"
+  },
+  "s:granary:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_granary_halflings.png"
+  },
+  "s:warehouse:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_warehouse_halflings.png"
+  },
+  "s:town_hall:halflings": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_town_hall_halflings.png"
+  },
+  "s:market:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_market_halflings.png"
+  },
+  "s:bank:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_bank_halflings.png"
+  },
+  "s:temple:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_temple_halflings.png"
+  },
+  "s:library:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_library_halflings.png"
+  },
+  "s:university:halflings": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_university_halflings.png"
+  },
+  "s:observatory:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_observatory_halflings.png"
+  },
+  "s:hospital:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_hospital_halflings.png"
+  },
+  "s:aqueduct:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_aqueduct_halflings.png"
+  },
+  "s:road:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_road_halflings.png"
+  },
+  "s:railway_station:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_railway_station_halflings.png"
+  },
+  "s:barracks:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_barracks_halflings.png"
+  },
+  "s:walls:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_walls_halflings.png"
+  },
+  "s:castle:halflings": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_castle_halflings.png"
+  },
+  "s:star_fort:halflings": {
+   "w": 32,
+   "h": 32,
+   "kind": "building",
+   "template": "templates/building/s_star_fort_halflings.png"
+  },
+  "s:textile_mill:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_textile_mill_halflings.png"
+  },
+  "s:foundry:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_foundry_halflings.png"
+  },
+  "s:factory:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_factory_halflings.png"
+  },
+  "s:campfire:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_campfire_halflings.png"
+  },
+  "s:walls_tower:halflings": {
+   "w": 16,
+   "h": 16,
+   "kind": "building",
+   "template": "templates/building/s_walls_tower_halflings.png"
+  },
+  "th:halflings:2:0": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_halflings_2_0.png"
+  },
+  "th:halflings:2:1": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_halflings_2_1.png"
+  },
+  "th:halflings:3:0": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_halflings_3_0.png"
+  },
+  "th:halflings:3:1": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/th_halflings_3_1.png"
+  },
+  "work:canal": {
+   "w": 32,
+   "h": 32,
+   "kind": "town",
+   "template": "templates/town/work_canal.png"
+  },
+  "work:cathedral": {
+   "w": 32,
+   "h": 32,
+   "kind": "town",
+   "template": "templates/town/work_cathedral.png"
+  },
+  "work:university": {
+   "w": 32,
+   "h": 32,
+   "kind": "town",
+   "template": "templates/town/work_university.png"
+  },
+  "work:palace": {
+   "w": 32,
+   "h": 32,
+   "kind": "town",
+   "template": "templates/town/work_palace.png"
+  },
+  "work:harbour_works": {
+   "w": 32,
+   "h": 32,
+   "kind": "town",
+   "template": "templates/town/work_harbour_works.png"
+  },
+  "work:boulevards": {
+   "w": 32,
+   "h": 32,
+   "kind": "town",
+   "template": "templates/town/work_boulevards.png"
+  },
+  "work:world_fair": {
+   "w": 32,
+   "h": 32,
+   "kind": "town",
+   "template": "templates/town/work_world_fair.png"
+  },
+  "tree:0": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/tree_0.png"
+  },
+  "hill:0:false": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/hill_0_false.png"
+  },
+  "tent:0:#c0392b": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/tent_0_c0392b.png"
+  },
+  "tree:1": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/tree_1.png"
+  },
+  "hill:1:false": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/hill_1_false.png"
+  },
+  "stilt:1": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/stilt_1.png"
+  },
+  "tent:1:#c0392b": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/tent_1_c0392b.png"
+  },
+  "tree:2": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/tree_2.png"
+  },
+  "hill:2:false": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/hill_2_false.png"
+  },
+  "stilt:2": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/stilt_2.png"
+  },
+  "tent:2:#c0392b": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/tent_2_c0392b.png"
+  },
+  "tree:3": {
+   "w": 16,
+   "h": 24,
+   "kind": "town",
+   "template": "templates/town/tree_3.png"
+  },
+  "hill:3:false": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/hill_3_false.png"
+  },
+  "stilt:3": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/stilt_3.png"
+  },
+  "tent:3:#c0392b": {
+   "w": 16,
+   "h": 16,
+   "kind": "town",
+   "template": "templates/town/tent_3_c0392b.png"
+  },
+  "o:oak:0:0": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_0_0.png"
+  },
+  "o:oak:0:1": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_0_1.png"
+  },
+  "o:oak:0:2": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_0_2.png"
+  },
+  "o:oak:2:0": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_2_0.png"
+  },
+  "o:oak:2:1": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_2_1.png"
+  },
+  "o:oak:2:2": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_oak_2_2.png"
+  },
+  "o:birch:0:0": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_0_0.png"
+  },
+  "o:birch:0:1": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_0_1.png"
+  },
+  "o:birch:0:2": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_0_2.png"
+  },
+  "o:birch:2:0": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_2_0.png"
+  },
+  "o:birch:2:1": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_2_1.png"
+  },
+  "o:birch:2:2": {
+   "w": 16,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_birch_2_2.png"
+  },
+  "o:pine:0:0": {
+   "w": 14,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_pine_0_0.png"
+  },
+  "o:pine:0:1": {
+   "w": 14,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_pine_0_1.png"
+  },
+  "o:pine:0:2": {
+   "w": 14,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_pine_0_2.png"
+  },
+  "o:pine:1:0": {
+   "w": 14,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_pine_1_0.png"
+  },
+  "o:pine:1:1": {
+   "w": 14,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_pine_1_1.png"
+  },
+  "o:pine:1:2": {
+   "w": 14,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_pine_1_2.png"
+  },
+  "o:pine:2:0": {
+   "w": 14,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_pine_2_0.png"
+  },
+  "o:pine:2:1": {
+   "w": 14,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_pine_2_1.png"
+  },
+  "o:pine:2:2": {
+   "w": 14,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_pine_2_2.png"
+  },
+  "o:palm:0:0": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_palm_0_0.png"
+  },
+  "o:palm:0:1": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_palm_0_1.png"
+  },
+  "o:palm:0:2": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_palm_0_2.png"
+  },
+  "o:palm:1:0": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_palm_1_0.png"
+  },
+  "o:palm:1:1": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_palm_1_1.png"
+  },
+  "o:palm:1:2": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_palm_1_2.png"
+  },
+  "o:palm:2:0": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_palm_2_0.png"
+  },
+  "o:palm:2:1": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_palm_2_1.png"
+  },
+  "o:palm:2:2": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_palm_2_2.png"
+  },
+  "o:jungle:0:0": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_jungle_0_0.png"
+  },
+  "o:jungle:0:1": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_jungle_0_1.png"
+  },
+  "o:jungle:0:2": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_jungle_0_2.png"
+  },
+  "o:jungle:1:0": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_jungle_1_0.png"
+  },
+  "o:jungle:1:1": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_jungle_1_1.png"
+  },
+  "o:jungle:1:2": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_jungle_1_2.png"
+  },
+  "o:jungle:2:0": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_jungle_2_0.png"
+  },
+  "o:jungle:2:1": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_jungle_2_1.png"
+  },
+  "o:jungle:2:2": {
+   "w": 18,
+   "h": 22,
+   "kind": "nature",
+   "template": "templates/nature/o_jungle_2_2.png"
+  },
+  "o:bush:0:0": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_bush_0_0.png"
+  },
+  "o:bush:0:1": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_bush_0_1.png"
+  },
+  "o:bush:0:2": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_bush_0_2.png"
+  },
+  "o:bush:1:0": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_bush_1_0.png"
+  },
+  "o:bush:1:1": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_bush_1_1.png"
+  },
+  "o:bush:1:2": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_bush_1_2.png"
+  },
+  "o:bush:2:0": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_bush_2_0.png"
+  },
+  "o:bush:2:1": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_bush_2_1.png"
+  },
+  "o:bush:2:2": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_bush_2_2.png"
+  },
+  "o:rock:0:0": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_rock_0_0.png"
+  },
+  "o:rock:0:1": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_rock_0_1.png"
+  },
+  "o:rock:0:2": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_rock_0_2.png"
+  },
+  "o:rock:1:0": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_rock_1_0.png"
+  },
+  "o:rock:1:1": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_rock_1_1.png"
+  },
+  "o:rock:1:2": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_rock_1_2.png"
+  },
+  "o:rock:2:0": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_rock_2_0.png"
+  },
+  "o:rock:2:1": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_rock_2_1.png"
+  },
+  "o:rock:2:2": {
+   "w": 10,
+   "h": 8,
+   "kind": "nature",
+   "template": "templates/nature/o_rock_2_2.png"
+  },
+  "o:mound:0:0": {
+   "w": 16,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_mound_0_0.png"
+  },
+  "o:mound:0:1": {
+   "w": 16,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_mound_0_1.png"
+  },
+  "o:mound:0:2": {
+   "w": 16,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_mound_0_2.png"
+  },
+  "o:mound:1:0": {
+   "w": 16,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_mound_1_0.png"
+  },
+  "o:mound:1:1": {
+   "w": 16,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_mound_1_1.png"
+  },
+  "o:mound:1:2": {
+   "w": 16,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_mound_1_2.png"
+  },
+  "o:mound:2:0": {
+   "w": 16,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_mound_2_0.png"
+  },
+  "o:mound:2:1": {
+   "w": 16,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_mound_2_1.png"
+  },
+  "o:mound:2:2": {
+   "w": 16,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_mound_2_2.png"
+  },
+  "o:peak:0:0": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_0_0.png"
+  },
+  "o:peak:0:1": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_0_1.png"
+  },
+  "o:peak:0:2": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_0_2.png"
+  },
+  "o:peak:1:0": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_1_0.png"
+  },
+  "o:peak:1:1": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_1_1.png"
+  },
+  "o:peak:1:2": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_1_2.png"
+  },
+  "o:peak:2:0": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_2_0.png"
+  },
+  "o:peak:2:1": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_2_1.png"
+  },
+  "o:peak:2:2": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_2_2.png"
+  },
+  "o:peak:3:0": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_3_0.png"
+  },
+  "o:peak:3:1": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_3_1.png"
+  },
+  "o:peak:3:2": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_3_2.png"
+  },
+  "o:peak_snow:0:0": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_snow_0_0.png"
+  },
+  "o:peak_snow:0:1": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_snow_0_1.png"
+  },
+  "o:peak_snow:0:2": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_snow_0_2.png"
+  },
+  "o:peak_snow:1:0": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_snow_1_0.png"
+  },
+  "o:peak_snow:1:1": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_snow_1_1.png"
+  },
+  "o:peak_snow:1:2": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_snow_1_2.png"
+  },
+  "o:peak_snow:2:0": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_snow_2_0.png"
+  },
+  "o:peak_snow:2:1": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_snow_2_1.png"
+  },
+  "o:peak_snow:2:2": {
+   "w": 18,
+   "h": 24,
+   "kind": "nature",
+   "template": "templates/nature/o_peak_snow_2_2.png"
+  },
+  "o:reeds:0:0": {
+   "w": 10,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_reeds_0_0.png"
+  },
+  "o:reeds:0:1": {
+   "w": 10,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_reeds_0_1.png"
+  },
+  "o:reeds:0:2": {
+   "w": 10,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_reeds_0_2.png"
+  },
+  "o:reeds:1:0": {
+   "w": 10,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_reeds_1_0.png"
+  },
+  "o:reeds:1:1": {
+   "w": 10,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_reeds_1_1.png"
+  },
+  "o:reeds:1:2": {
+   "w": 10,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_reeds_1_2.png"
+  },
+  "o:reeds:2:0": {
+   "w": 10,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_reeds_2_0.png"
+  },
+  "o:reeds:2:1": {
+   "w": 10,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_reeds_2_1.png"
+  },
+  "o:reeds:2:2": {
+   "w": 10,
+   "h": 10,
+   "kind": "nature",
+   "template": "templates/nature/o_reeds_2_2.png"
+  },
+  "o:cactus:0:0": {
+   "w": 10,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_cactus_0_0.png"
+  },
+  "o:cactus:0:1": {
+   "w": 10,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_cactus_0_1.png"
+  },
+  "o:cactus:0:2": {
+   "w": 10,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_cactus_0_2.png"
+  },
+  "o:cactus:1:0": {
+   "w": 10,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_cactus_1_0.png"
+  },
+  "o:cactus:1:1": {
+   "w": 10,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_cactus_1_1.png"
+  },
+  "o:cactus:1:2": {
+   "w": 10,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_cactus_1_2.png"
+  },
+  "o:cactus:2:0": {
+   "w": 10,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_cactus_2_0.png"
+  },
+  "o:cactus:2:1": {
+   "w": 10,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_cactus_2_1.png"
+  },
+  "o:cactus:2:2": {
+   "w": 10,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_cactus_2_2.png"
+  },
+  "o:cactus:3:1": {
+   "w": 10,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_cactus_3_1.png"
+  },
+  "o:cactus:3:2": {
+   "w": 10,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_cactus_3_2.png"
+  },
+  "o:flowers:0:0": {
+   "w": 8,
+   "h": 6,
+   "kind": "nature",
+   "template": "templates/nature/o_flowers_0_0.png"
+  },
+  "o:flowers:0:1": {
+   "w": 8,
+   "h": 6,
+   "kind": "nature",
+   "template": "templates/nature/o_flowers_0_1.png"
+  },
+  "o:flowers:0:2": {
+   "w": 8,
+   "h": 6,
+   "kind": "nature",
+   "template": "templates/nature/o_flowers_0_2.png"
+  },
+  "o:flowers:1:0": {
+   "w": 8,
+   "h": 6,
+   "kind": "nature",
+   "template": "templates/nature/o_flowers_1_0.png"
+  },
+  "o:flowers:1:1": {
+   "w": 8,
+   "h": 6,
+   "kind": "nature",
+   "template": "templates/nature/o_flowers_1_1.png"
+  },
+  "o:flowers:1:2": {
+   "w": 8,
+   "h": 6,
+   "kind": "nature",
+   "template": "templates/nature/o_flowers_1_2.png"
+  },
+  "o:flowers:2:0": {
+   "w": 8,
+   "h": 6,
+   "kind": "nature",
+   "template": "templates/nature/o_flowers_2_0.png"
+  },
+  "o:flowers:2:1": {
+   "w": 8,
+   "h": 6,
+   "kind": "nature",
+   "template": "templates/nature/o_flowers_2_1.png"
+  },
+  "o:flowers:2:2": {
+   "w": 8,
+   "h": 6,
+   "kind": "nature",
+   "template": "templates/nature/o_flowers_2_2.png"
+  },
+  "o:flowers:3:0": {
+   "w": 8,
+   "h": 6,
+   "kind": "nature",
+   "template": "templates/nature/o_flowers_3_0.png"
+  },
+  "o:flowers:3:1": {
+   "w": 8,
+   "h": 6,
+   "kind": "nature",
+   "template": "templates/nature/o_flowers_3_1.png"
+  },
+  "o:flowers:3:2": {
+   "w": 8,
+   "h": 6,
+   "kind": "nature",
+   "template": "templates/nature/o_flowers_3_2.png"
+  },
+  "o:dead:0:0": {
+   "w": 12,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_dead_0_0.png"
+  },
+  "o:dead:0:1": {
+   "w": 12,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_dead_0_1.png"
+  },
+  "o:dead:0:2": {
+   "w": 12,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_dead_0_2.png"
+  },
+  "o:dead:1:0": {
+   "w": 12,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_dead_1_0.png"
+  },
+  "o:dead:1:1": {
+   "w": 12,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_dead_1_1.png"
+  },
+  "o:dead:1:2": {
+   "w": 12,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_dead_1_2.png"
+  },
+  "o:dead:2:0": {
+   "w": 12,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_dead_2_0.png"
+  },
+  "o:dead:2:1": {
+   "w": 12,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_dead_2_1.png"
+  },
+  "o:dead:2:2": {
+   "w": 12,
+   "h": 14,
+   "kind": "nature",
+   "template": "templates/nature/o_dead_2_2.png"
+  }
+ }
+}

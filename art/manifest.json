@@ -1,0 +1,4 @@
+{
+  "about": "Hand-drawn sprites that replace the code-drawn ones. Map a slot key (see slots.json) to a PNG path inside this folder, e.g. \"h:humans:2\": \"houses/human-house-2.png\". Slots not listed stay code-drawn.",
+  "sprites": {}
+}
