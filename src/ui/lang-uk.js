@@ -2201,3 +2201,12 @@ UK_PATTERNS.unshift(
   [/^👁 Spies: (treasury|regiments|schemes)$/, (m) => `👁 Шпигуни: ${{ treasury: 'скарбниця', regiments: 'полки', schemes: 'змови' }[m[1]]}`],
 );
 Object.assign(UK, { 'Graphics card terrain (faster, animated water)': 'Рельєф на відеокарті (швидше, анімована вода)' });
+// ---------------- Phase 22: Modern era ----------------
+Object.assign(UK, {
+  Modern: 'Новітня', 'Modern Era': 'Новітня епоха', Electricity: 'Електрика', Telegraph: 'Телеграф', 'Mass Media': 'Масмедіа', 'Modern Medicine': 'Сучасна медицина', 'Combustion Engine': 'Двигун внутрішнього згоряння', 'Machine Guns': 'Кулемети',
+  '+20% knowledge, +10% all production. Unlocks Power Plant.': '+20% знань, +10% усього виробництва. Відкриває електростанцію.', '+2 administration, +10% taxes.': '+2 до управління, +10% податків.', '+5 stability. Unlocks Newspaper.': '+5 стабільності. Відкриває газету.', '+20% growth, +15% housing.': '+20% приросту, +15% житла.', '+30% build speed, +10% gold.': '+30% швидкості будівництва, +10% золота.', '+60 defense. Unlocks Regulars and Howitzers.': '+60 до оборони. Відкриває регулярні війська й гаубиці.',
+  Regulars: 'Регулярні війська', Howitzers: 'Гаубиці', 'Modern infantry with machine guns.': 'Сучасна піхота з кулеметами.', 'Heavy guns that flatten any fortress.': 'Важкі гармати, що рівняють будь-яку фортецю.',
+  'Power Plant': 'Електростанція', Newspaper: 'Газета', 'Electric light and power: +12% taxes, +4% growth, −1 stability from the smoke.': 'Електричне світло й сила: +12% податків, +4% приросту, −1 стабільності через дим.', 'The daily press: +3 stability, +3% taxes.': 'Щоденна преса: +3 стабільності, +3% податків.',
+  '🔭 Visit': '🔭 Відвідати', '⚔ Watch the battle': '⚔ Подивитися битву', 'Close · Esc': 'Закрити · Esc', 'Drag to look along the town · Esc to close': 'Тягніть, щоб роздивитися місто · Esc — закрити', 'The armies meet · Esc to close': 'Армії сходяться · Esc — закрити',
+});
+UK_PATTERNS.unshift([/^🔭 Visit (.+)$/, (m) => `🔭 Відвідати ${m[1]}`], [/^(.+) holds the field$/, (m) => `${m[1]} утримує поле бою`]);

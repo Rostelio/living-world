@@ -18,7 +18,7 @@ function vnoise(x, y, seed) {
   const a = hash2(xi, yi, seed), b = hash2(xi + 1, yi, seed), c = hash2(xi, yi + 1, seed), d = hash2(xi + 1, yi + 1, seed);
   return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
 }
-const INDUSTRY = new Set(['textile_mill', 'foundry', 'factory', 'brewery', 'railway_station']);
+const INDUSTRY = new Set(['power_plant', 'textile_mill', 'foundry', 'factory', 'brewery', 'railway_station']);
 const MAX_PARTICLES = [0, 350, 900, 1800];
 
 // Season helpers (day of year 0..360; month 0 = Frostmoot, mid-winter)

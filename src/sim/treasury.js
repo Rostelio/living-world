@@ -32,7 +32,7 @@ export function canBuildMonument(civ, id) {
   const M = MONUMENTS[id];
   if (!M) return { ok: false, reason: 'Unknown' };
   if (monumentOwner(id) >= 0) return { ok: false, reason: `Already built by ${civOf(monumentOwner(id)).displayName}` };
-  if ((civ.era || 0) < M.era) return { ok: false, reason: `Requires the ${['Ancient', 'Medieval', 'Renaissance', 'Industrial'][M.era]} era` };
+  if ((civ.era || 0) < M.era) return { ok: false, reason: `Requires the ${['Ancient', 'Medieval', 'Renaissance', 'Industrial', 'Modern'][M.era]} era` };
   const cap = S().settlements[civ.capital];
   if (!cap) return { ok: false, reason: 'No capital' };
   if (M.coastal && !G.world.provinces[cap.province].coastal) return { ok: false, reason: 'Needs a coastal capital' };

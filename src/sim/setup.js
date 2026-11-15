@@ -257,7 +257,7 @@ export function newGame(opts) {
   seedWildlife();
   const p = st.civs[0];
   const intro = startEra
-    ? `${p.displayName} enters history in the ${['Ancient', 'Medieval', 'Renaissance', 'Industrial'][startEra]} Era. Its story begins.`
+    ? `${p.displayName} enters history in the ${['Ancient', 'Medieval', 'Renaissance', 'Industrial', 'Modern'][startEra]} Era. Its story begins.`
     : `The ${RACES[p.race].adj} people of ${p.baseName} gather around their first campfire. Their story begins.`;
   log(intro, { civ: 0, type: 'good', toast: true });
   return st;

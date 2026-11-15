@@ -3,6 +3,7 @@ export const ERAS = [
   { name: 'Medieval', cost: 1100, unlockNeed: 6 },
   { name: 'Renaissance', cost: 9000, unlockNeed: 6 },
   { name: 'Industrial', cost: 32000, unlockNeed: 6 },
+  { name: 'Modern', cost: 80000, unlockNeed: 5 }, // Phase 22
 ];
 
 // fx: additive bonuses (0.1 = +10%) except stability/defense/admin (flat).
@@ -49,6 +50,14 @@ export const TECHS = [
   T('railways', 3, 'Railways', '+25% build speed, +10% taxes.', { build: 0.25, tax: 0.1 }, ['build', 'econ']),
   T('scientific_method', 3, 'Scientific Method', '+30% knowledge.', { knowledge: 0.3 }, ['science']),
   T('rifling', 3, 'Rifling', '+40 defense.', { defense: 40 }, ['military']),
+
+  // Modern (Phase 22)
+  T('electricity', 4, 'Electricity', '+20% knowledge, +10% all production. Unlocks Power Plant.', { knowledge: 0.2, food: 0.1, wood: 0.1, stone: 0.1, iron: 0.1, gold: 0.1 }, ['econ', 'science']),
+  T('telegraph', 4, 'Telegraph', '+2 administration, +10% taxes.', { admin: 2, tax: 0.1 }, ['admin', 'econ']),
+  T('mass_media', 4, 'Mass Media', '+5 stability. Unlocks Newspaper.', { stability: 5 }, ['admin']),
+  T('modern_medicine', 4, 'Modern Medicine', '+20% growth, +15% housing.', { growth: 0.2, housing: 0.15 }, ['food']),
+  T('combustion', 4, 'Combustion Engine', '+30% build speed, +10% gold.', { build: 0.3, gold: 0.1 }, ['build', 'econ']),
+  T('machine_guns', 4, 'Machine Guns', '+60 defense. Unlocks Regulars and Howitzers.', { defense: 60 }, ['military']),
 
   // Race-unique technologies
   T('chivalry', 1, 'Chivalry', 'Human: +4 stability, +10 defense.', { stability: 4, defense: 10 }, ['military', 'admin'], { race: 'humans' }),

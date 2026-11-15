@@ -370,7 +370,7 @@ export function civMonthly(civ) {
   const salaries = cabinetSalaries(civ);
   civ.treasury += taxes - upkeep - corruption - military - stateWages - salaries;
   knowledge = Math.pow(knowledge * m.knowledge * cabinetMul(civ, 'research', 0.04), 0.8);
-  knowledge *= [1, 1.15, 1.45, 1.8][civ.era || 0]; // Phase 19: printing, universities and science speed the later eras
+  knowledge *= [1, 1.15, 1.45, 1.8, 2.2][civ.era || 0] || 2.2; // Phase 19: printing, universities and science speed the later eras
   progressResearch(civ, knowledge);
 
   // ---- 6. Growth, housing, migration ----

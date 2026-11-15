@@ -50,7 +50,7 @@ const builtCount = (civ, id) => (civ.works || []).filter((w) => w.id === id).len
 export function canBuildWork(civ, id, s) {
   const Wk = WORKS[id];
   if (!Wk || !s || s.civ !== civ.id) return { ok: false, reason: 'Invalid' };
-  if ((civ.era || 0) < Wk.era) return { ok: false, reason: `Requires the ${['Ancient', 'Medieval', 'Renaissance', 'Industrial'][Wk.era]} era` };
+  if ((civ.era || 0) < Wk.era) return { ok: false, reason: `Requires the ${['Ancient', 'Medieval', 'Renaissance', 'Industrial', 'Modern'][Wk.era]} era` };
   if (s.stage < 2) return { ok: false, reason: 'Needs a town' };
   if (Wk.capital && !s.isCapital) return { ok: false, reason: 'Capital only' };
   const P = G.world.provinces[s.province];

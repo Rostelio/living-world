@@ -29,7 +29,7 @@ import { houseSprite, specialSprite, fieldSprites, BIG_SPRITES, iconCanvas, draw
 const HOUSE_VIS = [6, 10, 20, 40, 80];
 export const MAX_ZOOM = 16;
 export const HD_ZOOM = 1.0; // switch to the 16×16 tileset
-const SPECIAL_ORDER = ['town_hall', 'castle', 'star_fort', 'temple', 'market', 'trading_post', 'library', 'university', 'observatory', 'bank', 'hospital', 'granary', 'warehouse', 'barracks', 'brewery', 'aqueduct', 'railway_station', 'textile_mill', 'foundry', 'factory'];
+const SPECIAL_ORDER = ['town_hall', 'castle', 'star_fort', 'temple', 'market', 'trading_post', 'library', 'university', 'observatory', 'bank', 'hospital', 'granary', 'warehouse', 'barracks', 'brewery', 'aqueduct', 'railway_station', 'textile_mill', 'foundry', 'factory', 'power_plant', 'newspaper'];
 
 export class Renderer {
   constructor(canvas, minimap) {

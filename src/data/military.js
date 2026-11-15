@@ -7,6 +7,8 @@ export const UNITS = {
   siege: { name: 'Siege Engines', cls: 'sie', att: 1, def: 1, speed: 0.7, siege: 4, men: 6, upkeep: 0.5, cost: { gold: 30, wood: 30, iron: 8 }, tech: 'engineering', barracks: true, desc: 'Breaks walls. Fragile in open battle.' },
   musketeers: { name: 'Musketeers', cls: 'inf', att: 6, def: 5, speed: 1, siege: 0.4, men: 10, upkeep: 0.45, cost: { gold: 30, weapons: 3 }, tech: 'gunpowder', barracks: true, desc: 'Gunpowder infantry.' },
   artillery: { name: 'Artillery', cls: 'sie', att: 4, def: 1.5, speed: 0.8, siege: 10, men: 6, upkeep: 0.8, cost: { gold: 60, steel: 8, coal: 4 }, tech: 'steam_power', barracks: true, desc: 'Cannons that shatter fortresses.' },
+  regulars: { name: 'Regulars', cls: 'inf', att: 15, def: 13, speed: 1.2, siege: 0.6, men: 10, upkeep: 1, cost: { gold: 75, weapons: 5, steel: 3 }, tech: 'machine_guns', barracks: true, desc: 'Modern infantry with machine guns.' },
+  howitzers: { name: 'Howitzers', cls: 'sie', att: 7, def: 2, speed: 0.9, siege: 16, men: 6, upkeep: 1.2, cost: { gold: 100, steel: 12, coal: 6 }, tech: 'machine_guns', barracks: true, desc: 'Heavy guns that flatten any fortress.' },
   riflemen: { name: 'Riflemen', cls: 'inf', att: 10, def: 8, speed: 1.1, siege: 0.5, men: 10, upkeep: 0.7, cost: { gold: 50, weapons: 4, steel: 2 }, tech: 'rifling', barracks: true, desc: 'Industrial-era infantry.' },
   // Race-unique
   knights: { name: 'Knights', cls: 'cav', att: 7.5, def: 5, speed: 1.6, siege: 0, men: 8, upkeep: 0.9, cost: { gold: 45, weapons: 2, horses: 1 }, tech: 'chivalry', race: 'humans', barracks: true, desc: 'Human heavy cavalry.' },

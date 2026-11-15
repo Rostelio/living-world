@@ -516,3 +516,10 @@ The look follows the time of day: bright and bold by day, warm and painterly at 
   - Townsfolk and a cart pass by, chimneys smoke, it rains or snows, and windows and lamps glow at night.
   - Drag to look along the town; Esc closes.
 - **⚔ Watch the battle** (in a battle report) shows the two armies meeting: infantry with shields and spears, archers loosing arrows, cavalry, muskets smoking in later eras, the dust of the melee, the fallen, the rout and who held the field.
+
+**The Modern era** (fifth era, after the Industrial era; needs 5 Industrial techs):
+- **Techs:** Electricity (+20% knowledge, +10% production), Telegraph (+2 administration, +10% taxes), Mass Media (+5 stability), Modern Medicine (+20% growth, +15% housing), Combustion Engine (+30% build speed, +10% gold) and Machine Guns (+60 defence).
+- **Buildings:** Power Plant and Newspaper.
+- **Units:** Regulars (machine-gun infantry) and Howitzers.
+- Research runs faster in this era (×2.2).
+- In test games, realms reach it around years 150–200.

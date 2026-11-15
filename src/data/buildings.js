@@ -50,6 +50,8 @@ export const BUILDINGS = {
   // --- Industry (capitalists) ---
   textile_mill: { name: 'Textile Mill', icon: 'gold', max: 3, stage: 2, tech: 'textiles', cost: { wood: 120, stone: 60, tools: 30, gold: 80 }, days: 120, desc: 'Laborers mass-produce clothes from cloth.' },
   foundry: { name: 'Foundry', icon: 'iron', max: 3, stage: 2, tech: 'steam_power', cost: { stone: 150, tools: 40, iron: 60, gold: 120 }, days: 150, desc: 'Laborers smelt iron and coal into steel.' },
+  power_plant: { name: 'Power Plant', icon: 'gold', max: 1, stage: 3, tech: 'electricity', cost: { steel: 80, stone: 150, gold: 250 }, days: 200, tax: 0.12, growth: 0.04, stability: -1, desc: 'Electric light and power: +12% taxes, +4% growth, −1 stability from the smoke.' },
+  newspaper: { name: 'Newspaper', icon: 'stability', max: 1, stage: 2, tech: 'mass_media', cost: { paper: 30, stone: 40, gold: 120 }, days: 90, stability: 3, tax: 0.03, desc: 'The daily press: +3 stability, +3% taxes.' },
   factory: { name: 'Factory', icon: 'gold', max: 3, stage: 3, tech: 'industrialization', cost: { steel: 50, tools: 40, stone: 150, gold: 200 }, days: 180, desc: 'Laborers make tools, furniture and weapons from steel and wood.' },
 };
 export const BUILDING_LIST = Object.keys(BUILDINGS);
