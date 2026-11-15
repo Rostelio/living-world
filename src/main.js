@@ -2,6 +2,7 @@ import { remapKey } from './ui/keys.js';
 import { initI18n } from './ui/i18n.js';
 import { loadArt } from './render/pixelkit.js';
 import { initSkin } from './ui/skin.js';
+import { sceneView } from './render/scene.js';
 import { openChronicle } from './ui/chronicle.js';
 import { startTutorial, updateTutorial } from './ui/tutorial.js';
 import { encyclopedia } from './ui/encyclopedia.js';
@@ -339,6 +340,7 @@ function frame(now) {
     guard('input', () => handleKeysPan(dt));
     if (G.ui.follow != null) { const fa = S().armies.find((x) => x.id === G.ui.follow); if (fa) renderer.centerOn(fa.tile); else G.ui.follow = null; }
     guard('map rendering', () => renderer.draw(dt, Math.min(1, acc), speed > 0 && !modalOpen()));
+    if (sceneView.open) guard('scene', () => sceneView.draw(dt)); // Phase 22: side-view scenes
     uiTimer += dt;
     if (uiTimer > 0.35) {
       uiTimer = 0;
@@ -489,6 +491,7 @@ window.addEventListener('keydown', (e) => {
   if (e.ctrlKey || e.metaKey) return;
   if (MODE_KEYS[e.key]) { e.preventDefault(); setMode(MODE_KEYS[e.key]); return; }
   if (searchOpen()) return;
+  if (e.key === 'Escape' && sceneView.open) { sceneView.hide(); return; }
   if (e.key === 'Escape') {
     closeContextMenu();
     if (modalOpen()) hideModal();

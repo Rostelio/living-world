@@ -648,3 +648,12 @@ body.skin20 .modal-box.parchment .btn.primary { color: #1a1208; }
 #advisor[data-sev="3"] { box-shadow: 0 0 0 1px rgba(228, 107, 90, .6), 0 6px 18px rgba(0, 0, 0, .5); }
 #advisor[data-sev="3"] .adv-head b { color: #ff9a8a; }
 #advisor:hover { filter: brightness(1.08); }
+
+/* ---------- Phase 22: side-view scenes ---------- */
+#scene { position: absolute; inset: 0; z-index: 30; background: #0b0a08; }
+#scene canvas { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; cursor: grab; }
+#scene .scene-head { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; align-items: center; padding: 6px 14px; zoom: var(--ui-scale, 1);
+  border: 6px solid transparent; border-image: var(--frame) 8 / 6px round; background: linear-gradient(rgba(22, 16, 10, .88), rgba(18, 13, 8, .92)), var(--wood-dark); background-size: auto, 128px 64px; }
+#scene .scene-title { font-family: var(--pixel); color: var(--gold); font-size: 18px; }
+#scene .scene-sub { color: var(--muted); font-size: 12px; }
+#scene .scene-hint { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); color: rgba(255, 245, 220, .7); font-size: 11px; text-shadow: 0 1px 0 #000; zoom: var(--ui-scale, 1); }

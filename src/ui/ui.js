@@ -1,4 +1,6 @@
 import * as LB from '../sim/latebalance.js';
+import { sceneView } from '../render/scene.js';
+export function openScene(spec) { sceneView.show(spec, () => sceneView.hide()); }
 import * as DEPTH from '../sim/depth.js';
 import * as MK from '../sim/markets.js';
 import { LANGS, setLang, t, currentLang } from './i18n.js';
@@ -191,6 +193,8 @@ function onClick(e) {
     case 'startMonument': { const r = TR.startMonument(me, d.id, 2); if (!r.ok) toast(r.reason, 'bad'); refreshAll(true); break; }
     case 'investRate': TR.setInvestRate(me, +d.lvl); refreshAll(true); break;
     case 'cancelMonument': TR.cancelMonument(me); refreshAll(true); break;
+    case 'viewTown': hideModal(); openScene({ type: 'town', id: +d.id }); break;
+    case 'viewBattle': { const r = (S().battleReports || []).find((x) => x.id === +d.id); hideModal(); if (r) openScene({ type: 'battle', report: r }); break; }
     case 'decision': { const r = DEPTH.takeDecision(me, d.id); if (!r.ok) toast(r.reason, 'bad'); refreshAll(true); break; }
     case 'scheme': { const r = DEPTH.startScheme(me, G.ui.schemeTarget, d.k); if (!r.ok) toast(r.reason, 'bad'); refreshAll(true); break; }
     case 'cancelScheme': DEPTH.cancelScheme(me, +d.i); refreshAll(true); break;
@@ -730,7 +734,7 @@ export function battleReportModal(id) {
     <h3>Why it was won</h3>${r.why.map((w) => `<div class="small">• ${E(w[0].toUpperCase() + w.slice(1))}.</div>`).join('')}
     ${r.despite?.length ? `<h3>Despite</h3>${r.despite.map((w) => `<div class="small muted">• ${E(w[0].toUpperCase() + w.slice(1))}.</div>`).join('')}` : ''}
     ${r.traits?.length ? `<div class="small muted" style="margin-top:6px">${r.traits.map(E).join(' · ')}.</div>` : ''}
-    <div class="actions"><button class="btn" data-action="focusTile" data-tile="${r.tile}">Show the field</button><button class="btn primary" data-action="menuItem" data-item="resume">Close</button></div>
+    <div class="actions"><button class="btn" data-action="viewBattle" data-id="${r.id}">⚔ Watch the battle</button><button class="btn" data-action="focusTile" data-tile="${r.tile}">Show the field</button><button class="btn primary" data-action="menuItem" data-item="resume">Close</button></div>
   </div>`);
 }
 

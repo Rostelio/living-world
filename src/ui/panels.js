@@ -784,6 +784,7 @@ export function provincePanel(pid) {
     const civ = st.civs[s.civ];
     const mine = civ.id === me.id;
     const r = settlementSummary(civ, s);
+    h += `<div class="row" style="margin:6px 0"><button class="btn sm" data-action="viewTown" data-id="${s.id}">🔭 Visit ${E(s.name)}</button></div>`; // Phase 22: the side-view scene
     h += '<h3>Settlement</h3><div class="grid2">';
     h += stat(`${iconImg('pop', 'ico sm')} Population`, fmt(s.pop));
     h += stat(`${iconImg('housing', 'ico sm')} Housing`, `${fmt(s.housing)} / ${fmt(maxHousing(civ, s))}`);

@@ -506,3 +506,13 @@ The look follows the time of day: bright and bold by day, warm and painterly at 
 - Trees, rocks and rivers are still baked, now in half the time, and drawn on top.
 - Far out, the cached terrain is still used because it's cheaper there.
 - It can be turned off in Settings.
+
+**Side-view scenes:**
+- **🔭 Visit** (on any town's panel) opens the town as a wide painted side view at pixel-art resolution, scaled up crisply:
+  - The sky, sun, moon, stars and clouds follow the hour.
+  - Mountains and hills drift with the camera.
+  - The town's own buildings stand in a row in its people's style: half-timbered houses (taller in cities), orc tents, town hall, castle, temple, market stalls, library, granary, barracks, harbour crane, mine, lumber yard, windmill.
+  - Walls appear if it has walls, and boats if it's on the coast.
+  - Townsfolk and a cart pass by, chimneys smoke, it rains or snows, and windows and lamps glow at night.
+  - Drag to look along the town; Esc closes.
+- **⚔ Watch the battle** (in a battle report) shows the two armies meeting: infantry with shields and spears, archers loosing arrows, cavalry, muskets smoking in later eras, the dust of the melee, the fallen, the rout and who held the field.
