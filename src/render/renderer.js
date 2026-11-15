@@ -553,6 +553,17 @@ export class Renderer {
     this.atmo.drawLife(ctx, view);
     this.atmo.drawNature(ctx, view); // Phase 20: dawn mist, fireflies, stars on water
     if (z >= 0.9 && SETTINGS.ambientLife) this.drawCaravans(ctx, view, simRunning); // Phase 21
+    // Phase 22: holy sites — a small shrine in the faith's colour
+    if (z >= 0.45 && st.holySites) for (const h of st.holySites) {
+      const P = W.provinces[h.prov]; if (!P) continue;
+      const X = Math.round(P.cx * TILE + 4), Y = Math.round(P.cy * TILE + 4);
+      if (X < x0 - 10 || X > x1 + 10 || Y < y0 - 10 || Y > y1 + 10 || !isExplored(P.tiles[0])) continue;
+      const col = st.faiths?.[h.faith]?.color || '#e6c068', s2 = z >= 2 ? 1 : 2;
+      ctx.fillStyle = '#2a1c12'; ctx.fillRect(X - 3 * s2, Y - 5 * s2, 6 * s2, 6 * s2);
+      ctx.fillStyle = '#f0e8d8'; ctx.fillRect(X - 2.5 * s2, Y - 3 * s2, 5 * s2, 3.5 * s2);
+      ctx.fillStyle = col; ctx.fillRect(X - 3 * s2, Y - 4.5 * s2, 6 * s2, 1.5 * s2); ctx.fillRect(X - 0.5 * s2, Y - 7 * s2, 1 * s2, 2.5 * s2);
+      ctx.fillStyle = '#4a2e1a'; ctx.fillRect(X - 0.75 * s2, Y - 1.5 * s2, 1.5 * s2, 2 * s2);
+    }
 
     // Units (settlers)
     for (const u of st.units) if (isVisible(u.path[u.step] ?? u.tile)) this.drawUnit(ctx, u, z);

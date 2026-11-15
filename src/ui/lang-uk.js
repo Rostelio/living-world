@@ -2210,3 +2210,23 @@ Object.assign(UK, {
   '🔭 Visit': '🔭 Відвідати', '⚔ Watch the battle': '⚔ Подивитися битву', 'Close · Esc': 'Закрити · Esc', 'Drag to look along the town · Esc to close': 'Тягніть, щоб роздивитися місто · Esc — закрити', 'The armies meet · Esc to close': 'Армії сходяться · Esc — закрити',
 });
 UK_PATTERNS.unshift([/^🔭 Visit (.+)$/, (m) => `🔭 Відвідати ${m[1]}`], [/^(.+) holds the field$/, (m) => `${m[1]} утримує поле бою`]);
+// ---------------- Phase 22: religions & holy wars ----------------
+Object.assign(UK, {
+  'That is us': 'Це ми', ours: 'наш', unbelievers: 'невірні', unclaimed: 'нічий', Show: 'Показати', '⚔ Call a holy war': '⚔ Оголосити священну війну',
+  "Holding your faith's holy sites brings stability (+3 each); the realm with the most devotion leads the faith (+4 stability) and alone may call a holy war.": 'Утримання святих місць вашої віри дає стабільність (+3 за кожне); держава з найбільшою побожністю очолює віру (+4 стабільності) і лише вона може оголосити священну війну.',
+  'Call the faithful to retake a holy site: realms of our faith may join': 'Закликати вірних повернути святе місце: держави нашої віри можуть приєднатися',
+  'Only the head of the faith can call a holy war': 'Лише голова віри може оголосити священну війну',
+  'No holy site of our faith is held by unbelievers within reach': 'Жодне святе місце нашої віри в межах досяжності не в руках невірних',
+  'Reform the Faith': 'Реформувати віру', 'Our theologians strip away old abuses and write a new creed.': 'Наші богослови позбуваються давніх зловживань і пишуть нове віровчення.',
+  'Holy sites held': 'Утримані святі місця', 'Holy sites in infidel hands': 'Святі місця в руках невірних', 'Head of the faith': 'Голова віри',
+});
+UK_PATTERNS.unshift(
+  [/^✝ The faithful of (.+)$/, (m, t) => `✝ Вірні: ${t(m[1])}`],
+  [/^Our devotion: (\d+) · Head of the faith: (.+)$/, (m) => `Наша побожність: ${m[1]} · Голова віри: ${m[2]}`],
+  [/^The faithful are weary: (\d+) more years$/, (m) => `Вірні втомлені: ще ${m[1]} р.`],
+  [/^Holy sites held \((\d+)\)$/, (m) => `Утримані святі місця (${m[1]})`],
+  [/^Holy War for (.+)$/, (m) => `Священна війна за ${m[1]}`],
+  [/^✝ (.+) now leads the faithful of (.+)\.$/, (m, t) => `✝ ${m[1]} тепер очолює вірних: ${t(m[2])}.`],
+  [/^⚔✝ HOLY WAR! (.+) calls the faithful of (.+) to retake (.+) from (.+?)( — (.+) answer the call)?!$/, (m, t) => `⚔✝ СВЯЩЕННА ВІЙНА! ${m[1]} закликає вірних (${t(m[2])}) повернути ${m[3]} у ${m[4]}${m[6] ? ` — на заклик відгукуються ${m[6]}` : ''}!`],
+  [/^Missionaries from (.+) win over (.+): it turns from (.+) to (.+)\.$/, (m) => `Місіонери з ${m[1]} навертають ${m[2]}: воно переходить від ${m[3]} до ${m[4]}.`],
+);

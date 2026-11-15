@@ -1,5 +1,6 @@
 import { DIFFICULTY } from '../data/difficulty.js';
 import { monumentFx } from './treasury.js';
+import { religionFx } from './religion.js';
 import { lawFxList } from './politics.js';
 import { RACES } from '../data/races.js';
 import { TECH } from '../data/techs.js';
@@ -49,6 +50,8 @@ export function computeMods(civ) {
   }
   // Great monuments (Phase 12)
   for (const [fx, label] of monumentFx(civ)) apply(fx, label);
+  // Holy sites and leading the faith (Phase 22)
+  if (G.state?.holySites) for (const [fx, label] of religionFx(civ)) apply(fx, label);
   // Laws (Phase 10)
   for (const [fx, label] of lawFxList(civ)) apply(fx, label);
   // Timed and permanent modifiers (events, monuments...)

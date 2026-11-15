@@ -21,6 +21,8 @@ import { civMonthly } from './economy.js';
 import { yearlyGovernment } from './government.js';
 import { lateMonthly, lateYearly } from './latebalance.js';
 import { depthMonthly } from './depth.js';
+import * as REL from './religion.js';
+import { religionMonthly, religionYearly } from './religion.js';
 import { updateContacts } from './tech.js';
 import { dailyArmies, militaryMonthly, aiRecruit, aiArmies } from './military.js';
 import { diplomacyMonthly, diplomacyYearly } from './diplomacy.js';
@@ -39,6 +41,7 @@ import { storiesMonthly, heroesYearly, ensurePhase17Stories } from './stories.js
 G.ai = AI;
 G.politics = POLITICS;
 G.characters = CHARS;
+G.religion = REL; // Phase 22
 G.addWarScore = addWarScore;
 G.diplo = { makePeace, rel };
 G.succeed = succeed;
@@ -125,6 +128,7 @@ function monthly() {
   timed('trade', marketTrade);
   timed('markets', marketsMonthly);
   timed('depth', depthMonthly); // Phase 21: caravans, missions, schemes
+  timed('religion', religionMonthly); // Phase 22: missionaries
   timed('plays', PLAYS.playsMonthly);
   timed('civilWars', civilWarsMonthly);
   timed('diplomacy', diplomacyMonthly);
@@ -152,6 +156,7 @@ function yearly() {
     recordHistory(civ);
   }
   timed('lateYearly', lateYearly);
+  timed('religionYearly', religionYearly); // Phase 22: heads of faiths, holy wars
 }
 
 // Yearly snapshot for the Trends charts: [year, pop, gold, sol, stability, knowledge, regiments, techs]

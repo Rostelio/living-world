@@ -195,6 +195,7 @@ function onClick(e) {
     case 'cancelMonument': TR.cancelMonument(me); refreshAll(true); break;
     case 'viewTown': hideModal(); openScene({ type: 'town', id: +d.id }); break;
     case 'viewBattle': { const r = (S().battleReports || []).find((x) => x.id === +d.id); hideModal(); if (r) openScene({ type: 'battle', report: r }); break; }
+    case 'holyWar': { const r = G.religion.callHolyWar(me); if (!r.ok) toast(r.reason, 'bad'); refreshAll(true); break; }
     case 'decision': { const r = DEPTH.takeDecision(me, d.id); if (!r.ok) toast(r.reason, 'bad'); refreshAll(true); break; }
     case 'scheme': { const r = DEPTH.startScheme(me, G.ui.schemeTarget, d.k); if (!r.ok) toast(r.reason, 'bad'); refreshAll(true); break; }
     case 'cancelScheme': DEPTH.cancelScheme(me, +d.i); refreshAll(true); break;

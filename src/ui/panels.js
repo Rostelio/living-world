@@ -1,4 +1,5 @@
 import { HERO_KINDS } from '../sim/stories.js';
+import { holySitesOf, siteHolder, devotion, headOf, isHead, canCallHolyWar } from '../sim/religion.js';
 import { ROUTE_NAMES, canOpenRoute, routeBetween, linkedForTrade } from '../sim/markets.js';
 import { MISSIONS, DECISIONS, DECISION_LIST, canTakeDecision, decisionCost, SCHEMES, SCHEME_LIST, schemeCost, schemeOdds, canScheme, spymaster, spiedOn, escortCost, routeRaided } from '../sim/depth.js';
 import { WORKS, WORK_LIST, WORK_RATES, canBuildWork, workCost, adminShare, adminReach, ambitionText } from '../sim/latebalance.js';
@@ -602,6 +603,15 @@ function government(civ) {
   // ---- Faith ----
   const sf = faithOf(civ.faith);
   h += `<h3>State Faith</h3><div class="card"><b style="color:${sf?.color}">${E(sf?.name || '—')}</b>${sf?.parent ? ' <span class="tag">Heresy</span>' : ''}<div class="small muted">${E(sf?.desc || '')}</div><div class="small">Blessing: ${Object.entries(sf?.fx || {}).map(([k, v]) => `${k} ${Math.abs(v) < 1 ? '+' + Math.round(v * 100) + '%' : '+' + v}`).join(', ')}</div><div class="small muted">Religious policy: <b>${civ.tolerance === 'enforced' ? 'Enforced' : 'Tolerant'}</b> (change it in the Population panel)</div></div>`;
+  // Phase 22: holy sites, the head of the faith, holy war
+  const st = S();
+  if (st.holySites) {
+    const root = st.faiths?.[civ.faith]?.root ?? civ.faith, head = headOf(root);
+    h += `<div class="card"><b>✝ The faithful of ${E(st.faiths?.[root]?.name || '')}</b><div class="small">Our devotion: <b>${devotion(civ)}</b> · Head of the faith: ${head >= 0 ? `<b style="color:${st.civs[head].color}">${E(st.civs[head].displayName)}</b>${isHead(civ) ? ' <span class="tag gold">That is us</span>' : ''}` : '—'}</div>`;
+    for (const hs of holySitesOf(root)) { const hd = siteHolder(hs); const P = G.world.provinces[hs.prov]; h += `<div class="row between small" style="margin-top:3px"><span>⛪ ${E(P.name)}</span><span>${hd >= 0 ? `<span style="color:${st.civs[hd].color}">${E(st.civs[hd].baseName)}</span>${hd === civ.id ? ' <span class="tag good">ours</span>' : (st.faiths?.[st.civs[hd].faith]?.root ?? st.civs[hd].faith) !== root ? ' <span class="tag bad">unbelievers</span>' : ''}` : '<span class="muted">unclaimed</span>'} <button class="btn sm" data-action="focusTile" data-tile="${P.tiles[0]}">Show</button></span></div>`; }
+    const hw = canCallHolyWar(civ);
+    h += `<div class="row" style="margin-top:6px"><button class="btn sm ${hw.ok ? 'primary' : ''}" ${hw.ok ? 'data-action="holyWar"' : 'disabled'} title="${E(hw.ok ? 'Call the faithful to retake a holy site: realms of our faith may join' : hw.reason)}">⚔ Call a holy war</button></div><div class="small muted">Holding your faith's holy sites brings stability (+3 each); the realm with the most devotion leads the faith (+4 stability) and alone may call a holy war.</div></div>`;
+  }
   h += '<h3>Government Reform</h3><div class="small muted" style="margin-bottom:6px">Your nation persists through every change of ruler, dynasty and government.</div>';
   for (const id in GOVERNMENTS) {
     const G2 = GOVERNMENTS[id];

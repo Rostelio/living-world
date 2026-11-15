@@ -523,3 +523,11 @@ The look follows the time of day: bright and bold by day, warm and painterly at 
 - **Units:** Regulars (machine-gun infantry) and Howitzers.
 - Research runs faster in this era (×2.2).
 - In test games, realms reach it around years 150–200.
+
+**Religions and holy wars:**
+- **Holy sites:** each old faith has two sacred provinces, marked on the map with a small shrine in the faith's colour. Holding your faith's sites gives +3 stability each, and losing them to unbelievers costs stability.
+- **Head of the faith:** the realm with the most devotion (holy sites, faithful towns, temples) leads the faith (+4 stability) and alone may call a holy war.
+- **Missionaries** carry faiths from temple towns into restless towns across the border.
+- **Holy wars:** the head of a faith calls the faithful to retake a holy site held by unbelievers, and co-religionists join the war. At most one holy war per faith every 25 years; the AI calls them too.
+- **Reform the Faith:** a decision from the Renaissance that founds a Reformed faith (+8% knowledge) at −15 stability.
+- The faith card in the Government panel shows all of this.

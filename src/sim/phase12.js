@@ -1,3 +1,4 @@
+import { ensureReligion } from './religion.js';
 import { ensurePhase21 } from './depth.js';
 import { ensurePhase19 } from './latebalance.js';
 // Phase 12 state: treasury (loans, monuments, mercenaries) and the fog of war.
@@ -15,5 +16,6 @@ export function ensurePhase12(st, opts = null) {
   ensurePhase17Stories(st);
   ensurePhase19(st);
   ensurePhase21(st);
+  ensureReligion(st);
   st.version = Math.max(st.version || 0, 14);
 }
