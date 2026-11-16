@@ -17,6 +17,8 @@ import { battleScene, formation, siegeCamp, siegeAngle, isBreached, seaClash, ar
 import { setSun, castShadow, snowCap } from './pixelkit.js';
 import { yard16, path16, bridge16, plaza16, wall16, tower16, gate16, prop16, PROPS_BY_RACE, treehouse16, hillhome16, tent16, stilt16, boardwalk16, ropeBridge, fence16, pixelRing, townhouse16, work16, campTent8, windmill16, caravan16, lair16, creature16 } from './town16.js';
 import { findPath } from '../sim/pathfind.js';
+import { hasSprite, draw as drawSprite, animate, pickTag, frameAt, frameCanvas, beginFrame, drawDebug, crisp, mark, SPRITES } from '../sprites.js';
+import { legacyLair, legacyCreature, legacyCaravan } from '../legacy-draw.js';
 import { TerrainGL } from './terrainGL.js';
 import { seasonKey } from './tiles16.js';
 import { house16, special16, field16 } from './buildings16.js';
@@ -77,6 +79,7 @@ export class Renderer {
     const r = this.canvas.getBoundingClientRect();
     this.canvas.width = Math.round(r.width * dpr);
     this.canvas.height = Math.round(r.height * dpr);
+    crisp(this.ctx); // a resized canvas forgets its smoothing setting
     this.vw = r.width; this.vh = r.height;
     this.clampCam();
   }
@@ -129,9 +132,13 @@ export class Renderer {
           if (running && Math.random() < 0.2) this.atmo.add('smoke', X, Y - 3, (Math.random() - 0.5) * 2, -5, 2.5, 1.5, 1.5, '70,64,60');
           continue;
         }
-        ctx.save(); if (dir < 0) { ctx.translate(X * 2, 0); ctx.scale(-1, 1); }
-        ctx.drawImage(caravan16((back ? Bc : A).color, Math.floor(this.time * 4 + k) % 2), X - 4, Y - 4, 8, 5);
-        ctx.restore();
+        if (hasSprite('caravan')) drawSprite(ctx, 'caravan', X, Y + 1, { frame: frameAt('caravan', 'move', this.time + k * 0.13), flipX: dir < 0, scale: 0.5 });
+        else {
+          if (SPRITES.debug) mark(ctx, X - 4, Y - 4, 8, 5, X, Y + 1);
+          ctx.save(); if (dir < 0) { ctx.translate(X * 2, 0); ctx.scale(-1, 1); }
+          legacyCaravan(ctx, (back ? Bc : A).color, X, Y, this.time, k);
+          ctx.restore();
+        }
         if (r.escort?.[r.a] || r.escort?.[r.b]) { ctx.fillStyle = '#9aa4ae'; ctx.fillRect(X + dir * 5, Y - 2.5, 1, 2.5); ctx.fillStyle = (back ? Bc : A).color; ctx.fillRect(X + dir * 5, Y - 3, 1, 0.5); } // a mounted guard
       }
     }
@@ -445,6 +452,7 @@ export class Renderer {
 
   draw(dt, dayFrac, simRunning) {
     this._running = simRunning;
+    beginFrame();
     this.updateZoom(dt);
     setSun(this.atmo.tod, this.atmo.darkness || 0);
     const ctx = this.ctx;
@@ -558,14 +566,19 @@ export class Renderer {
       if (!m.alive || !isExplored(m.lair)) continue;
       const lx = (m.lair % W.w) * TILE + 4, ly = ((m.lair / W.w) | 0) * TILE + 4;
       if (lx < x0 - 30 || lx > x1 + 30 || ly < y0 - 30 || ly > y1 + 30) continue;
-      ctx.drawImage(lair16(), lx - 4, ly - 4, 8, 6);
+      if (!drawSprite(ctx, 'lair', lx, ly + 2, { scale: 0.5 })) { if (SPRITES.debug) mark(ctx, lx - 4, ly - 4, 8, 6, lx, ly + 2); legacyLair(ctx, lx, ly); }
       const fly = m.kind === 'dragon' || m.kind === 'wyvern';
       const a = this.time * (fly ? 0.6 : 0.25) + m.id;
       const mx = Math.round((lx + Math.cos(a) * (fly ? 16 : 5)) * 2) / 2, my = Math.round((ly + Math.sin(a) * (fly ? 9 : 3) - (fly ? 10 : 2)) * 2) / 2;
       if (fly) { ctx.fillStyle = 'rgba(20,14,30,0.25)'; ctx.fillRect(mx - 4, my + 12, 8, 2); }
-      ctx.save(); if (Math.cos(a + Math.PI / 2) < 0) { ctx.translate(mx * 2, 0); ctx.scale(-1, 1); }
-      ctx.drawImage(creature16(m.kind, Math.floor(this.time * (fly ? 4 : 2) + m.id)), mx - 6, my - 4.5, 12, 9);
-      ctx.restore();
+      const cid = 'creature_' + m.kind;
+      if (hasSprite(cid)) drawSprite(ctx, cid, mx, my + 4.5, { frame: animate(m, cid, pickTag(cid, [fly ? 'fly' : 'walk', 'idle']), dt), flipX: Math.cos(a + Math.PI / 2) < 0, scale: 0.5 });
+      else {
+        if (SPRITES.debug) mark(ctx, mx - 6, my - 4.5, 12, 9, mx, my + 4.5);
+        ctx.save(); if (Math.cos(a + Math.PI / 2) < 0) { ctx.translate(mx * 2, 0); ctx.scale(-1, 1); }
+        legacyCreature(ctx, m, mx, my, fly, this.time);
+        ctx.restore();
+      }
     }
     // Phase 22: holy sites — a small shrine in the faith's colour
     if (z >= 0.45 && st.holySites) for (const h of st.holySites) {
@@ -607,6 +620,7 @@ export class Renderer {
     this.drawLabels(ctx, z);
     this.drawArmyBadges(ctx, z, dayFrac);
     this.drawMinimap();
+    if (SPRITES.debug) drawDebug(ctx, this.armyHits || [], dpr); // F2: sprite boxes, anchors, click hitboxes
   }
 
   // Close-up detail: crops that grow with the seasons, fences around the fields
@@ -1191,7 +1205,7 @@ export class Renderer {
         let img, X = it.x * TILE, Y = it.y * TILE, w = TILE, h = TILE;
         if (it.kind === 'house') { const H = this.homeSprite(L, it); img = H.img; X += H.dx || 0; Y += H.dy || 0; w = H.w || TILE; h = H.h || TILE; }
         else if (it.kind === 'work') { img = work16(it.work); Y -= TILE; w = h = TILE * 2; }
-        else if (it.kind === 'windmill') { img = windmill16(0); Y -= TILE / 2; h = TILE * 1.5; }
+        else if (it.kind === 'windmill') { img = frameCanvas('windmill', 0, [16, 24]) || windmill16(0); Y -= TILE / 2; h = TILE * 1.5; }
         else { img = special16(it.kind, L.race, civ.color); if (it.big) { Y -= TILE; w = h = TILE * 2; } }
         castShadow(ctx, img, X, Y + h, w, h);
         // Phase 20: on the shore (or on stilts) a building is mirrored in the water, broken by ripples
@@ -1211,7 +1225,7 @@ export class Renderer {
         while (pi < props.length && props[pi].y < it.y * TILE + 1) { const p = props[pi++]; ctx.drawImage(prop16(p.kind), p.x, p.y, 4, 4); }
         const sn = (img) => (snowy && L.race !== 'elves' ? snowCap(img) : img); // Phase 20: snow on the roofs in winter
         if (it.kind === 'house') { const H = this.homeSprite(L, it); ctx.drawImage(sn(H.img), it.x * TILE + (H.dx || 0), it.y * TILE + (H.dy || 0), H.w || TILE, H.h || TILE); }
-        else if (it.kind === 'windmill') ctx.drawImage(sn(windmill16(Math.floor(this.time * 3 + it.x) % 4)), it.x * TILE, it.y * TILE - TILE / 2, TILE, TILE * 1.5);
+        else if (it.kind === 'windmill') { const wf = frameAt('windmill', 'turn', this.time + it.x * 0.37); ctx.drawImage(sn((wf >= 0 && frameCanvas('windmill', wf, [16, 24])) || windmill16(Math.floor(this.time * 3 + it.x) % 4)), it.x * TILE, it.y * TILE - TILE / 2, TILE, TILE * 1.5); }
         else if (it.kind === 'work') ctx.drawImage(sn(work16(it.work)), it.x * TILE, (it.y - 1) * TILE, TILE * 2, TILE * 2);
         else if (it.big) ctx.drawImage(sn(special16(it.kind, L.race, civ.color)), it.x * TILE, (it.y - 1) * TILE, TILE * 2, TILE * 2);
         else ctx.drawImage(sn(special16(it.kind, L.race, civ.color)), it.x * TILE, it.y * TILE, TILE, TILE);

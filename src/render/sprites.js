@@ -1,4 +1,5 @@
 import { RACES } from '../data/races.js';
+import { frameCanvas } from '../sprites.js';
 import { hexToRgb, rgbToHex, shade } from '../core/util.js';
 
 export function makeCanvas(w, h) {
@@ -42,7 +43,8 @@ export function iconCanvas(name, scale = 2) {
   const c = makeCanvas(8 * scale, 8 * scale);
   const ctx = c.getContext('2d');
   ctx.scale(scale, scale);
-  drawPixels(ctx, ic.rows, ic.pal);
+  const art = frameCanvas('icon_' + name, 0, [8, 8]); // Aseprite sprite if there is one
+  if (art) { ctx.imageSmoothingEnabled = false; ctx.drawImage(art, 0, 0); } else drawPixels(ctx, ic.rows, ic.pal);
   iconCache[key] = c;
   return c;
 }

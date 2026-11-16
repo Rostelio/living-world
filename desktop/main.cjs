@@ -21,6 +21,7 @@ function serveApp() {
     if (p === '/' || p === '') p = '/index.html';
     const file = path.normalize(path.join(ROOT, p));
     if (!file.startsWith(ROOT + path.sep)) return new Response('Forbidden', { status: 403 });
+    if (!require('fs').existsSync(file)) return new Response('Not found', { status: 404 }); // e.g. a sprite not drawn yet
     return net.fetch(pathToFileURL(file).toString());
   });
 }

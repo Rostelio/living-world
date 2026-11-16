@@ -1,6 +1,7 @@
 import { remapKey } from './ui/keys.js';
 import { initI18n } from './ui/i18n.js';
 import { loadArt } from './render/pixelkit.js';
+import { preloadSprites, toggleDebug } from './sprites.js';
 import { initSkin } from './ui/skin.js';
 import { sceneView } from './render/scene.js';
 import { openChronicle } from './ui/chronicle.js';
@@ -40,6 +41,11 @@ initI18n(SETTINGS.lang || 'en');
 initSkin(); // Phase 20: wood & parchment interface
 loadArt().then((n) => { if (n) console.info(`Art slots: ${n} hand-drawn sprites loaded`); }); // Phase 20
 applyPixelSkin();
+// Aseprite sprites (assets/sprites/) load before the game starts; a missing one is drawn in code
+await Promise.race([
+  preloadSprites().then((n) => { if (n) console.info(`Sprites: ${n} Aseprite sprites loaded`); }),
+  new Promise((ok) => setTimeout(ok, 5000)), // never hold the game back for long
+]);
 
 const canvas = document.getElementById('map');
 const minimap = document.getElementById('minimap');
@@ -489,6 +495,8 @@ window.addEventListener('keydown', (e) => {
   if (e.target.tagName === 'INPUT' && e.target.type !== 'range' && e.target.type !== 'checkbox') return;
   if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); const r = saveGame('quick'); toast(r.ok ? 'Game saved.' : 'Save failed', r.ok ? 'good' : 'bad'); return; }
   if (e.ctrlKey || e.metaKey) return;
+  // F2: sprite debug (boxes, anchors, click hitboxes); Shift+F2 is the terrain map mode
+  if (e.key === 'F2' && !e.shiftKey) { e.preventDefault(); toast(toggleDebug() ? 'Sprite debug on (F2)' : 'Sprite debug off', 'info'); return; }
   if (MODE_KEYS[e.key]) { e.preventDefault(); setMode(MODE_KEYS[e.key]); return; }
   if (searchOpen()) return;
   if (e.key === 'Escape' && sceneView.open) { sceneView.hide(); return; }

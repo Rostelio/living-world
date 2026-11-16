@@ -9,6 +9,9 @@ import { SPECIES } from '../sim/wildlife.js';
 import { hash2 } from '../core/rng.js';
 import { TILE } from './terrain.js';
 import { SETTINGS } from '../ui/settings.js';
+import { hasSprite, pickTag, animate, tagFrame, draw as drawSprite, mark, SPRITES } from '../sprites.js';
+import { VIEW, legacyFigure, legacyFarmAnimal, legacyWildlife } from '../legacy-draw.js';
+export { VIEW };
 
 const rnd = Math.random;
 const L_RACE_DOGS = new Set(['humans', 'halflings', 'dwarves', 'orcs']);
@@ -29,55 +32,35 @@ const WORK_KINDS = {
   merchant: ['market', 'bank'], priest: ['temple', 'library', 'university', 'observatory', 'hospital'], guard: ['barracks', 'castle', 'star_fort', 'town_hall'], noble: ['town_hall', 'castle'],
 };
 
-// ---------- A single figure (feet at x,y; ~3.4 world px tall) ----------
-// Close-up mode: real animated sprites instead of rectangles
-export const VIEW = { hd: false };
-const frameOf = (o) => (o.moving ? Math.floor(o.phase * 8) % 4 : o.working ? 4 + (Math.floor(o.phase * 5) % 2) : 0);
+// ---------- A single figure (feet at x,y) ----------
+// An Aseprite sprite when one exists (townsfolk_<race> / person_<race>), else the code-drawn one.
+const MAP = 0.5; // world px per art px on the map
 const snap = (v) => Math.round(v * 2) / 2; // Phase 20: whole art pixels
+const STATE = (o) => (o.moving ? 'walk' : o.working ? 'work' : 'idle');
 export function figure(ctx, x, y, o) {
-  if (VIEW.hd && (o.tiny || SETTINGS.smallPeople !== false)) { // Phase 20: everyone on the town scale
-    const spr = tinyPerson(o.race || 'humans', { body: o.body, hat: o.helm || o.hat, tool: o.tool, carry: o.carry, small: o.small, shield: o.shield, bow: o.bow, gun: o.gun }, frameOf(o), o.dir || 1);
-    ctx.fillStyle = 'rgba(20,14,30,0.22)'; ctx.fillRect(snap(x - 1), snap(y - 0.5), 2.5, 0.5); // a dot of shadow at the feet
-    ctx.drawImage(spr, snap(x - 1.75), snap(y - 4.5), 3.5, 4.5);
-    return;
-  }
   if (VIEW.hd) {
-    const look = { body: o.body, hat: o.hat, legs: o.legs, tool: o.tool, carry: o.carry, small: o.small, shield: o.shield, bow: o.bow, gun: o.gun, helm: o.helm };
-    const spr = personSprite(o.race || 'humans', look, frameOf(o), o.dir || 1);
-    const sc = 0.5; // Phase 20: every figure on the same 2-pixels-per-unit grid
-    ctx.drawImage(spr, x - 5 * sc, y - 11 * sc, 10 * sc, 12 * sc);
-    return;
-  }
-  const k = o.small ? 0.72 : 1;
-  const step = o.moving ? Math.sin(o.phase * 12) : 0;
-  const work = o.working ? Math.sin(o.phase * 9) : 0;
-  ctx.fillStyle = 'rgba(0,0,0,0.28)';
-  ctx.fillRect(x - 0.8 * k, y - 0.15, 1.6 * k, 0.4);
-  // legs
-  ctx.fillStyle = o.legs || '#3b2a1e';
-  ctx.fillRect(x - 0.45 * k + step * 0.25, y - 1 * k, 0.35 * k, 1 * k);
-  ctx.fillRect(x + 0.1 * k - step * 0.25, y - 1 * k, 0.35 * k, 1 * k);
-  // body
-  const by = y - 2.2 * k + (o.moving ? Math.abs(step) * -0.15 : 0);
-  ctx.fillStyle = o.body;
-  ctx.fillRect(x - 0.6 * k, by, 1.2 * k, 1.3 * k);
-  // head
-  ctx.fillStyle = o.skin;
-  ctx.fillRect(x - 0.42 * k, by - 0.85 * k, 0.84 * k, 0.85 * k);
-  if (o.hat) { ctx.fillStyle = o.hat; ctx.fillRect(x - 0.5 * k, by - 0.95 * k, 1 * k, 0.32 * k); }
-  // tool
-  const d = o.dir || 1;
-  if (o.tool) {
-    ctx.fillStyle = o.tool === 'spear' ? '#cfd6dd' : '#6e5636';
-    if (o.tool === 'spear') ctx.fillRect(x + 0.7 * d, by - 1.6, 0.2, 3.2);
-    else {
-      const a = work * 0.6;
-      ctx.fillRect(x + 0.6 * d, by - 0.6 + a, 0.22, 1.6);
-      ctx.fillStyle = o.tool === 'hoe' ? '#9aa0a6' : o.tool === 'axe' ? '#b8c0c8' : '#8a9096';
-      ctx.fillRect(x + (0.6 * d) - (d < 0 ? 0.5 : 0), by - 0.7 + a, 0.7, 0.3);
+    const tiny = o.tiny || SETTINGS.smallPeople !== false;
+    const id = (tiny ? 'townsfolk_' : 'person_') + (o.race || 'humans');
+    if (hasSprite(id)) {
+      const st = STATE(o);
+      const tag = pickTag(id, [o.role && `${o.role}_${st}`, st, 'idle']);
+      // its own animator when the caller keeps the figure between frames, else the code's own step
+      const fr = o.ref ? animate(o.ref, id, tag, o.dt) : tagFrame(id, tag, o.moving ? Math.floor(o.phase * 8) : o.working ? Math.floor(o.phase * 5) : 0);
+      ctx.fillStyle = 'rgba(20,14,30,0.22)'; ctx.fillRect(snap(x - 1), snap(y - 0.5), 2.5, 0.5);
+      drawSprite(ctx, id, x, y, { frame: fr, flipX: (o.dir || 1) < 0, scale: MAP });
+      return;
     }
+    if (SPRITES.debug) { if (tiny) mark(ctx, snap(x - 1.75), snap(y - 4.5), 3.5, 4.5, x, y); else mark(ctx, x - 2.5, y - 5.5, 5, 6, x, y); }
   }
-  if (o.carry) { ctx.fillStyle = o.carry; ctx.fillRect(x - 0.55 * k, by - 1.45 * k, 1.1 * k, 0.6 * k); }
+  legacyFigure(ctx, x, y, o);
+}
+
+// Farm animals as Aseprite sprites (livestock_<kind>); false when there is none
+function stockSprite(ctx, m, state, dir, dt) {
+  const id = 'livestock_' + m.kind;
+  if (!hasSprite(id)) { if (SPRITES.debug) mark(ctx, snap(m.x - 2.5), snap(m.y - 3.5), 5, 3.5, m.x, m.y); return false; }
+  drawSprite(ctx, id, m.x, m.y, { frame: animate(m, id, pickTag(id, [state, 'idle', 'walk']), dt), flipX: dir < 0, scale: MAP });
+  return true;
 }
 
 export class People {
@@ -115,6 +98,7 @@ export class People {
       figure(ctx, a.x, a.y, { tiny: true,
         body: look.body || civ.color, hat: look.hat, tool: a.state === 'work' || a.role === 'guard' ? look.tool : null, skin, small: look.small, race: L.race,
         moving: a.state === 'walk', working: a.state === 'work', phase: a.phase, dir: a.dir, carry: a.carry,
+        role: a.role, ref: a, dt: running ? dt : 0,
       });
     }
     // livestock near pastures
@@ -224,7 +208,11 @@ export class People {
         if (Math.abs(m.x - m.cx) > 7) m.vx = -m.vx; if (Math.abs(m.y - m.cy) > 5) m.vy = -m.vy;
       }
       const dir = m.vx < 0 ? -1 : 1;
-      if (VIEW.hd) { const fr = m.vx ? Math.floor(m.phase * 6) % 2 : (Math.sin(m.phase * 0.7) > -0.3 ? 2 : 0); const spr = farmAnimal(m.kind, fr, dir); ctx.drawImage(spr, snap(m.x - 2.5), snap(m.y - 3.5), 5, 3.5); continue; }
+      if (VIEW.hd) {
+        const fr = m.vx ? Math.floor(m.phase * 6) % 2 : (Math.sin(m.phase * 0.7) > -0.3 ? 2 : 0);
+        if (!stockSprite(ctx, m, m.vx ? 'walk' : fr === 2 ? 'graze' : 'idle', dir, running ? dt : 0)) legacyFarmAnimal(ctx, m, fr, dir);
+        continue;
+      }
       if (m.kind === 'sheep') animal(ctx, m.x, m.y, { body: '#f2efe6', head: '#3a3330', legs: '#3a3330', w: 1.8, h: 1.2, dir, phase: m.phase, moving: !!m.vx });
       else animal(ctx, m.x, m.y, { body: '#f4f0e8', spots: '#3a2a20', head: '#f4f0e8', legs: '#5a4a3a', w: 2.4, h: 1.4, dir, phase: m.phase, moving: !!m.vx });
     }
@@ -251,14 +239,14 @@ export class People {
         }
       }
       const fr = m.kind === 'chicken' ? (Math.sin(m.phase * 3) > 0.6 ? 2 : 0) : m.moving ? Math.floor(m.phase * 8) % 2 : 0;
-      const spr = farmAnimal(m.kind, fr, m.dir);
-      ctx.drawImage(spr, snap(m.x - 2.5), snap(m.y - 3.5), 5, 3.5);
+      if (!stockSprite(ctx, m, m.kind === 'chicken' ? (fr === 2 ? 'graze' : 'idle') : m.moving ? 'walk' : 'idle', m.dir, running ? dt : 0)) legacyFarmAnimal(ctx, m, fr, m.dir);
     }
   }
 
   // ---------- Wildlife ----------
   wildlife(ctx, v, dayFrac, seen = () => true) {
     const st = S();
+    const wdt = this.r.time - (this._wt ?? this.r.time); this._wt = this.r.time; // animation clock
     const W = this.r.world;
     for (const a of st.animals) {
       const ax = a.t % W.w, ay = (a.t / W.w) | 0;
@@ -271,7 +259,12 @@ export class People {
       const moving = a.t !== a.pt;
       const dir = ax >= px ? 1 : -1;
       const big = a.sp === 'bear' ? 1.35 : a.sp === 'wolf' || a.sp === 'boar' ? 1 : 1.05;
-      if (VIEW.hd) { const spr = animalSprite(a.sp, moving ? Math.floor((this.r.time + a.id) * 6) % 2 : 0, dir); const k = a.sp === 'bear' ? 1.2 : 1; ctx.drawImage(spr, X - 3.5 * k, Y - 5.5 * k, 7 * k, 5.5 * k); continue; }
+      if (VIEW.hd) {
+        const id = 'wildlife_' + a.sp;
+        if (hasSprite(id)) drawSprite(ctx, id, X, Y, { frame: animate(a, id, pickTag(id, [moving ? 'walk' : 'idle', 'walk']), wdt), flipX: dir < 0, scale: MAP });
+        else { if (SPRITES.debug) mark(ctx, X - 3.5, Y - 5.5, 7, 5.5, X, Y); legacyWildlife(ctx, a, X, Y, moving, dir, this.r.time); }
+        continue;
+      }
       animal(ctx, X, Y, { body: sp.color, head: sp.color, legs: a.sp === 'goat' ? '#8a8276' : '#3a2a1e', w: 2.2 * big, h: 1.2 * big, dir, phase: this.r.time + a.id, moving, antlers: a.sp === 'deer' && a.id % 2 === 0, ears: a.sp === 'wolf', tusks: a.sp === 'boar' });
     }
   }

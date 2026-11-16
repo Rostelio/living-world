@@ -22,6 +22,7 @@
       "styles.css",
       "src/**/*",
       "art/**/*",
+      "assets/sprites/**/*",
       "audio/**/*",
       "desktop/main.cjs",
       "package.json"

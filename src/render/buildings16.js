@@ -1,4 +1,5 @@
 import { selectiveOutline, slot } from './pixelkit.js';
+import { fromSheet } from '../sprites.js';
 // Phase 13 — buildings at 16×16 (houses, most specials) and 32×32 (halls, castles,
 // universities), hand-built from a small pixel-art kit: shaded walls, tiled roofs,
 // doors, lit windows, outlines and soft drop shadows. Every race has its own style.
@@ -125,7 +126,7 @@ export function house16(race, tier, v = 0) {
     }
     default: k.wall(3, 7, 10, 7, wall); k.gable(2, 2, 12, 5, roof); k.door(7, 10, 2, 4);
   }
-  const c = slot(key, k.outline(), 'house');
+  const c = fromSheet('house_' + race, 'tier' + tier, v, slot(key, k.outline(), 'house')); // Aseprite sprite if there is one
   cache.set(key, c);
   return c;
 }
@@ -265,7 +266,7 @@ export function special16(kind, race, civColor) {
       break;
     default: k.wall(3, 6, 10, 8, wall); k.gable(2, 1, 12, 6, roof); k.door(7, 10, 2, 4);
   }
-  const c = slot(`s:${kind}:${race}`, k.outline(), 'building');
+  const c = fromSheet(kind === 'campfire' ? 'campfire' : 'building_' + kind, race, 0, slot(`s:${kind}:${race}`, k.outline(), 'building'));
   cache.set(key, c);
   return c;
 }

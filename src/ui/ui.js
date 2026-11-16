@@ -856,6 +856,7 @@ export function helpModal() {
       <kbd>1 – 5</kbd><span>Game speed · <kbd>+ / −</kbd> faster / slower</span>
       <kbd>V E R M G K O T C P L · I</kbd><span>Overview, Economy, Diplomacy, Military, Government, Court, Politics, Technology, Construction, Population, Ledger · I: Encyclopedia</span>
       <kbd>F1 – F8</kbd><span>Map modes</span>
+      <kbd>Shift+F2 · F2</kbd><span>Terrain map mode · Sprite debug</span>
       <kbd>H</kbd><span>Jump to your capital</span>
       <kbd>Ctrl+S</kbd><span>Quick save</span>
       <kbd>Esc</kbd><span>Close panels / game menu (in sandbox: back to Inspect)</span>

@@ -1,4 +1,7 @@
 import { selectiveOutline, slot } from './pixelkit.js';
+import { fromSheet } from '../sprites.js';
+const TREES = new Set(['oak', 'birch', 'pine', 'palm', 'jungle', 'dead']);
+const SEASON_TAGS = ['spring', 'summer', 'autumn', 'winter'];
 // Phase 13 — close-up terrain at 16×16 pixels per tile. The world is rendered in chunks
 // (16×16 tiles each) that are baked once per season state and cached. Ground textures
 // blend softly between biomes; trees, rocks, hills and mountains are standing sprites
@@ -263,6 +266,7 @@ export function objectSprite(kind, season = 1, v = 0) {
     default: c = canvasOf(2, 2, () => {});
   }
   c = slot('o:' + key, c, 'nature');
+  c = fromSheet((TREES.has(kind) ? 'tree_' : 'nature_') + kind, SEASON_TAGS[season], v, c); // Aseprite sprite if there is one
   objCache.set(key, c);
   return c;
 }
