@@ -19,6 +19,8 @@ import { yard16, path16, bridge16, plaza16, wall16, tower16, gate16, prop16, PRO
 import { findPath } from '../sim/pathfind.js';
 import { hasSprite, draw as drawSprite, animate, pickTag, frameAt, frameCanvas, beginFrame, drawDebug, crisp, mark, SPRITES } from '../sprites.js';
 import { legacyLair, legacyCreature, legacyCaravan } from '../legacy-draw.js';
+import { ART_PER_WORLD, ART_SCALE } from '../sprite-config.js';
+const SPX = 1 / ART_PER_WORLD; // world px per Aseprite pixel
 import { TerrainGL } from './terrainGL.js';
 import { seasonKey } from './tiles16.js';
 import { house16, special16, field16 } from './buildings16.js';
@@ -132,7 +134,7 @@ export class Renderer {
           if (running && Math.random() < 0.2) this.atmo.add('smoke', X, Y - 3, (Math.random() - 0.5) * 2, -5, 2.5, 1.5, 1.5, '70,64,60');
           continue;
         }
-        if (hasSprite('caravan')) drawSprite(ctx, 'caravan', X, Y + 1, { frame: frameAt('caravan', 'move', this.time + k * 0.13), flipX: dir < 0, scale: 0.5 });
+        if (hasSprite('caravan')) drawSprite(ctx, 'caravan', X, Y + 1, { frame: frameAt('caravan', 'move', this.time + k * 0.13), flipX: dir < 0, scale: SPX });
         else {
           if (SPRITES.debug) mark(ctx, X - 4, Y - 4, 8, 5, X, Y + 1);
           ctx.save(); if (dir < 0) { ctx.translate(X * 2, 0); ctx.scale(-1, 1); }
@@ -175,10 +177,22 @@ export class Renderer {
     };
   }
 
+  // Close up, the zoom snaps so that art pixels land on whole screen pixels. The code-drawn art
+  // has 2 pixels per world px, Aseprite sprites 4: once any sprite is loaded, zoom steps are
+  // 2 screen px per world px (sprites at half size) and then every multiple of 4.
+  get zoomUnit() { return SPRITES.sheets.size ? ART_PER_WORLD : 2; }
   snapZoom(z) {
-    const dpr = this.dpr || 1, step = 2 / dpr; // art = 2 px per world px
+    const dpr = this.dpr || 1, step = 2 / dpr, u = this.zoomUnit;
     if (z < Math.max(HD_ZOOM, step) * 0.97) return z;
-    return clamp(Math.round(z / step) * step, step, MAX_ZOOM);
+    const d = z * dpr;
+    const sd = d < (2 + u) / 2 ? 2 : Math.max(u, Math.round(d / u) * u);
+    return clamp(sd / dpr, step, MAX_ZOOM);
+  }
+  // the next snapped zoom level up (dir 1) or down (-1) from z, or null when there is none
+  zoomStep(z, dir) {
+    const dpr = this.dpr || 1, u = this.zoomUnit, d = Math.round(this.snapZoom(z) * dpr);
+    const nd = dir > 0 ? (d < u ? u : d + u) : d > u ? d - u : d > 2 ? 2 : null;
+    return nd == null ? null : Math.min(MAX_ZOOM, nd / dpr);
   }
   updateZoom(dt) {
     if (this.zoomGoal == null) return;
@@ -202,7 +216,13 @@ export class Renderer {
   }
 
   zoomAt(sx, sy, factor) {
-    this.zoomGoal = clamp((this.zoomGoal ?? this.cam.zoom) * factor, this.minZoom, MAX_ZOOM);
+    const from = this.zoomGoal ?? this.cam.zoom;
+    this.zoomGoal = clamp(from * factor, this.minZoom, MAX_ZOOM);
+    // snapped steps can be wider than one wheel notch: always move at least one step
+    if (factor !== 1 && this.snapZoom(from) === from && this.snapZoom(this.zoomGoal) === from) {
+      const n = this.zoomStep(from, factor > 1 ? 1 : -1);
+      if (n != null) this.zoomGoal = n;
+    }
     this.zoomAnchor = [sx, sy];
     if (this.snapZoom(this.zoomGoal) === this.zoomGoal) { // far out: smooth and immediate, as before
       const before = this.screenToWorld(sx, sy);
@@ -566,13 +586,13 @@ export class Renderer {
       if (!m.alive || !isExplored(m.lair)) continue;
       const lx = (m.lair % W.w) * TILE + 4, ly = ((m.lair / W.w) | 0) * TILE + 4;
       if (lx < x0 - 30 || lx > x1 + 30 || ly < y0 - 30 || ly > y1 + 30) continue;
-      if (!drawSprite(ctx, 'lair', lx, ly + 2, { scale: 0.5 })) { if (SPRITES.debug) mark(ctx, lx - 4, ly - 4, 8, 6, lx, ly + 2); legacyLair(ctx, lx, ly); }
+      if (!drawSprite(ctx, 'lair', lx, ly + 2, { scale: SPX })) { if (SPRITES.debug) mark(ctx, lx - 4, ly - 4, 8, 6, lx, ly + 2); legacyLair(ctx, lx, ly); }
       const fly = m.kind === 'dragon' || m.kind === 'wyvern';
       const a = this.time * (fly ? 0.6 : 0.25) + m.id;
       const mx = Math.round((lx + Math.cos(a) * (fly ? 16 : 5)) * 2) / 2, my = Math.round((ly + Math.sin(a) * (fly ? 9 : 3) - (fly ? 10 : 2)) * 2) / 2;
       if (fly) { ctx.fillStyle = 'rgba(20,14,30,0.25)'; ctx.fillRect(mx - 4, my + 12, 8, 2); }
       const cid = 'creature_' + m.kind;
-      if (hasSprite(cid)) drawSprite(ctx, cid, mx, my + 4.5, { frame: animate(m, cid, pickTag(cid, [fly ? 'fly' : 'walk', 'idle']), dt), flipX: Math.cos(a + Math.PI / 2) < 0, scale: 0.5 });
+      if (hasSprite(cid)) drawSprite(ctx, cid, mx, my + 4.5, { frame: animate(m, cid, pickTag(cid, [fly ? 'fly' : 'walk', 'idle']), dt), flipX: Math.cos(a + Math.PI / 2) < 0, scale: SPX });
       else {
         if (SPRITES.debug) mark(ctx, mx - 6, my - 4.5, 12, 9, mx, my + 4.5);
         ctx.save(); if (Math.cos(a + Math.PI / 2) < 0) { ctx.translate(mx * 2, 0); ctx.scale(-1, 1); }
@@ -1205,7 +1225,7 @@ export class Renderer {
         let img, X = it.x * TILE, Y = it.y * TILE, w = TILE, h = TILE;
         if (it.kind === 'house') { const H = this.homeSprite(L, it); img = H.img; X += H.dx || 0; Y += H.dy || 0; w = H.w || TILE; h = H.h || TILE; }
         else if (it.kind === 'work') { img = work16(it.work); Y -= TILE; w = h = TILE * 2; }
-        else if (it.kind === 'windmill') { img = frameCanvas('windmill', 0, [16, 24]) || windmill16(0); Y -= TILE / 2; h = TILE * 1.5; }
+        else if (it.kind === 'windmill') { img = frameCanvas('windmill', 0, [16 * ART_SCALE, 24 * ART_SCALE]) || windmill16(0); Y -= TILE / 2; h = TILE * 1.5; }
         else { img = special16(it.kind, L.race, civ.color); if (it.big) { Y -= TILE; w = h = TILE * 2; } }
         castShadow(ctx, img, X, Y + h, w, h);
         // Phase 20: on the shore (or on stilts) a building is mirrored in the water, broken by ripples
@@ -1221,16 +1241,19 @@ export class Renderer {
           ctx.restore();
         }
       }
+      // Aseprite buildings have 4 px per world px: below that zoom, average instead of dropping pixels
+      ctx.imageSmoothingEnabled = SPRITES.sheets.size > 0 && z * this.dpr < ART_PER_WORLD - 0.01;
       for (const it of L.items) {
         while (pi < props.length && props[pi].y < it.y * TILE + 1) { const p = props[pi++]; ctx.drawImage(prop16(p.kind), p.x, p.y, 4, 4); }
         const sn = (img) => (snowy && L.race !== 'elves' ? snowCap(img) : img); // Phase 20: snow on the roofs in winter
         if (it.kind === 'house') { const H = this.homeSprite(L, it); ctx.drawImage(sn(H.img), it.x * TILE + (H.dx || 0), it.y * TILE + (H.dy || 0), H.w || TILE, H.h || TILE); }
-        else if (it.kind === 'windmill') { const wf = frameAt('windmill', 'turn', this.time + it.x * 0.37); ctx.drawImage(sn((wf >= 0 && frameCanvas('windmill', wf, [16, 24])) || windmill16(Math.floor(this.time * 3 + it.x) % 4)), it.x * TILE, it.y * TILE - TILE / 2, TILE, TILE * 1.5); }
+        else if (it.kind === 'windmill') { const wf = frameAt('windmill', 'turn', this.time + it.x * 0.37); ctx.drawImage(sn((wf >= 0 && frameCanvas('windmill', wf, [16 * ART_SCALE, 24 * ART_SCALE])) || windmill16(Math.floor(this.time * 3 + it.x) % 4)), it.x * TILE, it.y * TILE - TILE / 2, TILE, TILE * 1.5); }
         else if (it.kind === 'work') ctx.drawImage(sn(work16(it.work)), it.x * TILE, (it.y - 1) * TILE, TILE * 2, TILE * 2);
         else if (it.big) ctx.drawImage(sn(special16(it.kind, L.race, civ.color)), it.x * TILE, (it.y - 1) * TILE, TILE * 2, TILE * 2);
         else ctx.drawImage(sn(special16(it.kind, L.race, civ.color)), it.x * TILE, it.y * TILE, TILE, TILE);
       }
       while (pi < props.length) { const p = props[pi++]; ctx.drawImage(prop16(p.kind), p.x, p.y, 4, 4); }
+      ctx.imageSmoothingEnabled = false;
       // elven rope bridges between neighbouring treehouses
       if (L.race === 'elves') { const hs = L.items.filter((it) => it.kind === 'house'); const key = new Set(hs.map((q) => q.x + ',' + q.y)); for (const q of hs) for (const [ax, ay] of [[1, 0], [2, 0], [0, 1]]) if (key.has(q.x + ax + ',' + (q.y + ay))) ropeBridge(ctx, q.x * TILE + 6, q.y * TILE + 3, (q.x + ax) * TILE + 2, (q.y + ay) * TILE + 3); }
       this.drawTileWalls(ctx, s, L);

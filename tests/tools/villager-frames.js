@@ -1,4 +1,4 @@
-// Renders the code-drawn villager of one race, every role, into 16×16 frames (feet at the
+// Renders the code-drawn villager of one race, every role, doubled into 32×32 frames (feet at the
 // bottom centre) for a starter Aseprite file. Run in screenshot mode:
 //   LW_RACE=humans LW_SHOT=<dir> LW_SHOT_SCRIPT=tests/tools/villager-frames.js npx electron .
 const { tinyPerson } = await import('./src/render/sprites16.js');
@@ -24,9 +24,9 @@ for (const [role, L] of Object.entries(ROLES)) {
     const working = f >= 4 && f <= 5;
     const look = { body: L.body, hat: L.hat, small: L.small, tool: working || role === 'guard' ? L.tool : null, carry: role === 'hauler' && f < 4 ? L.carry : null };
     const spr = tinyPerson(RACE, look, f, 1);
-    const c = document.createElement('canvas'); c.width = 16; c.height = 16;
+    const c = document.createElement('canvas'); c.width = 32; c.height = 32;
     const x = c.getContext('2d'); x.imageSmoothingEnabled = false;
-    x.drawImage(spr, 5, 7); // 7×9 figure, feet on the bottom row, centred on x = 8
+    x.drawImage(spr, 10, 14, 14, 18); // 7×9 figure doubled, feet on the bottom row, centred on x = 16
     files.push({ name: `f${n}.png`, data: c.toDataURL('image/png') });
     n++;
   }

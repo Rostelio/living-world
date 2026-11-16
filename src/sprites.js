@@ -8,7 +8,7 @@
 //   (trim is fine: spriteSourceSize is respected), or from the command line:
 //   aseprite -b townsfolk_humans.aseprite --sheet townsfolk_humans.png --data townsfolk_humans.json \
 //            --format json-array --list-tags --trim
-import { SPRITE_IDS, configFor } from './sprite-config.js';
+import { SPRITE_IDS, configFor, ART_SCALE } from './sprite-config.js';
 
 export const SPRITES = {
   base: 'assets/sprites/',
@@ -202,13 +202,17 @@ export function draw(ctx, id, x, y, opts = {}) {
   const ax = Math.round(x / s) * s, ay = Math.round(y / s) * s;
   const left = ax + (f.ox - axA - (cfg.ox || 0)) * s;
   const top = ay + (f.oy - ayA - (cfg.oy || 0)) * s;
-  ctx.imageSmoothingEnabled = false;
+  // whole pixels when an art pixel covers one or more screen pixels; when it covers less (far
+  // zoom), average instead of dropping pixels
+  const m = ctx.getTransform();
+  ctx.imageSmoothingEnabled = Math.hypot(m.a, m.b) * s < 0.99;
   if (opts.flipX) {
     ctx.save();
     ctx.translate(ax * 2, 0); ctx.scale(-1, 1);
     ctx.drawImage(sh.img, f.x, f.y, f.w, f.h, left, top, f.w * s, f.h * s);
     ctx.restore();
   } else ctx.drawImage(sh.img, f.x, f.y, f.w, f.h, left, top, f.w * s, f.h * s);
+  ctx.imageSmoothingEnabled = false;
   if (SPRITES.debug) mark(ctx, ax + (-axA - (cfg.ox || 0)) * s, ay + (-ayA - (cfg.oy || 0)) * s, f.sw * s, f.sh * s, ax, ay, true);
   return true;
 }
@@ -246,13 +250,15 @@ export function tagFrame(id, tag, k = 0) {
   if (t) return t.from + (((k % (t.to - t.from + 1)) + (t.to - t.from + 1)) % (t.to - t.from + 1));
   return ((k % sh.frames.length) + sh.frames.length) % sh.frames.length;
 }
-// For the sprite factories: the Aseprite frame (tag, k) when the sprite exists and has the same
-// size as the code-drawn canvas it replaces; otherwise the code-drawn canvas itself.
+// For the sprite factories: the Aseprite frame (tag, k) when the sprite exists and is exactly
+// twice the size of the code-drawn canvas it replaces (ART_SCALE); otherwise that canvas.
 export function fromSheet(id, tag, k, legacy) {
   if (!SPRITES.sheets.has(id)) return legacy;
   const fi = tagFrame(id, tag, k);
-  return (fi >= 0 && frameCanvas(id, fi, [legacy.width, legacy.height])) || legacy;
+  return (fi >= 0 && frameCanvas(id, fi, [legacy.width * ART_SCALE, legacy.height * ART_SCALE])) || legacy;
 }
+// Is any sprite whose id starts with one of these prefixes loaded?
+export const anySheet = (...prefixes) => [...SPRITES.sheets.keys()].some((id) => prefixes.some((p) => id.startsWith(p)));
 
 // ---------------- Pixel-crisp canvases ----------------
 // Call after every canvas resize: resizing a canvas resets its context, smoothing included.

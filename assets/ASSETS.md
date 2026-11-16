@@ -6,7 +6,7 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 **How to read the tables**
 
 - **id** is snake_case and is also the file name. `{a|b|c}` means one file per value, e.g. `wildlife_{deer|boar}` = `wildlife_deer`, `wildlife_boar`.
-- **in-game size** is in *art pixels* (the game's own pixel grid, see "Scale" below), not screen pixels.
+- **in-game size** is the size of today's code-drawn picture, in its pixels (16 per map tile). **Aseprite canvases are twice that** (32 per tile): see the canvas table further down.
 - **states** come from the game logic (the frame numbers the code already asks for). Nothing extra is invented. Left/right is a mirror (`flipX`), so no left-facing frames are needed.
 - **frames** is the frame count *per file*.
 - **priority**: 1 = always on screen, 2 = frequent, 3 = rare.
@@ -18,12 +18,13 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 | thing | value | where |
 |---|---|---|
 | map tile | 8 world px (`TILE = 8`) | src/render/terrain.js:6 |
-| art density on the map | 2 art px per world px → **16×16 art px per tile** | src/render/tiles16.js, buildings16.js, town16.js |
+| code-drawn art on the map | 2 px per world px → 16×16 px per tile | src/render/tiles16.js, buildings16.js, town16.js |
+| **Aseprite sprites** | **4 px per world px → 32×32 px per tile** (`ART_PER_WORLD`, `ART_SCALE`) | src/sprite-config.js |
 | zoom | snapped to whole device pixels per art pixel | src/render/renderer.js:74 (`resize`), `snapZoom` |
 | side-view scenes | 270 art px tall, anchored to the bottom, integer-scaled | src/render/scene.js:245 |
 | UI | HTML/CSS; pixel textures from small canvases | src/ui/skin.js, src/ui/pixelskin.js |
 
-**Proposed tile size: 16×16** — it is exactly one map tile at the current art density, so no game logic or grid changes.
+**Tile size: 32×32** (chosen 2026-11-16, "a bit bigger"): twice the detail of the code-drawn 16×16 tiles, same map area, no change to the game grid or logic. A sprite that replaces a code-drawn picture is exactly twice its size.
 
 ---
 
@@ -200,15 +201,15 @@ The spec asks for 64×64 character canvases. The map's real sizes are much small
 
 Making all characters 64×64 would mean scaling the whole world ×4: four times as many pixels to bake per tile, and the map at a fixed zoom would show 1/16 of what it shows now. Options:
 
-- **A (recommended).** The map keeps its grid: tiles 16×16, map characters on a **16×16** canvas (the figure is about 8×10 inside it), buildings 16×16 / 16×24 / 32×32. **64×64 is used where the camera is close**: side-view scenes, portraits, creatures in scenes and the Chronicle. Every sprite is shown at a whole-number scale and nothing is resampled.
+- **A (chosen, then doubled).** The map keeps its grid at **32×32 per tile**: map characters on a **32×32** canvas (the figure is about 14×18 inside it), buildings 32×32 / 32×48 / 64×64. **64×64 is also used where the camera is close**: side-view scenes, portraits, the Chronicle.
 - **B.** Draw everything at 64×64 and scale map sprites down ×1/4. ✗ Shrinking pixel art throws away 15 of every 16 pixels, so the art turns to mush. Not recommended.
 - **C.** Raise the map art density from 2 to 8 art px per world px, so a tile is 64×64. ✗ About 16× more memory for baked chunks, slower, and the zoom levels and UI would need redoing. Not recommended.
 
-Objects flagged ⚠ that are taller or wider than one tile (`townhouse`, treehouse, `windmill` 16×24; big buildings and great works 32×32) are fine on a 16-px grid: they are 1×1.5 or 2×2 tiles, anchored bottom-centre.
+Objects flagged ⚠ that are taller or wider than one tile (`townhouse`, treehouse, `windmill` 32×48; big buildings and great works 64×64) are fine on the grid: they are 1×1.5 or 2×2 tiles, anchored bottom-centre.
 
 ## Proposed internal resolution
 
-- **Map:** the map has no fixed resolution, because it zooms. It keeps the current rule: one art pixel = a **whole number** of screen pixels (×1 to ×8, snapped by `snapZoom`), with the camera moved in whole pixels. Nothing changes here.
+- **Map:** the map has no fixed resolution, because it zooms. Close up, the zoom snaps so that one Aseprite pixel = a **whole number** of screen pixels: 4, 8, 12, 16… screen px per world px (×1, ×2, ×3, ×4 per art pixel). One step further out (2 screen px per world px) sprites are shown at half size, averaged. Further out the zoom is free, as before. The camera moves in whole pixels.
 - **Side-view scenes:** **640×360** internal (16:9), scaled ×2 → 1280×720, ×3 → 1920×1080, ×4 → 2560×1440, ×6 → 3840×2160; any extra space is letterboxed. That size fits 64×64 characters well (a 64-px figure is about 1/6 of the height, so a whole street fits). Today it is 480×270; going up to 640×360 only changes the scene drawing.
 - **UI:** stays HTML/CSS; icons and frames are shown at ×2 or ×3 with `image-rendering: pixelated`.
 
@@ -218,40 +219,40 @@ Objects flagged ⚠ that are taller or wider than one tile (`townhouse`, treehou
 
 ## Aseprite canvas and tags (option A)
 
-The size of the Aseprite canvas (File ▸ New) and the tags each sprite must have. `npm run sprites` checks every export against this table.
+The size of the Aseprite canvas (File ▸ New, 32 px per map tile) and the tags each sprite must have. `npm run sprites` checks every export against this table.
 `{role}` means one tag per villager role: farmer, woodcutter, miner, crafter, merchant, priest, guard, noble, child, hauler.
 Sprites marked **exact** replace a ready-made picture of that size, so the canvas must match to the pixel (otherwise the game keeps the old picture and warns once in the console). The others are placed by their anchor (bottom-centre), so the size is a recommendation.
 
 <!-- sprite-specs: start -->
 | id | canvas | required tags | optional tags |
 |---|---|---|---|
-| townsfolk_* | 16×16 | {role}_walk, {role}_work, {role}_idle | |
-| person_* | 16×16 | walk, work, idle | {role}_walk, {role}_work, {role}_idle |
-| livestock_* | 16×16 | walk | graze, idle |
-| wildlife_* | 16×16 | walk | idle |
-| creature_dragon, creature_wyvern | 32×32 | fly | idle |
-| creature_giant, creature_troll | 32×32 | walk | idle |
-| lair | 16×16 | | |
-| caravan | 16×16 | move | |
-| windmill | 16×24 exact | turn | |
-| house_* | 16×16 exact | tier0, tier1, tier2, tier3 | |
-| building_town_hall, building_castle, building_star_fort, building_university | 32×32 exact | | {race} |
-| building_* | 16×16 exact | | {race} |
-| campfire | 16×16 exact | | |
-| tree_oak, tree_birch | 16×22 exact | spring, summer, autumn, winter | |
-| tree_pine | 14×24 exact | spring, summer, autumn, winter | |
-| tree_palm, tree_jungle | 18×22 exact | spring, summer, autumn, winter | |
-| tree_dead | 12×14 exact | spring, summer, autumn, winter | |
-| nature_bush, nature_rock | 10×8 exact | | spring, summer, autumn, winter |
-| nature_mound | 16×10 exact | | spring, summer, autumn, winter |
-| nature_peak, nature_peak_snow | 18×24 exact | | spring, summer, autumn, winter |
-| nature_tuft | 7×6 exact | | spring, summer, autumn, winter |
-| nature_pebbles, nature_lily | 7×4 exact | | spring, summer, autumn, winter |
-| nature_mushroom | 6×6 exact | | spring, summer, autumn, winter |
-| nature_reeds | 10×10 exact | | spring, summer, autumn, winter |
-| nature_cactus | 10×14 exact | | spring, summer, autumn, winter |
-| nature_flowers | 8×6 exact | | spring, summer, autumn, winter |
-| icon_* | 8×8 exact | | |
+| townsfolk_* | 32×32 | {role}_walk, {role}_work, {role}_idle | |
+| person_* | 32×32 | walk, work, idle | {role}_walk, {role}_work, {role}_idle |
+| livestock_* | 32×32 | walk | graze, idle |
+| wildlife_* | 32×32 | walk | idle |
+| creature_dragon, creature_wyvern | 64×64 | fly | idle |
+| creature_giant, creature_troll | 64×64 | walk | idle |
+| lair | 32×32 | | |
+| caravan | 32×32 | move | |
+| windmill | 32×48 exact | turn | |
+| house_* | 32×32 exact | tier0, tier1, tier2, tier3 | |
+| building_town_hall, building_castle, building_star_fort, building_university | 64×64 exact | | {race} |
+| building_* | 32×32 exact | | {race} |
+| campfire | 32×32 exact | | |
+| tree_oak, tree_birch | 32×44 exact | spring, summer, autumn, winter | |
+| tree_pine | 28×48 exact | spring, summer, autumn, winter | |
+| tree_palm, tree_jungle | 36×44 exact | spring, summer, autumn, winter | |
+| tree_dead | 24×28 exact | spring, summer, autumn, winter | |
+| nature_bush, nature_rock | 20×16 exact | | spring, summer, autumn, winter |
+| nature_mound | 32×20 exact | | spring, summer, autumn, winter |
+| nature_peak, nature_peak_snow | 36×48 exact | | spring, summer, autumn, winter |
+| nature_tuft | 14×12 exact | | spring, summer, autumn, winter |
+| nature_pebbles, nature_lily | 14×8 exact | | spring, summer, autumn, winter |
+| nature_mushroom | 12×12 exact | | spring, summer, autumn, winter |
+| nature_reeds | 20×20 exact | | spring, summer, autumn, winter |
+| nature_cactus | 20×28 exact | | spring, summer, autumn, winter |
+| nature_flowers | 16×12 exact | | spring, summer, autumn, winter |
+| icon_* | 16×16 exact | | |
 <!-- sprite-specs: end -->
 
 Sprites not in this table can be drawn already, but the game does not use them yet (they still need hooking up).

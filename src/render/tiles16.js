@@ -1,5 +1,6 @@
 import { selectiveOutline, slot } from './pixelkit.js';
-import { fromSheet } from '../sprites.js';
+import { fromSheet, anySheet } from '../sprites.js';
+import { ART_SCALE } from '../sprite-config.js';
 const TREES = new Set(['oak', 'birch', 'pine', 'palm', 'jungle', 'dead']);
 const SEASON_TAGS = ['spring', 'summer', 'autumn', 'winter'];
 // Phase 13 — close-up terrain at 16×16 pixels per tile. The world is rendered in chunks
@@ -318,6 +319,7 @@ function tileObjects(W, i, x, y, S, season, snowy) {
 // ---------- chunk baking ----------
 export class Tiles16 {
   constructor(world) {
+    this.hiObjects = anySheet('tree_', 'nature_'); // Aseprite trees/rocks: chunks at double size
     this.world = world;
     this.cache = new Map();
     this.flow = null;
@@ -343,7 +345,7 @@ export class Tiles16 {
     if (c) { this.cache.delete(k); this.cache.set(k, c); return c; }
     c = this.bake(cx, cy, sk);
     this.cache.set(k, c);
-    if (this.cache.size > 140) this.cache.delete(this.cache.keys().next().value);
+    if (this.cache.size > (this.hiObjects ? 40 : 140)) this.cache.delete(this.cache.keys().next().value);
     return c;
   }
   bake(cx, cy, sk) { const g = this.bakeSteps(cx, cy, sk); let r; do { r = g.next(); } while (!r.done); return r.value; }
@@ -506,6 +508,19 @@ export class Tiles16 {
     }
     ctx.putImageData(img, 0, 0);
     yield null;
+    // Aseprite trees and rocks have twice the pixels: the chunk is then kept at double size (the
+    // ground above is doubled as it is) and code-drawn objects are drawn doubled too
+    const K = this.hiObjects ? ART_SCALE : 1;
+    let out = cv, octx = ctx;
+    if (K > 1) {
+      out = makeCanvas(PX * K, PX * K); octx = out.getContext('2d');
+      octx.imageSmoothingEnabled = false;
+      octx.drawImage(cv, 0, 0, PX * K, PX * K);
+    }
+    const put2 = (spr, sx, sy, sw, sh, dx, dy, dw, dh) => { // dx.. in chunk pixels (16 per tile)
+      const a = spr._art ? ART_SCALE : 1; // an Aseprite canvas is already doubled
+      octx.drawImage(spr, sx * a, sy * a, sw * a, sh * a, dx * K, dy * K, dw * K, dh * K);
+    };
     // --- standing objects, sorted by their feet (y) so lower ones overlap upper ones
     const objs = [];
     for (let ty = ty0; ty < ty0 + CHUNK + 2; ty++) for (let tx = tx0 - 1; tx < tx0 + CHUNK + 1; tx++) {
@@ -527,16 +542,19 @@ export class Tiles16 {
     }
     objs.sort((a, b) => (a[3] ? -1 : 0) - (b[3] ? -1 : 0) || a[0] - b[0]);
     // Phase 20: trees and rocks at the water's edge are mirrored in it (faint, squashed, broken by ripples)
+    // sizes below are in code-drawn pixels; an Aseprite canvas is ART_SCALE times larger
+    const size = (spr) => (spr._art ? [spr.width / ART_SCALE, spr.height / ART_SCALE] : [spr.width, spr.height]);
     for (const [fy, fx, spr, flat] of objs) {
-      if (flat || spr.height < 12) continue;
+      const [sw, sh0] = size(spr);
+      if (flat || sh0 < 12) continue;
       const tx = tx0 + Math.floor(fx / T16), ty = ty0 + Math.floor(fy / T16);
       if (ty + 1 >= h || tx < 0 || tx >= w || !isW((ty + 1) * w + tx)) continue;
-      ctx.save(); ctx.globalAlpha = 0.28;
-      for (let yy = 0; yy < spr.height; yy += 2) { const sh = (yy >> 1) % 2 ? 1 : 0; ctx.drawImage(spr, 0, spr.height - 1 - yy, spr.width, 1, Math.round(fx - spr.width / 2) + sh, Math.round(fy + 2 + yy * 0.6), spr.width, 1); }
-      ctx.restore();
+      octx.save(); octx.globalAlpha = 0.28;
+      for (let yy = 0; yy < sh0; yy += 2) { const sh = (yy >> 1) % 2 ? 1 : 0; put2(spr, 0, sh0 - 1 - yy, sw, 1, Math.round(fx - sw / 2) + sh, Math.round(fy + 2 + yy * 0.6), sw, 1); }
+      octx.restore();
     }
-    for (const [fy, fx, spr] of objs) ctx.drawImage(spr, Math.round(fx - spr.width / 2), Math.round(fy - spr.height + 2));
-    return cv;
+    for (const [fy, fx, spr] of objs) { const [sw, sh0] = size(spr); put2(spr, 0, 0, sw, sh0, Math.round(fx - sw / 2), Math.round(fy - sh0 + 2), sw, sh0); }
+    return out;
   }
   // Draw visible chunks (world space; one tile = TILE world px). Missing chunks are baked
   // within a small time budget per frame; the 8 px map shows underneath meanwhile.
@@ -545,6 +563,8 @@ export class Tiles16 {
     const cs = CHUNK * TILE;
     const cx0 = Math.floor(v.x0 / cs), cy0 = Math.floor(v.y0 / cs), cx1 = Math.floor((v.x1 - 1) / cs), cy1 = Math.floor((v.y1 - 1) / cs);
     const t0 = performance.now();
+    // double-size chunks (Aseprite trees): average when they are shown smaller than 1:1
+    ctx.imageSmoothingEnabled = !!this.hiObjects && v.z * v.dpr < 4 - 0.01;
     const cells = [], missing = [];
     for (let cy = cy0; cy <= cy1; cy++) for (let cx = cx0; cx <= cx1; cx++) {
       if (cx < 0 || cy < 0 || cx * CHUNK >= this.world.w || cy * CHUNK >= this.world.h) continue;
@@ -579,7 +599,7 @@ export class Tiles16 {
         if (r?.done) {
           this.jobs.delete(k);
           this.cache.set(k, r.value);
-          if (this.cache.size > 260) this.cache.delete(this.cache.keys().next().value);
+          if (this.cache.size > (this.hiObjects ? 70 : 260)) this.cache.delete(this.cache.keys().next().value);
           if (!holdOld && key === sk) { ctx.drawImage(r.value, cx * cs, cy * cs, cs, cs); this.last.set(`${cx},${cy}`, r.value); }
         }
       }
@@ -592,6 +612,7 @@ export class Tiles16 {
     }
     // forget half-baked jobs far from view
     if (this.jobs.size > 24) this.jobs.clear();
+    ctx.imageSmoothingEnabled = false;
     return missing.length;
   }
 }

@@ -10,6 +10,7 @@ import { hash2 } from '../core/rng.js';
 import { TILE } from './terrain.js';
 import { SETTINGS } from '../ui/settings.js';
 import { hasSprite, pickTag, animate, tagFrame, draw as drawSprite, mark, SPRITES } from '../sprites.js';
+import { ART_PER_WORLD } from '../sprite-config.js';
 import { VIEW, legacyFigure, legacyFarmAnimal, legacyWildlife } from '../legacy-draw.js';
 export { VIEW };
 
@@ -34,7 +35,7 @@ const WORK_KINDS = {
 
 // ---------- A single figure (feet at x,y) ----------
 // An Aseprite sprite when one exists (townsfolk_<race> / person_<race>), else the code-drawn one.
-const MAP = 0.5; // world px per art px on the map
+const MAP = 1 / ART_PER_WORLD; // world px per Aseprite pixel on the map
 const snap = (v) => Math.round(v * 2) / 2; // Phase 20: whole art pixels
 const STATE = (o) => (o.moving ? 'walk' : o.working ? 'work' : 'idle');
 export function figure(ctx, x, y, o) {

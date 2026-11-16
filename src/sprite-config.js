@@ -8,6 +8,12 @@
 //         inside the picture, so the picture moves left / up on screen)
 // scale:  art pixels per drawn pixel when the picture was drawn bigger than its slot (keep 1)
 
+// Art density: Aseprite sprites have 4 art pixels per world pixel (a map tile is 32×32), twice
+// the old code-drawn art (16×16 per tile). A sprite that replaces a code-drawn picture is
+// therefore exactly twice its size.
+export const ART_PER_WORLD = 4;
+export const ART_SCALE = 2; // Aseprite pixels per code-drawn pixel
+
 const RACES = ['humans', 'elves', 'dwarves', 'orcs', 'lizardfolk', 'halflings'];
 const each = (prefix, list) => list.map((k) => `${prefix}_${k}`);
 
