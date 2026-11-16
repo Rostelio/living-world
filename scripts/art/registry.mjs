@@ -22,3 +22,7 @@ GENERATORS.home_stilt = stiltSheet;
 for (const r of RACES) GENERATORS['townhouse_' + r] = () => townhouseSheet(r);
 import { NATURE } from './nature.mjs';
 for (const [id, fn] of Object.entries(NATURE)) GENERATORS[id] = () => ({ ...fn(), layer: id.replace(/^(tree|nature)_/, '') });
+import { BIOME_TILES, groundSheet } from './ground.mjs';
+for (const b of BIOME_TILES) GENERATORS['tile_' + b] = () => groundSheet(b);
+import { TOWN } from './town.mjs';
+for (const [id, fn] of Object.entries(TOWN)) GENERATORS[id] = () => ({ layer: id, ...fn() });

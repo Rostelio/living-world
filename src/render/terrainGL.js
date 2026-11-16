@@ -5,6 +5,7 @@
 // canvas as the first layer, so colour grading and night lighting still apply on top.
 import { terrainPalette } from './tiles16.js';
 import { BIOMES } from '../data/biomes.js';
+import { groundAtlas, GROUND_W, GROUND_H } from './ground-art.js';
 
 const VS = `attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }`;
 const FS = `
@@ -15,7 +16,10 @@ uniform vec2 uWorld;       // tiles
 uniform vec2 uArt0;        // art pixel at the top-left of the GL canvas (one GL pixel = one art pixel)
 uniform float uH;          // GL canvas height in px
 uniform float uSeason, uSnow, uTime, uSeed;
+uniform sampler2D uGround; // Aseprite ground textures: row = biome, column = season * 2 + variant (32 px each)
+uniform float uHasGround;
 const float T16 = 16.0;
+vec2 A32; // the fine pixel (32 per tile); a = A32 / 2 is the 16-per-tile grid the shapes use
 
 float h2(vec2 p) { p = mod(p, 4096.0); return fract(sin(dot(p, vec2(127.1, 311.7)) + uSeed * 0.0137) * 43758.5453); }
 float vn(vec2 p, float sc, float s) {
@@ -45,12 +49,13 @@ float heightAt(vec2 a) { // bilinear height in art px
 vec3 pal(float row, float col) { return texture2D(uPal, (vec2(col, row) + 0.5) / 16.0).rgb; }
 vec3 ramp(float set, float biome, float t, vec2 a) {
   float pos = clamp(t, 0.0, 0.9999) * 4.0; float i = floor(pos);
-  float k = i + (pos - i > bayer(a) ? 1.0 : 0.0);
+  float k = i + (pos - i > bayer(A32) ? 1.0 : 0.0);
   return pal(set * 5.0 + min(k, 4.0), biome);
 }
 bool isWater(float b) { return b < 2.5 || b > 14.5; }
 void main() {
-  vec2 a = uArt0 + floor(vec2(gl_FragCoord.x, uH - gl_FragCoord.y)); // art pixel (2 per world px, 16 per tile)
+  A32 = uArt0 + floor(vec2(gl_FragCoord.x, uH - gl_FragCoord.y)); // art pixel (4 per world px, 32 per tile)
+  vec2 a = A32 * 0.5;
   vec2 t = tileOf(a);
   vec4 d = tileAt(t);
   float b = floor(d.r * 255.0 + 0.5);
@@ -59,10 +64,10 @@ void main() {
   if (isWater(b)) {
     float hh = heightAt(a);
     float depth = clamp(-hh * 1.3 + (h2(a) - 0.5) * 0.06, 0.0, 1.0);
-    if (b > 14.5) { float pos = clamp(depth * 1.1, 0.0, 0.9999) * 3.0; float i = floor(pos); col = pal(15.0, 8.0 + min(i + (pos - i > bayer(a) ? 1.0 : 0.0), 3.0)); }
+    if (b > 14.5) { float pos = clamp(depth * 1.1, 0.0, 0.9999) * 3.0; float i = floor(pos); col = pal(15.0, 8.0 + min(i + (pos - i > bayer(A32) ? 1.0 : 0.0), 3.0)); }
     else {
       float pos = clamp(pow(depth, 0.8) * 1.05 + (vn(a, 14.0, 30.0) - 0.5) * 0.08, 0.0, 0.9999) * 5.0; float i = floor(pos);
-      col = pal(15.0, min(i + (pos - i > bayer(a) ? 1.0 : 0.0), 5.0));
+      col = pal(15.0, min(i + (pos - i > bayer(A32) ? 1.0 : 0.0), 5.0));
       if (depth < 0.16) { float cs = abs(vn(a + vec2(uTime * 2.0, 0.0), 5.0, 31.0) - vn(a + vec2(9.0 - uTime * 1.5, -4.0), 5.0, 32.0)); if (cs < 0.035) col = mix(col, vec3(0.745, 0.925, 0.925), 0.45); }
     }
     // moving wave strokes
@@ -93,6 +98,11 @@ void main() {
     col = ramp(set, b, tt, a);
     if (b > 2.5 && b < 3.5 || b > 8.5 && b < 9.5) { float r = sin(a.x * 0.35 + sin(a.y * 0.2) * 2.0 + a.y * 0.12); if (r > 0.93) col = pal(set * 5.0 + 3.0, b); else if (r < -0.95) col = pal(set * 5.0 + 1.0, b); }
     if (!snowy && (b > 3.5 && b < 6.5 || b > 11.5 && b < 12.5)) { float tb = h2(a + 7.0); if (tb < 0.02) col = pal(set * 5.0 + 4.0, b); else if (tb < 0.032) col = pal(set * 5.0 + 1.0, b); }
+    if (uHasGround > 0.5) { // hand-made texture, lit by the same slope and soft patches
+      float sb = snowy ? 11.0 : b, sc = snowy ? 3.0 : uSeason, vv = h2(t + 31.0) < 0.5 ? 0.0 : 1.0;
+      vec4 tx = texture2D(uGround, (vec2((sc * 2.0 + vv) * 32.0, sb * 32.0) + mod(A32, 32.0) + 0.5) / vec2(256.0, 512.0));
+      if (tx.a > 0.5) col = tx.rgb * (1.0 + clamp((tt - 0.52) * 0.55, -0.22, 0.22));
+    }
     if (b > 13.5 && b < 14.5 && !snowy) { float pv = vn(a, 5.0, 7.0) * 0.7 + vn(a, 13.0, 8.0) * 0.3; if (pv > 0.6) col = pv > 0.66 && h2(a + 9.0) < 0.05 ? pal(15.0, 14.0) : pal(15.0, 13.0); else if (pv > 0.57) col = pal(15.0, 12.0); }
     // wet sand along the shore
     float near = 0.0;
@@ -118,12 +128,16 @@ export class TerrainGL {
     const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
     const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    this.u = {}; for (const n of ['uData', 'uPal', 'uWorld', 'uArt0', 'uH', 'uSeason', 'uSnow', 'uTime', 'uSeed']) this.u[n] = gl.getUniformLocation(pr, n);
+    this.u = {}; for (const n of ['uData', 'uPal', 'uWorld', 'uArt0', 'uH', 'uSeason', 'uSnow', 'uTime', 'uSeed', 'uGround', 'uHasGround']) this.u[n] = gl.getUniformLocation(pr, n);
     // palette texture
     const rows = terrainPalette(); const px = new Uint8Array(16 * 16 * 4);
     rows.forEach((row, y) => row.forEach((c, x) => { const o = (y * 16 + x) * 4; px[o] = c[0]; px[o + 1] = c[1]; px[o + 2] = c[2]; px[o + 3] = 255; }));
     this.palTex = this.tex(16, 16, px);
     this.dataTex = null;
+    const ga = groundAtlas();
+    if (ga) { this.groundTex = this.tex(GROUND_W, GROUND_H, null); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, ga); }
+    else this.groundTex = this.tex(1, 1, new Uint8Array(4));
+    this.hasGround = !!ga;
     this.ok = true;
   }
   tex(w, h, data) {
@@ -146,18 +160,19 @@ export class TerrainGL {
     if (this.dataTex) this.gl.deleteTexture(this.dataTex);
     this.dataTex = this.tex(w, h, px);
   }
-  // Render the view at art resolution (one GL pixel per art pixel) and return how to place it:
+  // Render the view at art resolution (one GL pixel per art pixel, 32 per tile) and return how to place it:
   // { img, x, y, w, h } in device pixels. camX/camY: world px at the canvas's top-left corner.
   render(cw, ch, camX, camY, zoomDev, season, snow, time, seed) {
     const gl = this.gl;
-    const k = zoomDev / 2; // device px per art px
-    const ax = camX * 2, ay = camY * 2, ox = Math.floor(ax), oy = Math.floor(ay);
+    const k = zoomDev / 4; // device px per art px (32 per tile)
+    const ax = camX * 4, ay = camY * 4, ox = Math.floor(ax), oy = Math.floor(ay);
     const gw = Math.ceil(cw / k) + 2, gh = Math.ceil(ch / k) + 2;
     if (this.canvas.width !== gw || this.canvas.height !== gh) { this.canvas.width = gw; this.canvas.height = gh; }
     gl.viewport(0, 0, gw, gh);
     gl.useProgram(this.pr);
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, this.dataTex); gl.uniform1i(this.u.uData, 0);
     gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, this.palTex); gl.uniform1i(this.u.uPal, 1);
+    gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, this.groundTex); gl.uniform1i(this.u.uGround, 2); gl.uniform1f(this.u.uHasGround, this.hasGround ? 1 : 0);
     gl.uniform2f(this.u.uWorld, this.world.w, this.world.h);
     gl.uniform2f(this.u.uArt0, ox, oy);
     gl.uniform1f(this.u.uH, gh);

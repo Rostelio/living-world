@@ -87,7 +87,7 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 
 | id | what it is | where in code (file:line) | in-game size, px | states / animations | frames (estimate) | priority | status |
 |---|---|---|---|---|---|---|---|
-| `tile_{grass\|plains\|forest\|jungle\|taiga\|desert\|tundra\|snow\|hills\|mountain\|swamp\|beach}` | ground for each land biome; currently dithered per pixel | src/render/tiles16.js (Tiles16 chunk baking, ground pass), :597 `terrainPalette`; GPU version src/render/terrainGL.js | 16×16 | season (4: spring, summer, autumn, winter) × 4 variants | 16 | 1 | code-drawn |
+| `tile_{grass\|plains\|forest\|jungle\|taiga\|desert\|tundra\|snow\|hills\|mountain\|swamp\|beach}` | ground for each land biome; currently dithered per pixel | src/render/tiles16.js (Tiles16 chunk baking, ground pass), :597 `terrainPalette`; GPU version src/render/terrainGL.js | 16×16 | season (4: spring, summer, autumn, winter) × 4 variants | 16 | 1 | Aseprite (scripts/art) |
 | `tile_{deep\|ocean\|shallow\|lake}` | water bands | src/render/tiles16.js (water bands); terrainGL.js shader | 16×16 | wave (4); winter ice for lake | 4 (+1 ice) | 1 | code-drawn |
 | `shore_autotile` | coast and biome edges | src/render/tiles16.js (shorelines) | 16×16 | 16 edge/corner cases (4-bit mask) | 16 | 1 | code-drawn |
 | `river_autotile` | rivers | src/render/tiles16.js (rivers) | 16×16 | 16 masks | 16 | 1 | code-drawn |
@@ -104,15 +104,15 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 
 | id | what it is | where in code (file:line) | in-game size, px | states / animations | frames (estimate) | priority | status |
 |---|---|---|---|---|---|---|---|
-| `road_{dirt\|stone\|paved}` | square pixel roads | src/render/town16.js:55 `path16`; renderer.js:1345 `drawRoads` | 16×16 | 16 masks (neighbours N/E/S/W) | 16 | 1 | code-drawn |
-| `bridge` | road bridge over a river | src/render/town16.js:80 `bridge16` | 16×16 | horizontal, vertical | 2 | 2 | code-drawn |
-| `yard` | packed earth around houses | src/render/town16.js:39 `yard16`; renderer.js:657 `drawTownGround` | 16×16 | variant (2), snowy (1) | 3 | 1 | code-drawn |
-| `plaza_{plain\|well\|fountain}` | town square | src/render/town16.js:95 `plaza16` | 16×16 | fountain water (2) | 1–2 | 1 | code-drawn |
-| `wall` | town wall | src/render/town16.js:106 `wall16`; renderer.js:695 `drawTileWalls` | 16×16 | 16 masks | 16 | 2 | code-drawn |
-| `wall_tower`, `wall_gate` | wall tower and gate | src/render/town16.js:119 `tower16`, :126 `gate16` | 16×16 | gate: horizontal, vertical | 1, 2 | 2 | code-drawn |
-| `fence` | field and pen fences | src/render/town16.js:246 `fence16`; renderer.js:613 `drawFieldDetail` | 16×16 | 16 masks | 16 | 2 | code-drawn |
-| `field` | crop field | src/render/buildings16.js:274 `field16`; src/render/sprites.js:339 `fieldSprites` | 16×16 | growth by season (4) | 4 | 1 | code-drawn |
-| `prop_{barrel\|crate\|woodpile\|flowers\|lamp\|bush\|sack\|anvil\|rack\|scarecrow}` | small town props | src/render/town16.js:133 `prop16` | ~6×6 – 8×10 | static (1); lamp lit at night is done in code | 1 | 2 | code-drawn |
+| `road_{dirt\|stone\|paved}` | square pixel roads | src/render/town16.js:55 `path16`; renderer.js:1345 `drawRoads` | 16×16 | 16 masks (neighbours N/E/S/W) | 16 | 1 | Aseprite (scripts/art) |
+| `bridge` | road bridge over a river | src/render/town16.js:80 `bridge16` | 16×16 | horizontal, vertical | 2 | 2 | Aseprite (scripts/art) |
+| `yard` | packed earth around houses | src/render/town16.js:39 `yard16`; renderer.js:657 `drawTownGround` | 16×16 | variant (2), snowy (1) | 3 | 1 | Aseprite (scripts/art) |
+| `plaza_{plain\|well\|fountain}` | town square | src/render/town16.js:95 `plaza16` | 16×16 | fountain water (2) | 1–2 | 1 | Aseprite (scripts/art) |
+| `wall_{stone\|palisade}` | town wall | src/render/town16.js:106 `wall16`; renderer.js:695 `drawTileWalls` | 16×16 | 16 masks | 16 | 2 | Aseprite (scripts/art) |
+| `wall_tower`, `wall_gate` | wall tower and gate | src/render/town16.js:119 `tower16`, :126 `gate16` | 16×16 | gate: horizontal, vertical | 1, 2 | 2 | Aseprite (scripts/art) |
+| `fence` | field and pen fences | src/render/town16.js:246 `fence16`; renderer.js:613 `drawFieldDetail` | 16×16 | 16 masks | 16 | 2 | Aseprite (scripts/art) |
+| `field` | crop field | src/render/buildings16.js:274 `field16`; src/render/sprites.js:339 `fieldSprites` | 16×16 | growth by season (4) | 4 | 1 | Aseprite (scripts/art) |
+| `prop_{barrel\|crate\|woodpile\|flowers\|lamp\|bush\|sack\|anvil\|rack\|scarecrow}` | small town props | src/render/town16.js:133 `prop16` | ~6×6 – 8×10 | static (1); lamp lit at night is done in code | 1 | 2 | Aseprite (scripts/art) |
 
 ### Buildings
 
@@ -255,6 +255,17 @@ Sprites marked **exact** replace a ready-made picture of that size, so the canva
 | nature_reeds | 20×20 exact | | spring, summer, autumn, winter |
 | nature_cactus | 20×28 exact | | spring, summer, autumn, winter |
 | nature_flowers | 16×12 exact | | spring, summer, autumn, winter |
+| tile_* | 32×32 exact | spring, summer, autumn, winter | |
+| road_* | 32×32 exact | road, street | |
+| yard | 32×32 exact | grass, snow | |
+| plaza_* | 32×32 exact | | |
+| bridge | 32×32 exact | wood, stone | |
+| wall_stone, wall_palisade | 32×32 exact | whole, broken | |
+| wall_tower | 32×32 exact | stone, palisade | |
+| wall_gate | 32×32 exact | stone, palisade | |
+| fence | 32×32 exact | | |
+| field | 32×32 exact | stage0, stage1, stage2, stage3, stage4, stage5 | |
+| prop_* | 16×16 exact | | |
 | icon_* | 16×16 exact | | |
 <!-- sprite-specs: end -->
 

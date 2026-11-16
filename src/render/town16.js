@@ -49,7 +49,7 @@ function outline(c, col = [28, 18, 24]) {
 
 // ---------------- Ground ----------------
 // Trodden yard: covers the trees and rocks baked into the terrain under a building
-export function yard16(v, snow) {
+function yardLegacy(v, snow) {
   return sprite(`yard:${v}:${snow}`, 16, 16, (P) => {
     const g = snow ? ramp('#e6eef2') : ramp(['#78b04a', '#6ea844', '#82b850'][v % 3]);
     P(0, 0, 16, 16, g.mid);
@@ -65,7 +65,7 @@ const PATH = [
   { fill: '#a8a08e', edge: '#6a6458', dot: '#8a8476', hi: '#c8c0ae' },
   { fill: '#9a968e', edge: '#5a5852', dot: '#86827a', hi: '#bcb8ae' },
 ];
-export function path16(mask, style, half = 2) {
+function pathLegacy(mask, style, half = 2) {
   return sprite(`path:${mask}:${style}:${half}`, 16, 16, (P) => {
     const C = PATH[style];
     const a = 8 - half, b = 8 + half; // a narrow track down the middle of the tile (roads 4 px, streets 6 px)
@@ -90,7 +90,7 @@ export function path16(mask, style, half = 2) {
   });
 }
 // a bridge tile over water or a river; horiz = the road runs east–west
-export function bridge16(horiz, style) {
+function bridgeLegacy(horiz, style) {
   return sprite(`bridge:${horiz}:${style}`, 16, 16, (P) => {
     const deck = style ? ramp('#a8a094') : ramp('#9a6a3a'), rail = style ? '#6a645a' : '#5a3a1e';
     if (horiz) {
@@ -105,7 +105,7 @@ export function bridge16(horiz, style) {
     }
   });
 }
-export function plaza16(kind) {
+function plazaLegacy(kind) {
   return sprite(`plaza:${kind}`, 16, 16, (P) => {
     P(0, 0, 16, 16, '#b0a694'); for (let y = 0; y < 16; y += 4) P(0, y, 16, 1, '#968c7c'); for (let y = 0; y < 16; y += 4) for (let x = (y / 4) % 2 ? 2 : 0; x < 16; x += 4) P(x, y, 1, 4, '#968c7c');
     if (kind === 'well') { P(5, 6, 6, 6, '#7a7266'); P(6, 7, 4, 4, '#2a5a8a'); P(6, 7, 4, 1, '#5aa8e0'); P(4, 3, 1, 4, '#6a4a2a'); P(11, 3, 1, 4, '#6a4a2a'); P(4, 2, 8, 1, '#8a5a32'); }
@@ -116,7 +116,7 @@ export function plaza16(kind) {
 // ---------------- Walls ----------------
 // One wall piece along a tile edge (16 px long); hz = runs east–west. palisade = orc stakes.
 // Walls run along tile edges as a slim line (3 px stone, 2 px stakes) with small towers and gates
-export function wall16(hz, palisade, broken = false) {
+function wallLegacy(hz, palisade, broken = false) {
   return sprite(`wall:${hz}:${palisade}:${broken}`, 16, 16, (P, x) => {
     const st = palisade ? ramp('#7a5232') : ramp('#9a9286');
     if (hz) {
@@ -129,21 +129,21 @@ export function wall16(hz, palisade, broken = false) {
     if (broken && !palisade) { x.clearRect(hz ? 5 : 6, hz ? 4 : 5, hz ? 6 : 5, hz ? 6 : 6); P(hz ? 4 : 6, hz ? 8 : 4, 1, 1, st.dk); P(hz ? 10 : 9, hz ? 8 : 11, 1, 1, st.mid); }
   });
 }
-export function tower16(palisade) {
+function towerLegacy(palisade) {
   return sprite(`tower:${palisade}`, 16, 16, (P) => {
     const st = palisade ? ramp('#6a4628') : ramp('#a8a094');
     if (palisade) { P(5, 4, 6, 9, st.mid); P(5, 4, 1, 9, st.lt); P(4, 3, 8, 2, st.dk); for (let x = 4; x < 12; x += 2) P(x, 2, 1, 1, st.lt); P(7, 7, 2, 2, '#1a0e08'); }
     else { P(5, 4, 6, 9, st.mid); P(5, 4, 1, 9, st.lt); P(10, 4, 1, 9, st.dk); P(4, 3, 8, 2, st.lt); for (let x = 4; x < 12; x += 2) P(x, 2, 1, 1, st.lt); P(7, 7, 2, 2, '#2a2420'); P(5, 11, 6, 1, st.dk); }
   });
 }
-export function gate16(hz, palisade) {
+function gateLegacy(hz, palisade) {
   return sprite(`gate:${hz}:${palisade}`, 16, 16, (P) => {
     const st = palisade ? ramp('#6a4628') : ramp('#a8a094');
     if (hz) { P(2, 4, 3, 6, st.mid); P(11, 4, 3, 6, st.mid); P(2, 3, 3, 1, st.lt); P(11, 3, 3, 1, st.lt); P(5, 7, 6, 2, palisade ? '#5a3a1e' : '#6a4a2a'); for (let x = 6; x < 11; x += 2) P(x, 7, 1, 2, '#4a2e18'); }
     else { P(6, 2, 4, 3, st.mid); P(6, 11, 4, 3, st.mid); P(6, 2, 4, 1, st.lt); P(6, 11, 4, 1, st.lt); P(7, 5, 2, 6, '#6a4a2a'); for (let y = 6; y < 11; y += 2) P(7, y, 2, 1, '#4a2e18'); }
   });
 }
-export function prop16(kind) {
+function propLegacy(kind) {
   const c = sprite(`prop:${kind}`, 8, 8, (P) => {
     switch (kind) {
       case 'barrel': P(2, 2, 4, 5, '#8a5a2e'); P(2, 3, 4, 1, '#5a3a1e'); P(2, 5, 4, 1, '#5a3a1e'); P(3, 2, 2, 1, '#a87a44'); break;
@@ -169,6 +169,18 @@ export const PROPS_BY_RACE = {
   lizardfolk: ['sack', 'bush', 'rack'],
   halflings: ['flowers', 'barrel', 'sack', 'bush', 'woodpile'],
 };
+
+// town ground: Aseprite sheets (scripts/art/town.mjs) when present, else the code-drawn tiles
+const ROAD_IDS = ['road_dirt', 'road_stone', 'road_paved'];
+export const yard16 = (v, snow) => art('yard', snow ? 'snow' : 'grass', v % 3, yardLegacy(v, snow));
+export const path16 = (mask, style, half = 2) => art(ROAD_IDS[style] || 'road_dirt', half >= 3 ? 'street' : 'road', mask, pathLegacy(mask, style, half));
+export const bridge16 = (horiz, style) => art('bridge', style ? 'stone' : 'wood', horiz ? 1 : 0, bridgeLegacy(horiz, style));
+export const plaza16 = (kind) => art('plaza_' + (kind || 'plain'), null, 0, plazaLegacy(kind));
+export const wall16 = (hz, palisade, broken = false) => art(palisade ? 'wall_palisade' : 'wall_stone', broken ? 'broken' : 'whole', hz ? 1 : 0, wallLegacy(hz, palisade, broken));
+export const tower16 = (palisade) => art('wall_tower', palisade ? 'palisade' : 'stone', 0, towerLegacy(palisade));
+export const gate16 = (hz, palisade) => art('wall_gate', palisade ? 'palisade' : 'stone', hz ? 1 : 0, gateLegacy(hz, palisade));
+export const prop16 = (kind) => art('prop_' + kind, null, 0, propLegacy(kind));
+export const fence16 = (mask) => art('fence', null, mask, fenceLegacy(mask));
 
 // ---------------- Race homes ----------------
 // Elven treehouse: a great tree with a round house in the canopy (16×24, overhangs the tile above)
@@ -262,7 +274,7 @@ export const stilt16 = (tier) => art('home_stilt', 'tier' + tier, 0, stiltLegacy
 
 // ---------------- Crop plots ----------------
 // Fence sides for a field tile: mask bits say which sides border something that isn't a field
-export function fence16(mask) {
+function fenceLegacy(mask) {
   return sprite(`fence:${mask}`, 16, 16, (P) => {
     const wd = '#8a6a3e', dk = '#5a4026';
     if (mask & 1) { P(0, 0, 16, 1, wd); for (let x = 0; x < 16; x += 5) P(x, 0, 1, 2, dk); }

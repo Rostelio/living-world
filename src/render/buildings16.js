@@ -274,7 +274,14 @@ export function special16(kind, race, civColor) {
 }
 
 // ---------------- Fields (16×16, by season) ----------------
-export function field16(v, stage) {
+const FIELDC = new Map();
+export function field16(v, stage) { // Aseprite sheet 'field' (tags stage0..stage5, 3 soils) if there is one
+  const key = v + ':' + stage;
+  let c = FIELDC.get(key);
+  if (!c) { c = fromSheet('field', 'stage' + stage, v, fieldLegacy(v, stage)); FIELDC.set(key, c); }
+  return c;
+}
+function fieldLegacy(v, stage) {
   const key = `f:${v}:${stage}`;
   if (cache.has(key)) return cache.get(key);
   const k = new Kit(16, 16);

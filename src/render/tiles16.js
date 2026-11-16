@@ -1,6 +1,7 @@
 import { selectiveOutline, slot } from './pixelkit.js';
 import { fromSheet, anySheet } from '../sprites.js';
 import { ART_SCALE } from '../sprite-config.js';
+import { groundTexels16 } from './ground-art.js';
 const TREES = new Set(['oak', 'birch', 'pine', 'palm', 'jungle', 'dead']);
 const SEASON_TAGS = ['spring', 'summer', 'autumn', 'winter'];
 // Phase 13 — close-up terrain at 16×16 pixels per tile. The world is rendered in chunks
@@ -379,6 +380,7 @@ export class Tiles16 {
     const hillshade = (gx, gy) => clamp((Hs(gx - 5, gy - 5) - Hs(gx + 5, gy + 5)) * 5.5, -0.32, 0.32);
     // --- ground pass (per pixel, jittered sampling for organic biome edges)
     const anySnow = snow > 0;
+    const GT = groundTexels16(); // Aseprite ground textures, at 16 px per tile
     const objectsOnly = !!this.objectsOnly; // Phase 22: the GPU paints the ground; only rivers and standing things are baked
     for (let py = 0; py < (objectsOnly ? 0 : PX); py++) {
       if ((py & 31) === 0 && py) yield null; // spread the work over several frames
@@ -432,6 +434,7 @@ export class Tiles16 {
           if (b === B.DESERT || b === B.BEACH) { const r = Math.sin(gx * 0.35 + Math.sin(gy * 0.2) * 2 + gy * 0.12); if (r > 0.93) col = p[2]; else if (r < -0.95) col = p[3]; }
           // grass blades: a lit tip over a dark root, here and there
           if ((b === B.GRASS || b === B.PLAINS || b === B.HILLS || b === B.FOREST) && !snowy) { const tb = hash2(gx, gy, S + 6); if (tb < 0.02) col = r5[4]; else if (tb < 0.032 && py > 0) col = r5[1]; }
+          if (GT) { const tc = GT.texel(snowy ? B.SNOW : b, (snowy ? 3 : season) * 2 + (hash2(sx, sy, S + 31) < 0.5 ? 0 : 1), gx & 15, gy & 15); if (tc) { const lt = 1 + clamp((t - 0.52) * 0.55, -0.22, 0.22); col = [tc[0] * lt, tc[1] * lt, tc[2] * lt]; } }
           // marsh pools: smooth shapes with a muddy rim and a glint of sky
           if (b === B.SWAMP && !snowy) { const pv = vn(gx, gy, 5, S + 7) * 0.7 + vn(gx, gy, 13, S + 8) * 0.3; if (pv > 0.6) col = pv > 0.66 && hash2(gx, gy >> 1, S + 9) < 0.05 ? POOLHI : POOL; else if (pv > 0.57) col = MUD; }
         }
