@@ -1,0 +1,31 @@
+{ "frames": [
+   {
+    "filename": "nature_cactus 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 20, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 20, "h": 28 },
+    "sourceSize": { "w": 20, "h": 28 },
+    "duration": 100
+   },
+   {
+    "filename": "nature_cactus 1.aseprite",
+    "frame": { "x": 20, "y": 0, "w": 20, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 20, "h": 28 },
+    "sourceSize": { "w": 20, "h": 28 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.18.6-arm64",
+  "image": "nature_cactus.png",
+  "format": "RGBA8888",
+  "size": { "w": 40, "h": 28 },
+  "scale": "1",
+  "frameTags": [
+  ]
+ }
+}

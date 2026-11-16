@@ -1,0 +1,49 @@
+{ "frames": [
+   {
+    "filename": "nature_flowers 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 16, "h": 12 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 12 },
+    "sourceSize": { "w": 16, "h": 12 },
+    "duration": 100
+   },
+   {
+    "filename": "nature_flowers 1.aseprite",
+    "frame": { "x": 16, "y": 0, "w": 16, "h": 12 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 12 },
+    "sourceSize": { "w": 16, "h": 12 },
+    "duration": 100
+   },
+   {
+    "filename": "nature_flowers 2.aseprite",
+    "frame": { "x": 32, "y": 0, "w": 16, "h": 12 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 12 },
+    "sourceSize": { "w": 16, "h": 12 },
+    "duration": 100
+   },
+   {
+    "filename": "nature_flowers 3.aseprite",
+    "frame": { "x": 48, "y": 0, "w": 16, "h": 12 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 12 },
+    "sourceSize": { "w": 16, "h": 12 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.18.6-arm64",
+  "image": "nature_flowers.png",
+  "format": "RGBA8888",
+  "size": { "w": 64, "h": 12 },
+  "scale": "1",
+  "frameTags": [
+  ]
+ }
+}

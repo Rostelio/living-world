@@ -97,8 +97,8 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 
 | id | what it is | where in code (file:line) | in-game size, px | states / animations | frames (estimate) | priority | status |
 |---|---|---|---|---|---|---|---|
-| `tree_{oak\|birch\|pine\|palm\|jungle\|dead}` | trees | src/render/tiles16.js:121 `objectSprite`, :271 `tileObjects`; close zoom src/render/detail.js:50 `treeSprite` | 16×16 (some 16×24) | season (4) × variant (3) | 12 | 1 | code-drawn |
-| `nature_{bush\|rock\|mound\|peak\|peak_snow\|tuft\|pebbles\|mushroom\|lily\|reeds\|cactus\|flowers}` | ground decoration | src/render/tiles16.js:121 `objectSprite` | 8×8 – 16×16 | variant (2); snow on some in winter | 2 | 1 | code-drawn |
+| `tree_{oak\|birch\|pine\|palm\|jungle\|dead}` | trees | src/render/tiles16.js:121 `objectSprite`, :271 `tileObjects`; close zoom src/render/detail.js:50 `treeSprite` | 16×16 (some 16×24) | season (4) × variant (3) | 12 | 1 | Aseprite (scripts/art) |
+| `nature_{bush\|rock\|mound\|peak\|peak_snow\|tuft\|pebbles\|mushroom\|lily\|reeds\|cactus\|flowers}` | ground decoration | src/render/tiles16.js:121 `objectSprite` | 8×8 – 16×16 | variant (2); snow on some in winter | 2 | 1 | Aseprite (scripts/art) |
 
 ### Town ground, roads and walls (16×16 autotiles)
 

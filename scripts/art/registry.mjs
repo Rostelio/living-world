@@ -20,3 +20,5 @@ GENERATORS.home_hillhome = hillhomeSheet;
 GENERATORS.home_tent = tentSheet;
 GENERATORS.home_stilt = stiltSheet;
 for (const r of RACES) GENERATORS['townhouse_' + r] = () => townhouseSheet(r);
+import { NATURE } from './nature.mjs';
+for (const [id, fn] of Object.entries(NATURE)) GENERATORS[id] = () => ({ ...fn(), layer: id.replace(/^(tree|nature)_/, '') });
