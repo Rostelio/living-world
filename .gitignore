@@ -6,3 +6,6 @@ desktop/build/
 # test and tool output
 .claude/
 *.log
+
+# local settings (Aseprite path)
+.env

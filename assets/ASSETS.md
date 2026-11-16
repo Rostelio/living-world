@@ -121,8 +121,8 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 | `townhouse` | 2–3 storey town houses in big cities | src/render/town16.js:283 `townhouse16` | 16×24 ⚠ | 2 storeys, 3 storeys | 2 | 1 | code-drawn |
 | `home_{treehouse\|hillhome\|tent\|stilt}` | race-style homes (elves, halflings, orcs, lizardfolk) | src/render/town16.js:162 `treehouse16` (16×24), :180 `hillhome16`, :196 `tent16`, :211 `stilt16` | 16×16 (treehouse 16×24 ⚠) | tier (2–3) | 3 | 1 | code-drawn |
 | `boardwalk`, `rope_bridge` | lizardfolk boardwalk, elven rope bridge | src/render/town16.js:227 `boardwalk16`, :235 `ropeBridge` | 16×16 | 16 masks / horizontal-vertical | 16, 2 | 2 | code-drawn |
-| `building_{town_hall\|temple\|market\|library\|granary\|warehouse\|barracks\|brewery\|lumber_camp\|mine\|quarry\|port\|walls_tower\|bank\|hospital\|observatory\|aqueduct\|textile_mill\|foundry\|power_plant\|newspaper}` | special buildings, one each (`power_plant` and `newspaper` have no own drawing yet and use the default look) | src/render/buildings16.js:135 `special16`; src/render/sprites.js:202 `drawSpecial` (older 8 px) | 16×16 | static (1) | 1 | 2 | code-drawn |
-| `building_{castle\|star_fort\|university\|railway_station\|factory}` | big special buildings | src/render/buildings16.js:135 `special16` (`BIG_SPRITES`, sprites.js:325) | 32×32 ⚠ (2×2 tiles) | static (1) | 1 | 2 | code-drawn |
+| `building_{temple\|market\|library\|granary\|warehouse\|barracks\|brewery\|lumber_camp\|mine\|quarry\|port\|walls_tower\|bank\|hospital\|observatory\|aqueduct\|textile_mill\|foundry\|power_plant\|newspaper\|railway_station\|factory}` | special buildings, one each (`power_plant` and `newspaper` have no own drawing yet and use the default look) | src/render/buildings16.js:135 `special16`; src/render/sprites.js:202 `drawSpecial` (older 8 px) | 16×16 | static (1) | 1 | 2 | code-drawn |
+| `building_{town_hall\|castle\|star_fort\|university}` | big special buildings | src/render/buildings16.js:135 `special16` (`BIG16`) | 32×32 ⚠ (2×2 tiles) | static (1) | 1 | 2 | code-drawn |
 | `campfire` | campfire in camps and villages | src/render/buildings16.js:135 `special16` + src/render/fx.js:971 `flameSprite` | 16×16 | burn (3) | 3 | 2 | code-drawn |
 | `windmill` | windmill | src/render/town16.js:373 `windmill16` | 16×24 ⚠ | sails turning (4) | 4 | 2 | code-drawn |
 | `great_work_{cathedral\|university\|palace\|canal\|harbour_works\|boulevards\|world_fair}` | great works | src/render/town16.js:309 `work16` | 32×32 ⚠ | static (1) | 1 | 3 | code-drawn |
@@ -215,6 +215,49 @@ Objects flagged ⚠ that are taller or wider than one tile (`townhouse`, treehou
 ## Note: the art-slot system already exists
 
 `src/render/pixelkit.js` (`loadArt`, `artFor`) with `art/manifest.json` and `art/slots.json` (505 slots) already lets a PNG replace a generated sprite by key, but without Aseprite JSON, tags or frame durations. In step 2, `src/sprites.js` will take over that job: keep the slot keys as aliases so nothing breaks, and point them at the new ids.
+
+## Aseprite canvas and tags (option A)
+
+The size of the Aseprite canvas (File ▸ New) and the tags each sprite must have. `npm run sprites` checks every export against this table.
+`{role}` means one tag per villager role: farmer, woodcutter, miner, crafter, merchant, priest, guard, noble, child, hauler.
+Sprites marked **exact** replace a ready-made picture of that size, so the canvas must match to the pixel (otherwise the game keeps the old picture and warns once in the console). The others are placed by their anchor (bottom-centre), so the size is a recommendation.
+
+<!-- sprite-specs: start -->
+| id | canvas | required tags | optional tags |
+|---|---|---|---|
+| townsfolk_* | 16×16 | {role}_walk, {role}_work, {role}_idle | |
+| person_* | 16×16 | walk, work, idle | {role}_walk, {role}_work, {role}_idle |
+| livestock_* | 16×16 | walk | graze, idle |
+| wildlife_* | 16×16 | walk | idle |
+| creature_dragon, creature_wyvern | 32×32 | fly | idle |
+| creature_giant, creature_troll | 32×32 | walk | idle |
+| lair | 16×16 | | |
+| caravan | 16×16 | move | |
+| windmill | 16×24 exact | turn | |
+| house_* | 16×16 exact | tier0, tier1, tier2, tier3 | |
+| building_town_hall, building_castle, building_star_fort, building_university | 32×32 exact | | {race} |
+| building_* | 16×16 exact | | {race} |
+| campfire | 16×16 exact | | |
+| tree_oak, tree_birch | 16×22 exact | spring, summer, autumn, winter | |
+| tree_pine | 14×24 exact | spring, summer, autumn, winter | |
+| tree_palm, tree_jungle | 18×22 exact | spring, summer, autumn, winter | |
+| tree_dead | 12×14 exact | spring, summer, autumn, winter | |
+| nature_bush, nature_rock | 10×8 exact | | spring, summer, autumn, winter |
+| nature_mound | 16×10 exact | | spring, summer, autumn, winter |
+| nature_peak, nature_peak_snow | 18×24 exact | | spring, summer, autumn, winter |
+| nature_tuft | 7×6 exact | | spring, summer, autumn, winter |
+| nature_pebbles, nature_lily | 7×4 exact | | spring, summer, autumn, winter |
+| nature_mushroom | 6×6 exact | | spring, summer, autumn, winter |
+| nature_reeds | 10×10 exact | | spring, summer, autumn, winter |
+| nature_cactus | 10×14 exact | | spring, summer, autumn, winter |
+| nature_flowers | 8×6 exact | | spring, summer, autumn, winter |
+| icon_* | 8×8 exact | | |
+<!-- sprite-specs: end -->
+
+Sprites not in this table can be drawn already, but the game does not use them yet (they still need hooking up).
+- `{race}` tags on buildings: one frame per race (`humans`, `elves`, ...); without them frame 0 is used for every race.
+- Houses: the frames inside `tier0`..`tier3` are the roof variants (up to 3).
+- Trees and nature: the frames inside a season tag are the variants.
 
 ## Summary
 

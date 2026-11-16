@@ -10,6 +10,7 @@
     "web": "python3 serve.py",
     "icon": "node desktop/make-icon.cjs",
     "smoke": "LW_SMOKE_TEST=1 electron .",
+    "sprites": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/export-sprites.mjs",
     "dist:mac": "npm run icon && electron-builder --mac",
     "dist:win": "npm run icon && electron-builder --win",
     "dist": "npm run icon && electron-builder --mac --win"
@@ -22,6 +23,7 @@
       "styles.css",
       "src/**/*",
       "art/**/*",
+      "!art/**/*.{aseprite,ase}",
       "assets/sprites/**/*",
       "audio/**/*",
       "desktop/main.cjs",
