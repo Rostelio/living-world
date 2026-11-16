@@ -40,8 +40,9 @@ const STATE = (o) => (o.moving ? 'walk' : o.working ? 'work' : 'idle');
 export function figure(ctx, x, y, o) {
   if (VIEW.hd) {
     const tiny = o.tiny || SETTINGS.smallPeople !== false;
+    // townsfolk sheets are for villagers (they have a role); soldiers keep the code-drawn look for now
     const id = (tiny ? 'townsfolk_' : 'person_') + (o.race || 'humans');
-    if (hasSprite(id)) {
+    if (o.role && hasSprite(id)) {
       const st = STATE(o);
       const tag = pickTag(id, [o.role && `${o.role}_${st}`, st, 'idle']);
       // its own animator when the caller keeps the figure between frames, else the code's own step

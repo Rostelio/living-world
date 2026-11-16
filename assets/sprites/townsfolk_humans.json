@@ -1,0 +1,673 @@
+{ "frames": [
+   {
+    "filename": "townsfolk_humans 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 1.aseprite",
+    "frame": { "x": 5, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 2.aseprite",
+    "frame": { "x": 10, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 3.aseprite",
+    "frame": { "x": 15, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 4.aseprite",
+    "frame": { "x": 20, "y": 0, "w": 6, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 6, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 5.aseprite",
+    "frame": { "x": 26, "y": 0, "w": 6, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 6, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 6.aseprite",
+    "frame": { "x": 32, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 500
+   },
+   {
+    "filename": "townsfolk_humans 7.aseprite",
+    "frame": { "x": 37, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 8.aseprite",
+    "frame": { "x": 42, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 9.aseprite",
+    "frame": { "x": 47, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 10.aseprite",
+    "frame": { "x": 52, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 11.aseprite",
+    "frame": { "x": 57, "y": 0, "w": 6, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 6, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 12.aseprite",
+    "frame": { "x": 63, "y": 0, "w": 6, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 6, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 13.aseprite",
+    "frame": { "x": 69, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 500
+   },
+   {
+    "filename": "townsfolk_humans 14.aseprite",
+    "frame": { "x": 74, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 15.aseprite",
+    "frame": { "x": 79, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 16.aseprite",
+    "frame": { "x": 84, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 17.aseprite",
+    "frame": { "x": 89, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 18.aseprite",
+    "frame": { "x": 94, "y": 0, "w": 6, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 6, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 19.aseprite",
+    "frame": { "x": 100, "y": 0, "w": 6, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 6, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 20.aseprite",
+    "frame": { "x": 106, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 500
+   },
+   {
+    "filename": "townsfolk_humans 21.aseprite",
+    "frame": { "x": 111, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 22.aseprite",
+    "frame": { "x": 116, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 23.aseprite",
+    "frame": { "x": 121, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 24.aseprite",
+    "frame": { "x": 126, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 25.aseprite",
+    "frame": { "x": 131, "y": 0, "w": 6, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 6, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 26.aseprite",
+    "frame": { "x": 137, "y": 0, "w": 6, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 6, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 27.aseprite",
+    "frame": { "x": 143, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 500
+   },
+   {
+    "filename": "townsfolk_humans 28.aseprite",
+    "frame": { "x": 148, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 29.aseprite",
+    "frame": { "x": 153, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 30.aseprite",
+    "frame": { "x": 158, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 31.aseprite",
+    "frame": { "x": 163, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 32.aseprite",
+    "frame": { "x": 168, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 33.aseprite",
+    "frame": { "x": 173, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 34.aseprite",
+    "frame": { "x": 178, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 500
+   },
+   {
+    "filename": "townsfolk_humans 35.aseprite",
+    "frame": { "x": 183, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 36.aseprite",
+    "frame": { "x": 188, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 37.aseprite",
+    "frame": { "x": 193, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 38.aseprite",
+    "frame": { "x": 198, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 39.aseprite",
+    "frame": { "x": 203, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 40.aseprite",
+    "frame": { "x": 208, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 41.aseprite",
+    "frame": { "x": 213, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 500
+   },
+   {
+    "filename": "townsfolk_humans 42.aseprite",
+    "frame": { "x": 218, "y": 0, "w": 6, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 6, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 43.aseprite",
+    "frame": { "x": 224, "y": 0, "w": 6, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 6, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 44.aseprite",
+    "frame": { "x": 230, "y": 0, "w": 6, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 6, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 45.aseprite",
+    "frame": { "x": 236, "y": 0, "w": 6, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 6, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 46.aseprite",
+    "frame": { "x": 242, "y": 0, "w": 6, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 6, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 47.aseprite",
+    "frame": { "x": 248, "y": 0, "w": 6, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 6, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 48.aseprite",
+    "frame": { "x": 254, "y": 0, "w": 6, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 6, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 500
+   },
+   {
+    "filename": "townsfolk_humans 49.aseprite",
+    "frame": { "x": 260, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 50.aseprite",
+    "frame": { "x": 265, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 51.aseprite",
+    "frame": { "x": 270, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 52.aseprite",
+    "frame": { "x": 275, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 53.aseprite",
+    "frame": { "x": 280, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 54.aseprite",
+    "frame": { "x": 285, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 55.aseprite",
+    "frame": { "x": 290, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 500
+   },
+   {
+    "filename": "townsfolk_humans 56.aseprite",
+    "frame": { "x": 295, "y": 0, "w": 5, "h": 7 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 9, "w": 5, "h": 7 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 57.aseprite",
+    "frame": { "x": 300, "y": 0, "w": 5, "h": 7 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 9, "w": 5, "h": 7 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 58.aseprite",
+    "frame": { "x": 305, "y": 0, "w": 5, "h": 7 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 9, "w": 5, "h": 7 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 59.aseprite",
+    "frame": { "x": 310, "y": 0, "w": 5, "h": 7 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 9, "w": 5, "h": 7 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 60.aseprite",
+    "frame": { "x": 315, "y": 0, "w": 5, "h": 7 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 9, "w": 5, "h": 7 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 61.aseprite",
+    "frame": { "x": 320, "y": 0, "w": 5, "h": 7 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 9, "w": 5, "h": 7 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 62.aseprite",
+    "frame": { "x": 325, "y": 0, "w": 5, "h": 7 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 9, "w": 5, "h": 7 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 500
+   },
+   {
+    "filename": "townsfolk_humans 63.aseprite",
+    "frame": { "x": 330, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 64.aseprite",
+    "frame": { "x": 335, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 65.aseprite",
+    "frame": { "x": 340, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 66.aseprite",
+    "frame": { "x": 345, "y": 0, "w": 5, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 7, "w": 5, "h": 9 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 125
+   },
+   {
+    "filename": "townsfolk_humans 67.aseprite",
+    "frame": { "x": 350, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 68.aseprite",
+    "frame": { "x": 355, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 200
+   },
+   {
+    "filename": "townsfolk_humans 69.aseprite",
+    "frame": { "x": 360, "y": 0, "w": 5, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 8, "w": 5, "h": 8 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 500
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.18.6-arm64",
+  "image": "townsfolk_humans.png",
+  "format": "RGBA8888",
+  "size": { "w": 365, "h": 9 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "farmer_walk", "from": 0, "to": 3, "direction": "forward", "color": "#000000ff" },
+   { "name": "farmer_work", "from": 4, "to": 5, "direction": "forward", "color": "#000000ff" },
+   { "name": "farmer_idle", "from": 6, "to": 6, "direction": "forward", "color": "#000000ff" },
+   { "name": "woodcutter_walk", "from": 7, "to": 10, "direction": "forward", "color": "#000000ff" },
+   { "name": "woodcutter_work", "from": 11, "to": 12, "direction": "forward", "color": "#000000ff" },
+   { "name": "woodcutter_idle", "from": 13, "to": 13, "direction": "forward", "color": "#000000ff" },
+   { "name": "miner_walk", "from": 14, "to": 17, "direction": "forward", "color": "#000000ff" },
+   { "name": "miner_work", "from": 18, "to": 19, "direction": "forward", "color": "#000000ff" },
+   { "name": "miner_idle", "from": 20, "to": 20, "direction": "forward", "color": "#000000ff" },
+   { "name": "crafter_walk", "from": 21, "to": 24, "direction": "forward", "color": "#000000ff" },
+   { "name": "crafter_work", "from": 25, "to": 26, "direction": "forward", "color": "#000000ff" },
+   { "name": "crafter_idle", "from": 27, "to": 27, "direction": "forward", "color": "#000000ff" },
+   { "name": "merchant_walk", "from": 28, "to": 31, "direction": "forward", "color": "#000000ff" },
+   { "name": "merchant_work", "from": 32, "to": 33, "direction": "forward", "color": "#000000ff" },
+   { "name": "merchant_idle", "from": 34, "to": 34, "direction": "forward", "color": "#000000ff" },
+   { "name": "priest_walk", "from": 35, "to": 38, "direction": "forward", "color": "#000000ff" },
+   { "name": "priest_work", "from": 39, "to": 40, "direction": "forward", "color": "#000000ff" },
+   { "name": "priest_idle", "from": 41, "to": 41, "direction": "forward", "color": "#000000ff" },
+   { "name": "guard_walk", "from": 42, "to": 45, "direction": "forward", "color": "#000000ff" },
+   { "name": "guard_work", "from": 46, "to": 47, "direction": "forward", "color": "#000000ff" },
+   { "name": "guard_idle", "from": 48, "to": 48, "direction": "forward", "color": "#000000ff" },
+   { "name": "noble_walk", "from": 49, "to": 52, "direction": "forward", "color": "#000000ff" },
+   { "name": "noble_work", "from": 53, "to": 54, "direction": "forward", "color": "#000000ff" },
+   { "name": "noble_idle", "from": 55, "to": 55, "direction": "forward", "color": "#000000ff" },
+   { "name": "child_walk", "from": 56, "to": 59, "direction": "forward", "color": "#000000ff" },
+   { "name": "child_work", "from": 60, "to": 61, "direction": "forward", "color": "#000000ff" },
+   { "name": "child_idle", "from": 62, "to": 62, "direction": "forward", "color": "#000000ff" },
+   { "name": "hauler_walk", "from": 63, "to": 66, "direction": "forward", "color": "#000000ff" },
+   { "name": "hauler_work", "from": 67, "to": 68, "direction": "forward", "color": "#000000ff" },
+   { "name": "hauler_idle", "from": 69, "to": 69, "direction": "forward", "color": "#000000ff" }
+  ]
+ }
+}
