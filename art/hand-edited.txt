@@ -1,0 +1,1 @@
+# ids listed here were edited by hand in Aseprite; scripts/art/build.mjs will not overwrite them

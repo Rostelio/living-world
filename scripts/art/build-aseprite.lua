@@ -1,9 +1,9 @@
 -- Builds a .aseprite file from numbered frames (all the same size) and a tag list (name from to ms per line).
--- aseprite -b --script-param dir=<frames dir> --script-param out=<file.aseprite> --script tests/tools/build-aseprite.lua
+-- aseprite -b --script-param dir=<frames dir> --script-param out=<file.aseprite> --script scripts/art/build-aseprite.lua
 local dir, out = app.params.dir, app.params.out
 local first = Image{ fromFile = app.fs.joinPath(dir, "f0.png") }
 local spr = Sprite(first.width, first.height, ColorMode.RGB)
-spr.layers[1].name = "villager"
+spr.layers[1].name = app.params.layer or "art"
 local i = 0
 while app.fs.isFile(app.fs.joinPath(dir, "f" .. i .. ".png")) do
   if i > 0 then spr:newEmptyFrame() end

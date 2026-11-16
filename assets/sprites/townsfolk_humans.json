@@ -6,7 +6,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 1.aseprite",
@@ -15,7 +15,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 2.aseprite",
@@ -24,7 +24,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 3.aseprite",
@@ -33,7 +33,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 4.aseprite",
@@ -42,7 +42,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 5.aseprite",
@@ -51,7 +51,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 6.aseprite",
@@ -69,7 +69,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 8.aseprite",
@@ -78,7 +78,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 9.aseprite",
@@ -87,7 +87,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 10.aseprite",
@@ -96,7 +96,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 11.aseprite",
@@ -105,7 +105,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 12.aseprite",
@@ -114,7 +114,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 13.aseprite",
@@ -132,7 +132,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 15.aseprite",
@@ -141,7 +141,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 16.aseprite",
@@ -150,7 +150,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 17.aseprite",
@@ -159,7 +159,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 18.aseprite",
@@ -168,7 +168,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 19.aseprite",
@@ -177,7 +177,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 20.aseprite",
@@ -195,7 +195,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 22.aseprite",
@@ -204,7 +204,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 23.aseprite",
@@ -213,7 +213,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 24.aseprite",
@@ -222,7 +222,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 25.aseprite",
@@ -231,7 +231,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 26.aseprite",
@@ -240,7 +240,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 27.aseprite",
@@ -258,7 +258,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 29.aseprite",
@@ -267,7 +267,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 30.aseprite",
@@ -276,7 +276,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 31.aseprite",
@@ -285,7 +285,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 32.aseprite",
@@ -294,7 +294,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 33.aseprite",
@@ -303,7 +303,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 34.aseprite",
@@ -321,7 +321,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 36.aseprite",
@@ -330,7 +330,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 37.aseprite",
@@ -339,7 +339,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 38.aseprite",
@@ -348,7 +348,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 39.aseprite",
@@ -357,7 +357,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 40.aseprite",
@@ -366,7 +366,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 41.aseprite",
@@ -384,7 +384,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 43.aseprite",
@@ -393,7 +393,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 44.aseprite",
@@ -402,7 +402,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 45.aseprite",
@@ -411,7 +411,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 46.aseprite",
@@ -420,7 +420,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 47.aseprite",
@@ -429,7 +429,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 48.aseprite",
@@ -447,7 +447,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 50.aseprite",
@@ -456,7 +456,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 51.aseprite",
@@ -465,7 +465,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 52.aseprite",
@@ -474,7 +474,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 53.aseprite",
@@ -483,7 +483,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 54.aseprite",
@@ -492,7 +492,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 55.aseprite",
@@ -510,7 +510,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 57.aseprite",
@@ -519,7 +519,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 58.aseprite",
@@ -528,7 +528,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 59.aseprite",
@@ -537,7 +537,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 60.aseprite",
@@ -546,7 +546,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 61.aseprite",
@@ -555,7 +555,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 62.aseprite",
@@ -573,7 +573,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 64.aseprite",
@@ -582,7 +582,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 65.aseprite",
@@ -591,7 +591,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 66.aseprite",
@@ -600,7 +600,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 125
+    "duration": 140
    },
    {
     "filename": "townsfolk_humans 67.aseprite",
@@ -609,7 +609,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 68.aseprite",
@@ -618,7 +618,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 200
+    "duration": 220
    },
    {
     "filename": "townsfolk_humans 69.aseprite",

@@ -24,6 +24,7 @@
       "src/**/*",
       "art/**/*",
       "!art/**/*.{aseprite,ase}",
+      "!art/previews/**/*",
       "assets/sprites/**/*",
       "audio/**/*",
       "desktop/main.cjs",
