@@ -7,6 +7,19 @@ import { makeCanvas } from './sprites.js';
 import { ramp } from './tiles16.js';
 import { hash2 } from '../core/rng.js';
 import { selectiveOutline, slot } from './pixelkit.js';
+import { fromSheet, tintKey } from '../sprites.js';
+
+// Aseprite art (assets/sprites) for a code-drawn canvas when there is a sheet, else the canvas
+const ARTC = new Map();
+function art(id, tag, k, legacy, tint) {
+  const key = `${id}|${tag}|${k}|${tint || ''}`;
+  let c = ARTC.get(key);
+  if (c) return c;
+  c = fromSheet(id, tag, k, legacy);
+  if (tint && c !== legacy) c = tintKey(c, tint);
+  ARTC.set(key, c);
+  return c;
+}
 
 const cache = new Map();
 const css = (c) => (typeof c === 'string' ? c : `rgb(${c[0] | 0},${c[1] | 0},${c[2] | 0})`);
@@ -159,7 +172,7 @@ export const PROPS_BY_RACE = {
 
 // ---------------- Race homes ----------------
 // Elven treehouse: a great tree with a round house in the canopy (16×24, overhangs the tile above)
-export function treehouse16(tier) {
+function treehouseLegacy(tier) {
   const key = `tree:${tier}`;
   if (cache.has(key)) return cache.get(key);
   const c = sprite(key, 16, 24, (P) => {
@@ -177,7 +190,7 @@ export function treehouse16(tier) {
   return c;
 }
 // Dwarven hill home: a stone door set into a grassy (or rocky) slope
-export function hillhome16(tier, rocky) {
+function hillhomeLegacy(tier, rocky) {
   const key = `hill:${tier}:${rocky}`;
   if (cache.has(key)) return cache.get(key);
   const c = sprite(key, 16, 16, (P) => {
@@ -193,7 +206,7 @@ export function hillhome16(tier, rocky) {
   return c;
 }
 // Orc hide tent with bone poles
-export function tent16(tier, color) {
+function tentLegacy(tier, color) {
   const key = `tent:${tier}:${color}`;
   if (cache.has(key)) return cache.get(key);
   const c = sprite(key, 16, 16, (P) => {
@@ -208,7 +221,7 @@ export function tent16(tier, color) {
   return c;
 }
 // Lizardfolk hut on stilts (for water and swamp tiles)
-export function stilt16(tier) {
+function stiltLegacy(tier) {
   const key = `stilt:${tier}`;
   if (cache.has(key)) return cache.get(key);
   const c = sprite(key, 16, 16, (P) => {
@@ -240,6 +253,12 @@ export function ropeBridge(ctx, x0, y0, x1, y1) {
     ctx.fillStyle = i % 2 ? '#a8885a' : '#7a5a3a'; ctx.fillRect(x, y, 0.5, 0.5);
   }
 }
+
+// race homes: Aseprite sheets home_<kind> (tags tier0..tier3) and townhouse_<race> (storeys2, storeys3)
+export const treehouse16 = (tier) => art('home_treehouse', 'tier' + tier, 0, treehouseLegacy(tier));
+export const hillhome16 = (tier, rocky) => art('home_hillhome', 'tier' + tier, rocky ? 1 : 0, hillhomeLegacy(tier, rocky));
+export const tent16 = (tier, color) => art('home_tent', 'tier' + tier, 0, tentLegacy(tier, color), color);
+export const stilt16 = (tier) => art('home_stilt', 'tier' + tier, 0, stiltLegacy(tier));
 
 // ---------------- Crop plots ----------------
 // Fence sides for a field tile: mask bits say which sides border something that isn't a field
@@ -280,7 +299,7 @@ const TALL = {
   elves: { wall: '#e8e0c8', roof: '#4a7a8a', beam: '#8a7a5a' },
   lizardfolk: { wall: '#a8a070', roof: '#6a8a4a', beam: '#5a4a2a' },
 };
-export function townhouse16(race, storeys, v = 0) {
+function townhouseLegacy(race, storeys, v = 0) {
   const key = `th:${race}:${storeys}:${v}`;
   if (cache.has(key)) return cache.get(key);
   const T = TALL[race] || TALL.humans;
@@ -304,6 +323,8 @@ export function townhouse16(race, storeys, v = 0) {
   outline(c);
   return c;
 }
+
+export const townhouse16 = (race, storeys, v = 0) => art('townhouse_' + race, 'storeys' + storeys, v, townhouseLegacy(race, storeys, v));
 
 // Great works stand in town as 2×2 landmarks (32×32 px drawn into two tiles)
 export function work16(id) {

@@ -118,14 +118,14 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 
 | id | what it is | where in code (file:line) | in-game size, px | states / animations | frames (estimate) | priority | status |
 |---|---|---|---|---|---|---|---|
-| `house_{humans\|elves\|dwarves\|orcs\|lizardfolk\|halflings}` | ordinary homes; tier grows with the town | src/render/buildings16.js:69 `house16`; renderer.js:1172 `drawSettlement` | 16×16 | tier (4) × roof variant (3) | 12 | 1 | code-drawn |
-| `townhouse` | 2–3 storey town houses in big cities | src/render/town16.js:283 `townhouse16` | 16×24 ⚠ | 2 storeys, 3 storeys | 2 | 1 | code-drawn |
-| `home_{treehouse\|hillhome\|tent\|stilt}` | race-style homes (elves, halflings, orcs, lizardfolk) | src/render/town16.js:162 `treehouse16` (16×24), :180 `hillhome16`, :196 `tent16`, :211 `stilt16` | 16×16 (treehouse 16×24 ⚠) | tier (2–3) | 3 | 1 | code-drawn |
+| `house_{humans\|elves\|dwarves\|orcs\|lizardfolk\|halflings}` | ordinary homes; tier grows with the town | src/render/buildings16.js:69 `house16`; renderer.js:1172 `drawSettlement` | 16×16 | tier (4) × roof variant (3) | 12 | 1 | Aseprite (scripts/art) |
+| `townhouse_{humans\|elves\|dwarves\|orcs\|lizardfolk\|halflings}` | 2–3 storey town houses in big cities (tags storeys2, storeys3; 2 variants each) | src/render/town16.js:283 `townhouse16` | 16×24 ⚠ | 2 storeys, 3 storeys | 2 | 1 | Aseprite (scripts/art) |
+| `home_{treehouse\|hillhome\|tent\|stilt}` | race-style homes (elves, halflings, orcs, lizardfolk) | src/render/town16.js:162 `treehouse16` (16×24), :180 `hillhome16`, :196 `tent16`, :211 `stilt16` | 16×16 (treehouse 16×24 ⚠) | tier (2–3) | 3 | 1 | Aseprite (scripts/art) |
 | `boardwalk`, `rope_bridge` | lizardfolk boardwalk, elven rope bridge | src/render/town16.js:227 `boardwalk16`, :235 `ropeBridge` | 16×16 | 16 masks / horizontal-vertical | 16, 2 | 2 | code-drawn |
-| `building_{temple\|market\|library\|granary\|warehouse\|barracks\|brewery\|lumber_camp\|mine\|quarry\|port\|walls_tower\|bank\|hospital\|observatory\|aqueduct\|textile_mill\|foundry\|power_plant\|newspaper\|railway_station\|factory}` | special buildings, one each (`power_plant` and `newspaper` have no own drawing yet and use the default look) | src/render/buildings16.js:135 `special16`; src/render/sprites.js:202 `drawSpecial` (older 8 px) | 16×16 | static (1) | 1 | 2 | code-drawn |
-| `building_{town_hall\|castle\|star_fort\|university}` | big special buildings | src/render/buildings16.js:135 `special16` (`BIG16`) | 32×32 ⚠ (2×2 tiles) | static (1) | 1 | 2 | code-drawn |
-| `campfire` | campfire in camps and villages | src/render/buildings16.js:135 `special16` + src/render/fx.js:971 `flameSprite` | 16×16 | burn (3) | 3 | 2 | code-drawn |
-| `windmill` | windmill | src/render/town16.js:373 `windmill16` | 16×24 ⚠ | sails turning (4) | 4 | 2 | code-drawn |
+| `building_{temple\|market\|library\|granary\|warehouse\|barracks\|brewery\|lumber_camp\|mine\|quarry\|port\|walls_tower\|bank\|hospital\|observatory\|aqueduct\|textile_mill\|foundry\|power_plant\|newspaper\|railway_station\|factory}` | special buildings, one each (`power_plant` and `newspaper` have no own drawing yet and use the default look) | src/render/buildings16.js:135 `special16`; src/render/sprites.js:202 `drawSpecial` (older 8 px) | 16×16 | static (1) | 1 | 2 | Aseprite (scripts/art) |
+| `building_{town_hall\|castle\|star_fort\|university}` | big special buildings | src/render/buildings16.js:135 `special16` (`BIG16`) | 32×32 ⚠ (2×2 tiles) | static (1) | 1 | 2 | Aseprite (scripts/art) |
+| `campfire` | campfire in camps and villages | src/render/buildings16.js:135 `special16` + src/render/fx.js:971 `flameSprite` | 16×16 | burn (3) | 3 | 2 | Aseprite (scripts/art) |
+| `windmill` | windmill | src/render/town16.js:373 `windmill16` | 16×24 ⚠ | sails turning (4) | 4 | 2 | Aseprite (scripts/art) |
 | `great_work_{cathedral\|university\|palace\|canal\|harbour_works\|boulevards\|world_fair}` | great works | src/render/town16.js:309 `work16` | 32×32 ⚠ | static (1) | 1 | 3 | code-drawn |
 | `shrine` | holy-site marker | src/render/renderer.js (holy-site shrines) | ~8×10 | static (1) | 1 | 3 | code-drawn |
 | `camp_tent` | army camp and siege camp tents | src/render/town16.js:360 `campTent8`; warfx.js:92 `siegeCamp`, :190 `armyCamp` | 8×8 | static (1) | 1 | 2 | code-drawn |
@@ -236,6 +236,9 @@ Sprites marked **exact** replace a ready-made picture of that size, so the canva
 | caravan | 32×32 | move | |
 | windmill | 32×48 exact | turn | |
 | house_* | 32×32 exact | tier0, tier1, tier2, tier3 | |
+| townhouse_* | 32×48 exact | storeys2, storeys3 | |
+| home_treehouse | 32×48 exact | tier0, tier1, tier2, tier3 | |
+| home_hillhome, home_tent, home_stilt | 32×32 exact | tier0, tier1, tier2, tier3 | |
 | building_town_hall, building_castle, building_star_fort, building_university | 64×64 exact | | {race} |
 | building_* | 32×32 exact | | {race} |
 | campfire | 32×32 exact | | |

@@ -257,6 +257,28 @@ export function fromSheet(id, tag, k, legacy) {
   const fi = tagFrame(id, tag, k);
   return (fi >= 0 && frameCanvas(id, fi, [legacy.width * ART_SCALE, legacy.height * ART_SCALE])) || legacy;
 }
+// Generated art draws banners, flags and bands in magenta key colours (scripts/art/kit.mjs KEY):
+// darkest to lightest. tintKey swaps them for a ramp of `color` (a realm's colour) and returns a
+// copy, or the canvas itself when it has no key pixels.
+const KEYS = [[0x5a, 0x00, 0x5a], [0xa0, 0x00, 0xa0], [0xe6, 0x00, 0xe6], [0xff, 0x70, 0xff]];
+const toRGB = (c) => (Array.isArray(c) ? c : [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)]);
+export function tintKey(src, color) {
+  const base = toRGB(color);
+  const mix = (t, to) => base.map((v, i) => Math.round(v + (to[i] - v) * t));
+  const to = [mix(0.5, [40, 30, 70]), mix(0.26, [50, 40, 90]), base, mix(0.25, [255, 240, 170])];
+  const d = src.getContext('2d').getImageData(0, 0, src.width, src.height), p = d.data;
+  let hit = false;
+  for (let i = 0; i < p.length; i += 4) {
+    if (!p[i + 3] || p[i + 1] > 0x70) continue;
+    const k = KEYS.findIndex((q) => q[0] === p[i] && q[1] === p[i + 1] && q[2] === p[i + 2]);
+    if (k >= 0) { [p[i], p[i + 1], p[i + 2]] = to[k]; hit = true; }
+  }
+  if (!hit) return src;
+  const c = document.createElement('canvas');
+  c.width = src.width; c.height = src.height;
+  c.getContext('2d').putImageData(d, 0, 0);
+  return c;
+}
 // Is any sprite whose id starts with one of these prefixes loaded?
 export const anySheet = (...prefixes) => [...SPRITES.sheets.keys()].some((id) => prefixes.some((p) => id.startsWith(p)));
 

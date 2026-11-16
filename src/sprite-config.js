@@ -32,7 +32,7 @@ export const SPRITE_IDS = [
   ...each('nature', ['bush', 'rock', 'mound', 'peak', 'peak_snow', 'tuft', 'pebbles', 'mushroom', 'lily', 'reeds', 'cactus', 'flowers']),
   'road_dirt', 'road_stone', 'road_paved', 'bridge', 'yard', 'plaza_plain', 'plaza_well', 'plaza_fountain', 'wall', 'wall_tower', 'wall_gate', 'fence', 'field',
   ...each('prop', ['barrel', 'crate', 'woodpile', 'flowers', 'lamp', 'bush', 'sack', 'anvil', 'rack', 'scarecrow']),
-  ...each('house', RACES), 'townhouse', ...each('home', ['treehouse', 'hillhome', 'tent', 'stilt']), 'boardwalk', 'rope_bridge',
+  ...each('house', RACES), ...each('townhouse', RACES), ...each('home', ['treehouse', 'hillhome', 'tent', 'stilt']), 'boardwalk', 'rope_bridge',
   ...each('building', ['town_hall', 'temple', 'market', 'library', 'granary', 'warehouse', 'barracks', 'brewery', 'lumber_camp', 'mine', 'quarry', 'port',
     'walls_tower', 'bank', 'hospital', 'observatory', 'aqueduct', 'textile_mill', 'foundry', 'power_plant', 'newspaper',
     'castle', 'star_fort', 'university', 'railway_station', 'factory']),
