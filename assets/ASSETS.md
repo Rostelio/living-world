@@ -140,7 +140,7 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 | `scene_sky` | sky behind side-view scenes | src/render/scene.js:24 `sky` | 480×270 | time of day (4: dawn, day, dusk, night) | 4 | 3 | code-drawn |
 | `scene_hills_{far\|mid\|near}` | parallax hills | src/render/scene.js:245 `paint` | 480×~120, repeating | static (1) | 1 | 3 | code-drawn |
 | `scene_{house\|tent\|special\|windmill\|tree}` | side-view buildings and trees (per race for houses) | src/render/scene.js:50 `house`, :69 `tent`, :76 `special`, :92 `windmill`, :100 `tree` | 20–60 tall | windmill sails (4); others static | 1–4 | 3 | Aseprite (scripts/art) |
-| `title_backdrop` | title-screen background | src/ui/titlebg.js:7 `showTitleBackdrop` | full screen (redraws the live map) | static (1) | 1 | 3 | code-drawn |
+| `title_backdrop` | title-screen background: a painted valley in four parallax layers | src/ui/titlebg.js `paintValley` | 480×270 per layer | sky, far, mid, near | 4 | 3 | Aseprite (scripts/art) |
 
 ---
 
@@ -242,6 +242,7 @@ Sprites marked **exact** replace a ready-made picture of that size, so the canva
 | caravan | 32×32 | move | |
 | windmill | 32×48 exact | turn | |
 | great_work_* | 64×64 exact | | |
+| title_backdrop | 480×270 | sky, far, mid, near | |
 | tile_deep, tile_ocean, tile_shallow, tile_lake | 32×32 exact | flow | |
 | shore_foam | 32×32 exact | flow | |
 | ribbon | 10×12 | normal, capital | |
