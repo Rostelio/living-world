@@ -1,6 +1,7 @@
 // Phase 11 — pixel-art interface skin. Frames, buttons and the cursor are drawn as tiny
 // pixel images at startup and used as CSS border-images (scaled up with crisp pixels).
 import { makeCanvas } from '../render/sprites.js';
+import { SPRITES, tagFrame, frameCanvas } from '../sprites.js';
 
 // A 12×12 nine-slice frame: rows of palette letters, 4 px corners.
 function frame(rows, pal) {
@@ -113,4 +114,30 @@ export function applyPixelSkin() {
   set('--px-btn-wood', frame(RAISED, { k: '#140a04', l: '#c08a52', f: '#8a5a32', d: '#5a3a1e', s: '#2e1c0e' }));
   root.setProperty('--px-cursor', `url("${cursorUrl()}") 0 0, auto`);
   document.body.classList.add('pixel-ui');
+}
+
+// Aseprite interface art (assets/sprites: ui_frames, cursor, ui_wood, ui_wood_dark, ui_paper), applied
+// after the sprites have loaded. Frames are 24×24 with 8 px corners, so the slice width changes too.
+const FRAME_VARS = {
+  panel: '--px-panel', modal: '--px-modal', parch: '--px-parch', btn: '--px-btn', btn_hover: '--px-btn-hover', btn_down: '--px-btn-down',
+  btn_gold: '--px-btn-gold', inset: '--px-inset', god: '--px-god', tip: '--px-tip', btn_wood: '--px-btn-wood', carved: '--frame',
+};
+export function applySpriteSkin() {
+  const root = document.documentElement.style;
+  const url = (c) => `url("${c.toDataURL()}")`;
+  let n = 0;
+  if (SPRITES.sheets.has('ui_frames')) {
+    for (const [tag, v] of Object.entries(FRAME_VARS)) {
+      const c = frameCanvas('ui_frames', tagFrame('ui_frames', tag, 0), [24, 24]);
+      if (c) { root.setProperty(v, url(c)); n++; }
+    }
+    if (n) root.setProperty('--px-slice', '8');
+  }
+  const cur = SPRITES.sheets.has('cursor') && frameCanvas('cursor', 0, [32, 32]);
+  if (cur) root.setProperty('--px-cursor', `${url(cur)} 2 2, auto`);
+  for (const [id, v, size] of [['ui_wood', '--wood-tex', [64, 32]], ['ui_wood_dark', '--wood-dark', [64, 32]], ['ui_paper', '--paper-tex', [64, 64]]]) {
+    const c = SPRITES.sheets.has(id) && frameCanvas(id, 0, size);
+    if (c) root.setProperty(v, url(c));
+  }
+  return n;
 }

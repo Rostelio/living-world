@@ -42,7 +42,7 @@ export const SPRITE_IDS = [
   'scene_house', 'scene_tent', 'scene_special', 'scene_windmill', 'scene_tree', 'title_backdrop',
   // UI and icons
   ...each('icon', ['food', 'wood', 'stone', 'iron', 'gold', 'knowledge', 'pop', 'stability', 'defense', 'housing']),
-  'flag_parts', 'ribbon', 'ui_frame_wood', 'ui_frame_paper', 'ui_frame_pixel', 'cursor', 'compass', 'army_badge', 'siege_ring', 'god_cursor',
+  'ui_frames', 'ui_wood', 'ui_wood_dark', 'ui_paper', 'flag_parts', 'ribbon', 'ui_frame_wood', 'ui_frame_paper', 'ui_frame_pixel', 'cursor', 'compass', 'army_badge', 'siege_ring', 'god_cursor',
   ...each('vignette', ['alliance', 'city', 'crown', 'death', 'era', 'faith', 'hero', 'plague', 'revolt', 'ship', 'war']),
   // effects
   'fx_chimney_smoke', 'fx_torch', 'fx_washing_line', 'fx_scaffolding', 'fx_flame',

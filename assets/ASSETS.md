@@ -148,11 +148,11 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 
 | id | what it is | where in code (file:line) | in-game size, px | states / animations | frames (estimate) | priority | status |
 |---|---|---|---|---|---|---|---|
-| `icon_{food\|wood\|stone\|iron\|gold\|knowledge\|pop\|stability\|defense\|housing}` | resource icons in the top bar and panels | src/render/sprites.js:25 `ICONS`, :38 `iconCanvas` | 8×8 | static (1) | 1 | 1 | code-drawn |
+| `icon_{food\|wood\|stone\|iron\|gold\|knowledge\|pop\|stability\|defense\|housing}` | resource icons in the top bar and panels | src/render/sprites.js:25 `ICONS`, :38 `iconCanvas` | 8×8 | static (1) | 1 | 1 | Aseprite (scripts/art) |
 | `flag_parts` | realm flags (field pattern + charge + colours per realm) | src/render/sprites.js:69 `drawFlag`, :90 `flagUrl` | 12×8 | patterns as frames, colours applied in code | ~12 | 1 | code-drawn |
 | `ribbon` | name tags over towns (9-slice) | src/render/renderer.js:1511 `drawRibbon` | 9-slice, 3×3 parts | normal, capital | 2 | 1 | code-drawn |
-| `ui_frame_{wood\|paper\|pixel}` | panel and dialog frames (9-slice) | src/ui/skin.js:16 `wood`, :31 `paper`, :42 `frame`; src/ui/pixelskin.js:6 `frame` | 9-slice, ~24×24 | static (1) | 1 | 1 | code-drawn |
-| `cursor` | mouse cursor | src/ui/pixelskin.js:89 `cursorUrl` | 16×16 (shown ×2) | normal (1) | 1 | 1 | code-drawn |
+| `ui_frame_{wood\|paper\|pixel}` | panel and dialog frames (9-slice) | src/ui/skin.js:16 `wood`, :31 `paper`, :42 `frame`; src/ui/pixelskin.js:6 `frame` | 9-slice, ~24×24 | static (1) | 1 | 1 | Aseprite (scripts/art) |
+| `cursor` | mouse cursor | src/ui/pixelskin.js:89 `cursorUrl` | 16×16 (shown ×2) | normal (1) | 1 | 1 | Aseprite (scripts/art) |
 | `compass` | compass rose on the atlas | src/render/atlas.js:169 `drawCompass` | ~32×32 | static (1) | 1 | 2 | code-drawn |
 | `army_badge` | banner over armies (strength, colour) | src/render/renderer.js:1076 `drawArmyBadges` | ~10×12 | static (1) | 1 | 2 | code-drawn |
 | `siege_ring` | ring around a besieged town | src/render/renderer.js:948 `drawSiegeRing` | 16×16 | turning (4) | 4 | 3 | code-drawn |
@@ -267,6 +267,10 @@ Sprites marked **exact** replace a ready-made picture of that size, so the canva
 | field | 32×32 exact | stage0, stage1, stage2, stage3, stage4, stage5 | |
 | prop_* | 16×16 exact | | |
 | icon_* | 16×16 exact | | |
+| ui_frames | 24×24 exact | panel, modal, parch, btn, btn_hover, btn_down, btn_gold, inset, god, tip, btn_wood, carved | |
+| cursor | 32×32 exact | | |
+| ui_wood, ui_wood_dark | 64×32 exact | | |
+| ui_paper | 64×64 exact | | |
 <!-- sprite-specs: end -->
 
 Sprites not in this table can be drawn already, but the game does not use them yet (they still need hooking up).

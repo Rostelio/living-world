@@ -10,7 +10,7 @@ import { encyclopedia } from './ui/encyclopedia.js';
 import { sendExplorer, isExplored } from './sim/fog.js';
 import { initQuick, openContextMenu, closeContextMenu, quickKey, searchOpen, closeSearch } from './ui/quick.js';
 import { sendColonists } from './sim/colonize.js';
-import { applyPixelSkin } from './ui/pixelskin.js';
+import { applyPixelSkin, applySpriteSkin } from './ui/pixelskin.js';
 import { G, S, player, on } from './sim/state.js';
 import { newGame } from './sim/setup.js';
 import { simDay } from './sim/sim.js';
@@ -46,6 +46,7 @@ await Promise.race([
   preloadSprites().then((n) => { if (n) console.info(`Sprites: ${n} Aseprite sprites loaded`); }),
   new Promise((ok) => setTimeout(ok, 5000)), // never hold the game back for long
 ]);
+applySpriteSkin(); // Aseprite menu frames, cursor and textures replace the code-drawn ones
 
 const canvas = document.getElementById('map');
 const minimap = document.getElementById('minimap');
