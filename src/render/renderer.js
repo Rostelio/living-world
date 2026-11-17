@@ -1224,7 +1224,7 @@ export class Renderer {
       if (SETTINGS.shadows !== false && z >= 2) for (const it of L.items) {
         let img, X = it.x * TILE, Y = it.y * TILE, w = TILE, h = TILE;
         if (it.kind === 'house') { const H = this.homeSprite(L, it); img = H.img; X += H.dx || 0; Y += H.dy || 0; w = H.w || TILE; h = H.h || TILE; }
-        else if (it.kind === 'work') { img = work16(it.work); Y -= TILE; w = h = TILE * 2; }
+        else if (it.kind === 'work') { img = work16(it.work, civ.color); Y -= TILE; w = h = TILE * 2; }
         else if (it.kind === 'windmill') { img = frameCanvas('windmill', 0, [16 * ART_SCALE, 24 * ART_SCALE]) || windmill16(0); Y -= TILE / 2; h = TILE * 1.5; }
         else { img = special16(it.kind, L.race, civ.color); if (it.big) { Y -= TILE; w = h = TILE * 2; } }
         castShadow(ctx, img, X, Y + h, w, h);
@@ -1248,7 +1248,7 @@ export class Renderer {
         const sn = (img) => (snowy && L.race !== 'elves' ? snowCap(img) : img); // Phase 20: snow on the roofs in winter
         if (it.kind === 'house') { const H = this.homeSprite(L, it); ctx.drawImage(sn(H.img), it.x * TILE + (H.dx || 0), it.y * TILE + (H.dy || 0), H.w || TILE, H.h || TILE); }
         else if (it.kind === 'windmill') { const wf = frameAt('windmill', 'turn', this.time + it.x * 0.37); ctx.drawImage(sn((wf >= 0 && frameCanvas('windmill', wf, [16 * ART_SCALE, 24 * ART_SCALE])) || windmill16(Math.floor(this.time * 3 + it.x) % 4)), it.x * TILE, it.y * TILE - TILE / 2, TILE, TILE * 1.5); }
-        else if (it.kind === 'work') ctx.drawImage(sn(work16(it.work)), it.x * TILE, (it.y - 1) * TILE, TILE * 2, TILE * 2);
+        else if (it.kind === 'work') ctx.drawImage(sn(work16(it.work, civ.color)), it.x * TILE, (it.y - 1) * TILE, TILE * 2, TILE * 2);
         else if (it.big) ctx.drawImage(sn(special16(it.kind, L.race, civ.color)), it.x * TILE, (it.y - 1) * TILE, TILE * 2, TILE * 2);
         else ctx.drawImage(sn(special16(it.kind, L.race, civ.color)), it.x * TILE, it.y * TILE, TILE, TILE);
       }
@@ -1263,7 +1263,7 @@ export class Renderer {
       if (z >= 2.2) this.drawFieldDetail(ctx, L, z);
       for (const it of L.items) {
         let spr;
-        if (it.kind === 'work') { ctx.drawImage(work16(it.work), it.x * TILE, (it.y - 1) * TILE, TILE * 2, TILE * 2); continue; }
+        if (it.kind === 'work') { ctx.drawImage(work16(it.work, civ.color), it.x * TILE, (it.y - 1) * TILE, TILE * 2, TILE * 2); continue; }
         if (it.kind === 'house') spr = houseSprite(L.race, it.tier);
         else spr = specialSprite(it.kind, L.race, civ.color);
         const img = z >= 2 ? hiRes(spr) : spr;

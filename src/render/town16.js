@@ -339,7 +339,7 @@ function townhouseLegacy(race, storeys, v = 0) {
 export const townhouse16 = (race, storeys, v = 0) => art('townhouse_' + race, 'storeys' + storeys, v, townhouseLegacy(race, storeys, v));
 
 // Great works stand in town as 2×2 landmarks (32×32 px drawn into two tiles)
-export function work16(id) {
+function workLegacy(id) {
   const key = `work:${id}`;
   if (cache.has(key)) return cache.get(key);
   const stone = ramp('#c8c0b0'), dark = ramp('#7a7468'), gold = '#e8c050', glass = '#8ac8e8';
@@ -388,6 +388,8 @@ export function work16(id) {
   outline(c);
   return c;
 }
+
+export const work16 = (id, color) => art('great_work_' + id, null, 0, workLegacy(id), color);
 
 // A small field tent for army camps (8×8 px, drawn into half a tile)
 export function campTent8(color) {

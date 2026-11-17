@@ -30,3 +30,7 @@ import { UI } from './ui.mjs';
 for (const [id, fn] of Object.entries(UI)) GENERATORS[id] = () => ({ layer: id, ...fn() });
 import { ARMY } from './army.mjs';
 for (const [id, fn] of Object.entries(ARMY)) GENERATORS[id] = fn;
+import { WORKS, workSheet } from './works.mjs';
+for (const k of Object.keys(WORKS)) GENERATORS['great_work_' + k] = () => workSheet(k);
+import { FX } from './fx.mjs';
+for (const [id, fn] of Object.entries(FX)) GENERATORS[id] = () => ({ layer: id, ...fn() });

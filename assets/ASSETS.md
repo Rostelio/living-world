@@ -126,7 +126,7 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 | `building_{town_hall\|castle\|star_fort\|university}` | big special buildings | src/render/buildings16.js:135 `special16` (`BIG16`) | 32×32 ⚠ (2×2 tiles) | static (1) | 1 | 2 | Aseprite (scripts/art) |
 | `campfire` | campfire in camps and villages | src/render/buildings16.js:135 `special16` + src/render/fx.js:971 `flameSprite` | 16×16 | burn (3) | 3 | 2 | Aseprite (scripts/art) |
 | `windmill` | windmill | src/render/town16.js:373 `windmill16` | 16×24 ⚠ | sails turning (4) | 4 | 2 | Aseprite (scripts/art) |
-| `great_work_{cathedral\|university\|palace\|canal\|harbour_works\|boulevards\|world_fair}` | great works | src/render/town16.js:309 `work16` | 32×32 ⚠ | static (1) | 1 | 3 | code-drawn |
+| `great_work_{cathedral\|university\|palace\|canal\|harbour_works\|boulevards\|world_fair}` | great works | src/render/town16.js:309 `work16` | 32×32 (art 64×64) ⚠ | static (1) | 1 | 3 | Aseprite (scripts/art) |
 | `shrine` | holy-site marker | src/render/renderer.js (holy-site shrines) | ~8×10 | static (1) | 1 | 3 | code-drawn |
 | `camp_tent` | army camp and siege camp tents | src/render/town16.js:360 `campTent8`; warfx.js:92 `siegeCamp`, :190 `armyCamp` | 8×8 | static (1) | 1 | 2 | code-drawn |
 | `house_old_{race}` | older 8 px house set (still used at far zoom) | src/render/sprites.js:109 `drawHouse`, :315 `houseSprite` | 8×8 | tier (4) | 4 | 2 | code-drawn |
@@ -168,7 +168,10 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 | `fx_chimney_smoke` | smoke from houses | src/render/fx.js:293 `settlementExtras`, :950 `puffSprite` | 4×4 | rise / fade (4) | 4 | 1 | code-drawn |
 | `fx_torch` | torches and window lights at night | src/render/fx.js:293 `settlementExtras` | 3×5 | flicker (3) | 3 | 1 | code-drawn |
 | `fx_washing_line`, `fx_scaffolding` | washing lines; scaffolding on buildings under construction | src/render/fx.js:293 `settlementExtras` | 16×8, 16×16 | flap (2), static (1) | 2, 1 | 2 | code-drawn |
-| `fx_flame` | fire on burning towns, campfires | src/render/fx.js:971 `flameSprite` | 6×10 | burn (3) | 3 | 2 | code-drawn |
+| `fx_flame` | fire on burning towns, campfires | src/render/fx.js `flameSprite` | 6×10 (art 12×20) | burn (3) | 3 | 2 | Aseprite (scripts/art) |
+| `fx_puff` | smoke puffs (grey, tinted by the smoke colour); one size per frame (diameters 8, 14, 20, 28, 40, 56) | src/render/fx.js `puffSprite` | 64×64 frames | static (6 sizes) | 6 | 2 | Aseprite (scripts/art) |
+| `fx_meteor`, `fx_burst` | falling meteor; impact flash for meteors and lightning | src/render/fx.js `drawEffects` (anims) | 32×32 | fall (3), burst (5) | 3, 5 | 2 | Aseprite (scripts/art) |
+| `fx_cloud` | drifting clouds and their shadows | src/render/fx.js `drawSky`, `cloudsFromSheet` | 64×32 | 8 shapes | 8 | 2 | Aseprite (scripts/art) |
 | `fx_{smoke\|dust\|fire\|spark\|debris\|mote\|flake\|ember}` | particles | src/render/fx.js:465 `drawEffects` | 1×1 – 4×4 | life (3–4) | 4 | 2 | code-drawn |
 | `fx_ring` | expanding ring (god powers, events) | src/render/fx.js:465 `drawEffects` (`k: 'ring'`) | 16–48 | grow (5) | 5 | 3 | code-drawn |
 | `fx_meteor`, `fx_bolt` | meteor and lightning strikes | src/render/fx.js:80, :465 | 16×48 | fall (4), strike (3) | 4, 3 | 3 | code-drawn |
@@ -238,6 +241,12 @@ Sprites marked **exact** replace a ready-made picture of that size, so the canva
 | lair | 32×32 | | |
 | caravan | 32×32 | move | |
 | windmill | 32×48 exact | turn | |
+| great_work_* | 64×64 exact | | |
+| fx_flame | 12×20 exact | burn | |
+| fx_puff | 64×64 | | |
+| fx_meteor | 32×32 | fall | |
+| fx_burst | 32×32 | burst | |
+| fx_cloud | 64×32 | | |
 | house_* | 32×32 exact | tier0, tier1, tier2, tier3 | |
 | townhouse_* | 32×48 exact | storeys2, storeys3 | |
 | home_treehouse | 32×48 exact | tier0, tier1, tier2, tier3 | |

@@ -37,6 +37,7 @@ export const SPRITE_IDS = [
     'walls_tower', 'bank', 'hospital', 'observatory', 'aqueduct', 'textile_mill', 'foundry', 'power_plant', 'newspaper',
     'castle', 'star_fort', 'university', 'railway_station', 'factory']),
   'campfire', 'windmill', ...each('great_work', ['cathedral', 'university', 'palace', 'canal', 'harbour_works', 'boulevards', 'world_fair']),
+  'fx_puff', 'fx_burst',
   'shrine', 'camp_tent', ...each('house_old', RACES),
   'atlas_glyph_mountain', 'atlas_glyph_tree', 'atlas_glyph_ship', 'atlas_paper', 'scene_sky', 'scene_hills_far', 'scene_hills_mid', 'scene_hills_near',
   'scene_house', 'scene_tent', 'scene_special', 'scene_windmill', 'scene_tree', 'title_backdrop',

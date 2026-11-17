@@ -8,6 +8,7 @@ import { hash2 } from '../core/rng.js';
 import { clamp } from '../core/util.js';
 import { TILE, SEASON_PX, bakeSeasonLayers, waterKinds } from './terrain.js';
 import { makeCanvas } from './sprites.js';
+import { SPRITES, fromSheet, frameCanvas, tagFrame } from '../sprites.js';
 import { SETTINGS } from '../ui/settings.js';
 
 const TAU = Math.PI * 2;
@@ -97,6 +98,7 @@ export class Atmosphere {
         while (py < y) { pts.push([px, py]); py += 10 + Math.random() * 14; px += (Math.random() - 0.5) * 16; }
         pts.push([x, y]);
         this.anims.push({ k: 'bolt', pts, t: 0, dur: 0.45, x, y });
+        this.anims.push({ k: 'burst', x, y, t: 0, dur: 0.3, s: 10 });
         if (visible) this.flash = Math.max(this.flash, 0.5);
         for (let i = 0; i < 14; i++) this.add('spark', x, y, (Math.random() - 0.5) * 50, -20 - Math.random() * 40, 0.6, 1.2);
         break;
@@ -169,6 +171,7 @@ export class Atmosphere {
         const vis = this.r.worldVisible(a.x, a.y, 200);
         if (vis) { this.shake(1.4, 8); this.flash = Math.max(this.flash, 0.8); }
         this.anims.push({ k: 'ring', x: a.x, y: a.y, t: 0, dur: 1.0, R: a.R * 2.2, col: '255,220,160' });
+        this.anims.push({ k: 'burst', x: a.x, y: a.y, t: 0, dur: 0.4, s: 20 });
         for (let k = 0; k < 60; k++) { const an = Math.random() * TAU, sp = 30 + Math.random() * 90; this.add('debris', a.x, a.y, Math.cos(an) * sp, Math.sin(an) * sp - 40, 1 + Math.random(), 1.4); }
         for (let k = 0; k < 40; k++) this.spawnAround('fire', a.x, a.y, a.R);
         for (let k = 0; k < 30; k++) this.add('smoke', a.x + (Math.random() - 0.5) * a.R, a.y + (Math.random() - 0.5) * a.R, (Math.random() - 0.5) * 10, -8 - Math.random() * 8, 4 + Math.random() * 3, 4, 4);
@@ -590,6 +593,16 @@ export class Atmosphere {
       const u = clamp(a.t / a.dur, 0, 1);
       if (a.k === 'ring') {
         pixelRing(ctx, a.x, a.y, Math.max(1, a.R * u), `rgba(${a.col},${(1 - u) * 0.8})`, { px: u < 0.5 ? 1.5 : 1 }); // Phase 18: crisp pixel ring
+      } else if (a.k === 'burst') {
+        const fi = tagFrame('fx_burst', 'burst', Math.min(4, Math.floor(u * 5))), img = fi >= 0 && frameCanvas('fx_burst', fi);
+        if (img) ctx.drawImage(img, Math.round(a.x - a.s / 2), Math.round(a.y - a.s / 2), a.s, a.s);
+      } else if (a.k === 'meteor' && !a.hit && SPRITES.sheets.has('fx_meteor')) {
+        // the rock's centre sits at (9, 22) of the 32×32 frame; drawn at 16 world units
+        const sx = a.x + 220 * (1 - u), sy = a.y - 260 * (1 - u);
+        const img = frameCanvas('fx_meteor', tagFrame('fx_meteor', 'fall', Math.floor(this.time * 11)));
+        if (img) ctx.drawImage(img, Math.round(sx - 4.5), Math.round(sy - 11), 16, 16);
+        this.light(sx, sy, 40, 2);
+        if (running) this.add('fire', sx, sy, 0, 0, 0.4, 2);
       } else if (a.k === 'meteor' && !a.hit) {
         const sx = a.x + 220 * (1 - u), sy = a.y - 260 * (1 - u);
         const g = ctx.createLinearGradient(sx + 60, sy - 70, sx, sy);
@@ -619,6 +632,7 @@ export class Atmosphere {
   // ---------- Clouds (world space, on top of everything on the ground) ----------
   drawSky(ctx, v) {
     if (!SETTINGS.clouds) return;
+    if (!this.cloudArt && SPRITES.sheets.has('fx_cloud')) { const art = cloudsFromSheet(); if (art.length) { this.clouds = art; this.cloudArt = true; } }
     const z = v.z;
     const alpha = z < 0.4 ? 0.55 : z < 1 ? 0.45 : z < 2 ? 0.3 : z < 3 ? 0.1 : 0;
     const shadowOnly = z >= 2.2; // Phase 20: close up, only the clouds' shadows sweep over the land
@@ -637,7 +651,7 @@ export class Atmosphere {
         if (h > (c - 0.35) * 1.6) continue;
         const spr = this.clouds[(hash2(id, cy, 94) * this.clouds.length) | 0];
         const sc = 2 + hash2(id, cy, 95) * 2.5;
-        const ww = spr.width * sc, hh = spr.height * sc;
+        const ww = spr.width * sc * (spr.k || 1), hh = spr.height * sc * (spr.k || 1);
         const dark = clamp((c - 0.55) * 2, 0, 0.6);
         // shadow on the ground
         ctx.globalAlpha = shadowOnly ? 0.14 + dark * 0.1 : alpha * 0.35;
@@ -888,6 +902,23 @@ function makeCloudSprites() {
   return out;
 }
 
+// fx_cloud frames (64×32) with the same dark, shadow and soft versions the code-drawn clouds carry
+function cloudsFromSheet() {
+  const sh = SPRITES.sheets.get('fx_cloud'), out = [];
+  for (let i = 0; i < sh.frames.length; i++) {
+    const cv = frameCanvas('fx_cloud', i);
+    if (!cv) continue;
+    const w = cv.width, h = cv.height;
+    const dark = makeCanvas(w, h), shadow = makeCanvas(w, h), soft = makeCanvas(w, h);
+    const d = dark.getContext('2d'); d.drawImage(cv, 0, 0); d.globalCompositeOperation = 'multiply'; d.fillStyle = 'rgb(174,174,184)'; d.fillRect(0, 0, w, h); d.globalCompositeOperation = 'destination-in'; d.drawImage(cv, 0, 0);
+    const s = shadow.getContext('2d'); s.drawImage(cv, 0, 0); s.globalCompositeOperation = 'source-in'; s.fillStyle = 'rgb(10,20,30)'; s.fillRect(0, 0, w, h);
+    const so = soft.getContext('2d'); so.filter = 'blur(2px)'; so.drawImage(shadow, 0, 0); so.filter = 'none';
+    cv.dark = dark; cv.shadow = shadow; cv.soft = soft; cv.k = 0.7;
+    out.push(cv);
+  }
+  return out;
+}
+
 function makeScarSprite(sc, W) {
   const R = Math.max(1, sc.r) * TILE + 4;
   const size = R * 2 + 2;
@@ -947,10 +978,27 @@ function makeScarSprite(sc, W) {
 // ---------------- Phase 20: smoke puffs and flames as pixel sprites ----------------
 const PUFFS = new Map();
 // A round puff `d` art pixels across: lit on top, shaded below, ragged dithered rim
+const PUFF_D = [8, 14, 20, 28, 40, 56]; // scripts/art/fx.mjs: puff diameters in the fx_puff frames (64×64)
 export function puffSprite(d, col) {
   const key = d + ':' + col;
   let c = PUFFS.get(key);
   if (c) return c;
+  if (SPRITES.sheets.has('fx_puff')) {
+    // the frame whose puff is nearest twice this size, cropped and tinted by the smoke's colour
+    let k = 0;
+    for (let i = 1; i < PUFF_D.length; i++) if (Math.abs(PUFF_D[i] - d * 2) < Math.abs(PUFF_D[k] - d * 2)) k = i;
+    const src = frameCanvas('fx_puff', k), D = PUFF_D[k], o = 32 - D / 2;
+    if (src && src.width === 64) {
+      c = makeCanvas(D, D);
+      const x = c.getContext('2d');
+      x.drawImage(src, o, o, D, D, 0, 0, D, D);
+      const im = x.getImageData(0, 0, D, D), q = im.data, rgb = col.split(',').map(Number);
+      for (let i = 0; i < q.length; i += 4) for (let j = 0; j < 3; j++) q[i + j] = Math.min(255, (rgb[j] * q[i + j]) / 220);
+      x.putImageData(im, 0, 0);
+      PUFFS.set(key, c);
+      return c;
+    }
+  }
   c = makeCanvas(d, d);
   const x = c.getContext('2d');
   const [r, g, b] = col.split(',').map(Number);
@@ -970,6 +1018,12 @@ const FLAMES = [];
 // Flame tongues, 6×10 px, three flickering frames: red base, orange body, yellow-white core
 export function flameSprite(f) {
   if (FLAMES[f]) return FLAMES[f];
+  if (SPRITES.sheets.has('fx_flame')) return (FLAMES[f] = fromSheet('fx_flame', 'burn', f, flameLegacy(f)));
+  return flameLegacy(f);
+}
+const FLAMES0 = [];
+function flameLegacy(f) {
+  if (FLAMES0[f]) return FLAMES0[f];
   const c = makeCanvas(6, 10), x = c.getContext('2d');
   const P = (px, py, col) => { x.fillStyle = col; x.fillRect(px, py, 1, 1); };
   for (let py = 0; py < 10; py++) {
@@ -983,6 +1037,6 @@ export function flameSprite(f) {
       P(px, py, core ? (t > 0.7 ? '#fff6c8' : '#ffd860') : t < 0.3 ? '#d8402a' : '#ff8a2a');
     }
   }
-  FLAMES[f] = c;
+  FLAMES0[f] = c;
   return c;
 }
