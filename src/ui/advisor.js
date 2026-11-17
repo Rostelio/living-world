@@ -1,3 +1,4 @@
+import { frameCanvas } from '../sprites.js';
 // Phase 21 — the advisor: a small card with a portrait that reads the state of the realm and
 // suggests what to do next (most urgent first). Click the advice to open the right panel.
 import { G, S, player } from '../sim/state.js';
@@ -47,6 +48,8 @@ export function adviceFor(c) {
 
 // a little portrait: an old counsellor with a grey beard and a scholar's cap (24×24)
 function portrait() {
+  const art = frameCanvas('advisor_portrait', 0, [48, 48]);
+  if (art) return art.toDataURL();
   const c = document.createElement('canvas'); c.width = 24; c.height = 24;
   const x = c.getContext('2d');
   const P = (px, py, w, h, col) => { x.fillStyle = col; x.fillRect(px, py, w, h); };

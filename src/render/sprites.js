@@ -1,5 +1,5 @@
 import { RACES } from '../data/races.js';
-import { frameCanvas } from '../sprites.js';
+import { frameCanvas, tagFrame, tintKey, SPRITES } from '../sprites.js';
 import { hexToRgb, rgbToHex, shade } from '../core/util.js';
 
 export function makeCanvas(w, h) {
@@ -363,6 +363,10 @@ export function portraitUrl(p, race, opts = {}) {
   const ageBand = p.age < 16 ? 0 : p.age < 45 ? 1 : p.age < 62 ? 2 : 3;
   const key = `${p.id}:${p.name}:${race}:${ageBand}:${opts.crown ? 1 : 0}:${opts.bg || ''}:${(p.traits || []).join(',')}`;
   if (portraitCache.has(key)) return portraitCache.get(key);
+  if (SPRITES.sheets.has('portrait_' + race)) {
+    const url = portraitArt(p, race, opts, ageBand);
+    if (url) { portraitCache.set(key, url); return url; }
+  }
   const c = makeCanvas(32, 32);
   const ctx = c.getContext('2d');
   const R = RACES[race] || RACES.humans;
@@ -444,6 +448,54 @@ export function portraitUrl(p, race, opts = {}) {
   portraitCache.set(key, url);
   if (portraitCache.size > 600) portraitCache.delete(portraitCache.keys().next().value);
   return url;
+}
+// Portraits from the Aseprite parts sheet portrait_<race> (scripts/art/portraits.mjs): a 64×64 bust
+// in layers (head by gender, age and look; beard; crown; scar), hair and clothes recoloured from
+// their key colours, over the realm's colour.
+const HAIRK = [[0x00, 0x5a, 0x5a], [0x00, 0xa0, 0xa0], [0x00, 0xd2, 0xd2], [0x70, 0xff, 0xff]];
+function recolorHair(src, hair) {
+  const to = [-0.45, -0.2, 0, 0.25].map((f) => hexToRgb(shadeHex(hair, f)));
+  const c = makeCanvas(src.width, src.height), x = c.getContext('2d');
+  x.drawImage(src, 0, 0);
+  const d = x.getImageData(0, 0, c.width, c.height), q = d.data;
+  for (let i = 0; i < q.length; i += 4) {
+    if (!q[i + 3] || q[i] !== 0 && q[i] !== 0x70) continue;
+    const k = HAIRK.findIndex((h) => h[0] === q[i] && h[1] === q[i + 1] && h[2] === q[i + 2]);
+    if (k >= 0) [q[i], q[i + 1], q[i + 2]] = to[k];
+  }
+  x.putImageData(d, 0, 0);
+  return c;
+}
+function portraitArt(p, race, opts, ageBand) {
+  const id = 'portrait_' + race;
+  let seed = ((p.id || 1) * 2654435761 + 977) >>> 0;
+  const rnd = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
+  const male = p.gender !== 'f', look = rnd() < 0.5 ? 0 : 1;
+  const head = frameCanvas(id, tagFrame(id, male ? 'm' : 'f', ageBand * 2 + look));
+  if (!head || head.width !== 64) return null;
+  let hair = HAIR[(rnd() * HAIR.length) | 0];
+  if (race === 'elves') hair = ['#e8d8a0', '#c0a060', '#2a1d14', '#d8d8e8'][(rnd() * 4) | 0];
+  if (race === 'orcs') hair = ['#1a1410', '#3a2a1a'][(rnd() * 2) | 0];
+  if (race === 'lizardfolk') hair = ['#c94a3a', '#e0a030', '#3a8ac8', '#8a4ac8'][(rnd() * 4) | 0];
+  if (ageBand >= 2 && race !== 'lizardfolk') hair = ageBand === 3 ? '#e8e8e8' : '#a8a8a8';
+  const cloth = opts.crown ? (opts.robe || '#7a1f2a') : ['#2e5fa8', '#3a6a3a', '#6a3a2a', '#4a3a6a', '#7a6a3a'][(rnd() * 5) | 0];
+  const c = makeCanvas(64, 64), ctx = c.getContext('2d');
+  const P = (x, y, w, h, col) => { ctx.fillStyle = col; ctx.fillRect(x, y, w, h); };
+  const bg = opts.bg || '#3a2c1d';
+  P(0, 0, 64, 64, shadeHex(bg, -0.45)); P(3, 3, 58, 58, shadeHex(bg, -0.2));
+  for (let i = 0; i < 7; i++) P(5 + i * 8, 3, 3, 58, shadeHex(bg, -0.26));
+  P(3, 3, 58, 1, shadeHex(bg, 0.05));
+  const layer = (tag, k) => { const f = frameCanvas(id, tagFrame(id, tag, k)); if (f) ctx.drawImage(recolorHair(f, hair), 0, 0); };
+  ctx.drawImage(tintKey(recolorHair(head, hair), cloth), 0, 0);
+  const beard = male && ageBand > 0 && (race === 'dwarves' || (race !== 'elves' && race !== 'lizardfolk' && rnd() < 0.55));
+  if (beard) layer('beard', ageBand);
+  const tr = p.traits || [];
+  if (tr.includes('brave') || tr.includes('strong')) layer('scar', ageBand);
+  if (opts.crown) layer('crown', ageBand);
+  if (tr.includes('sickly')) { ctx.globalCompositeOperation = 'source-atop'; P(16, 8, 32, 36, 'rgba(160,200,140,0.16)'); ctx.globalCompositeOperation = 'source-over'; }
+  ctx.strokeStyle = '#0c0906'; ctx.lineWidth = 2; ctx.strokeRect(1, 1, 62, 62);
+  P(2, 2, 60, 1, 'rgba(255,230,170,0.3)');
+  return c.toDataURL();
 }
 export function portraitImg(p, race, opts = {}) {
   if (!p) return '<span class="portrait empty"></span>';

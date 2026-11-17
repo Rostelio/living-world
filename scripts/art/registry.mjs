@@ -34,3 +34,14 @@ import { WORKS, workSheet } from './works.mjs';
 for (const k of Object.keys(WORKS)) GENERATORS['great_work_' + k] = () => workSheet(k);
 import { FX } from './fx.mjs';
 for (const [id, fn] of Object.entries(FX)) GENERATORS[id] = () => ({ layer: id, ...fn() });
+import { portraitSheet, advisorSheet } from './portraits.mjs';
+for (const r of RACES) GENERATORS['portrait_' + r] = () => portraitSheet(r);
+GENERATORS.advisor_portrait = advisorSheet;
+import { SCENE, houseSheet as sceneHouseSheet, walkerSheet, soldierSheet as sceneSoldierSheet, riderSheet } from './scenes.mjs';
+for (const r of RACES) {
+  GENERATORS['scene_house_' + r] = () => sceneHouseSheet(r);
+  GENERATORS['scene_walker_' + r] = () => walkerSheet(r);
+  GENERATORS['scene_soldier_' + r] = () => sceneSoldierSheet(r);
+  GENERATORS['scene_rider_' + r] = () => riderSheet(r);
+}
+for (const [id, fn] of Object.entries(SCENE)) GENERATORS[id] = fn;

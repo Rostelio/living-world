@@ -22,7 +22,7 @@ export const SPRITE_IDS = [
   ...each('townsfolk', RACES), ...each('person', RACES), ...each('soldier', RACES), ...each('cavalry', RACES), 'siege_engine', 'explorer',
   'caravan', 'cart', 'fishing_boat', 'ship_war', 'ship_transport',
   ...each('livestock', ['sheep', 'cow', 'pig', 'goat', 'horse', 'chicken', 'dog']), ...each('beast', ['sheep', 'cow', 'horse', 'warhorse']),
-  'scene_walker', 'scene_soldier', 'scene_rider', ...each('portrait', RACES), 'advisor_portrait',
+  'scene_walker', 'scene_soldier', 'scene_rider', ...each('scene_house', RACES), ...each('scene_walker', RACES), ...each('scene_soldier', RACES), ...each('scene_rider', RACES), ...each('portrait', RACES), 'advisor_portrait',
   // enemies
   ...each('creature', ['dragon', 'wyvern', 'giant', 'troll']), 'lair', ...each('wildlife', ['deer', 'boar', 'goat', 'wolf', 'bear']), 'sea_whale', 'sea_serpent',
   // tiles and backgrounds

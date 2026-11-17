@@ -9,6 +9,42 @@ import { UNITS } from '../data/military.js';
 import { hash2 } from '../core/rng.js';
 import { ramp } from './tiles16.js';
 import { makeCanvas } from './sprites.js';
+import { SPRITES, frameCanvas, tagFrame, tintKey } from '../sprites.js';
+
+// Aseprite scene art (scripts/art/scenes.mjs), drawn at the scene's own pixel size. Buildings and
+// trees are trimmed to their pixels; windows (glass #7ab4d6) and the chimney top (#8a7a70) are found
+// by colour so they still light up at night and smoke. Returns null when the sheet is missing.
+const ART = new Map();
+function art(id, tag, k, tint, trim = true) {
+  if (!SPRITES.sheets.has(id)) return null;
+  const key = `${id}|${tag}|${k}|${tint || ''}`;
+  if (ART.has(key)) return ART.get(key);
+  const fi = tagFrame(id, tag, k);
+  let src = fi >= 0 ? frameCanvas(id, fi) : null;
+  if (src && tint) src = tintKey(src, tint);
+  let c = src;
+  if (src && trim) {
+    const w = src.width, h = src.height, d = src.getContext('2d').getImageData(0, 0, w, h).data;
+    let x0 = w, y0 = h, x1 = -1, y1 = -1;
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (d[(y * w + x) * 4 + 3]) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+    if (x1 < 0) { ART.set(key, null); return null; }
+    c = makeCanvas(x1 - x0 + 1, y1 - y0 + 1);
+    c.getContext('2d').drawImage(src, -x0, -y0);
+    const is = (x, y, r, g, b) => { const i = (y * w + x) * 4; return d[i + 3] && d[i] === r && d[i + 1] === g && d[i + 2] === b; };
+    const seen = new Uint8Array(w * h), wins = [];
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      if (seen[y * w + x] || !(is(x, y, 0x7a, 0xb4, 0xd6) || is(x, y, 0xc6, 0xe6, 0xf2))) continue;
+      let ax = x, ay = y, bx = x, by = y; const st = [[x, y]]; seen[y * w + x] = 1;
+      while (st.length) { const [px, py] = st.pop(); ax = Math.min(ax, px); bx = Math.max(bx, px); ay = Math.min(ay, py); by = Math.max(by, py); for (const [qx, qy] of [[px + 1, py], [px - 1, py], [px, py + 1], [px, py - 1]]) if (qx >= 0 && qy >= 0 && qx < w && qy < h && !seen[qy * w + qx] && (is(qx, qy, 0x7a, 0xb4, 0xd6) || is(qx, qy, 0xc6, 0xe6, 0xf2))) { seen[qy * w + qx] = 1; st.push([qx, qy]); } }
+      wins.push([ax - x0, ay - y0, bx - ax + 1, by - ay + 1]);
+    }
+    c.wins = wins;
+    for (let i = 0; i < w * h && !c.chim; i++) if (is(i % w, (i / w) | 0, 0x8a, 0x7a, 0x70)) c.chim = [i % w - x0 + 1, ((i / w) | 0) - y0 - 1];
+  }
+  ART.set(key, c || null);
+  return c || null;
+}
+const SPECIAL_ART = { university: 'library', quarry: 'mine', warehouse: 'granary' };
 
 const H = 270; // art pixels tall
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -254,7 +290,8 @@ export class SceneView {
     if (!night && sunU > 0 && sunU < 1) { const sx = Wd * (0.1 + sunU * 0.8), sy = 150 - Math.sin(sunU * Math.PI) * 120; x.fillStyle = 'rgba(255,240,200,0.18)'; x.beginPath(); x.arc(sx, sy, 22, 0, 6.29); x.fill(); for (let yy = -8; yy <= 8; yy++) { const hw = Math.round(Math.sqrt(64 - yy * yy)); P(sx - hw, sy + yy, hw * 2, 1, mix([255, 250, 220], L, 0.3)); } }
     else { const mx = Wd * 0.75, my = 50; for (let yy = -7; yy <= 7; yy++) { const hw = Math.round(Math.sqrt(49 - yy * yy)); P(mx - hw, my + yy, hw * 2, 1, '#f0eedc'); } P(mx + 1, my - 3, 3, 3, '#d8d6c4'); P(mx - 4, my + 2, 2, 2, '#d8d6c4'); for (let i = 0; i < 70; i++) { const sx = hash2(i, 1, seed) * Wd, sy = hash2(i, 2, seed) * 150; if (Math.sin(this.t * 2 + i) > -0.3) P(sx, sy, 1, 1, '#fffbe8'); } }
     // clouds
-    for (let i = 0; i < 7; i++) { const cx = ((hash2(i, 3, seed) * Wd * 1.6 + this.t * (3 + i)) % (Wd + 120)) - 60, cy = 20 + hash2(i, 4, seed) * 70; const cc = mix([255, 255, 255], S2.hor, 0.35 + dark * 0.4); for (let b2 = 0; b2 < 4; b2++) { const r = 6 + hash2(i, b2, 5) * 7; x.fillStyle = css(cc); x.beginPath(); x.arc(cx + b2 * 9, cy + (b2 % 2) * 2, r, 0, 6.29); x.fill(); } }
+    const cloudArt = SPRITES.sheets.has('fx_cloud');
+    for (let i = 0; i < 7; i++) { const cx = ((hash2(i, 3, seed) * Wd * 1.6 + this.t * (3 + i)) % (Wd + 120)) - 60, cy = 20 + hash2(i, 4, seed) * 70; if (cloudArt) { const ci = frameCanvas('fx_cloud', (i * 3) % 8); if (ci) { x.globalAlpha = 0.95 - dark * 0.35; x.drawImage(ci, Math.round(cx - 8), Math.round(cy - 18)); x.globalAlpha = 1; continue; } } const cc = mix([255, 255, 255], S2.hor, 0.35 + dark * 0.4); for (let b2 = 0; b2 < 4; b2++) { const r = 6 + hash2(i, b2, 5) * 7; x.fillStyle = css(cc); x.beginPath(); x.arc(cx + b2 * 9, cy + (b2 % 2) * 2, r, 0, 6.29); x.fill(); } }
     // far mountains, mid hills (parallax)
     const layer = (base, amp, sc, col, par, snow) => {
       const off = this.cam * par;
@@ -272,7 +309,7 @@ export class SceneView {
     layer(190, 34, 34, fogc(midBase, 0.3), 0.4, false);
     // trees on the mid hills
     const treeKind = this.biome === B.JUNGLE || this.biome === B.DESERT || this.biome === B.BEACH ? 'palm' : this.temp < 0.45 || this.biome === B.TAIGA ? 'pine' : 'oak';
-    for (let i = 0; i < 40; i++) { const wx = hash2(i, 6, seed) * (this.width() + 200) - 100 - this.cam * 0.6; if (wx < -20 || wx > Wd + 20) continue; x.globalAlpha = 0.85; x.drawImage(tree(treeKind, i % 3), Math.round(wx), 168 + Math.round(hash2(i, 7, seed) * 14)); x.globalAlpha = 1; }
+    for (let i = 0; i < 40; i++) { const wx = hash2(i, 6, seed) * (this.width() + 200) - 100 - this.cam * 0.6; if (wx < -20 || wx > Wd + 20) continue; x.globalAlpha = 0.85; const tim = art('scene_tree', treeKind, i) || tree(treeKind, i % 3); x.drawImage(tim, Math.round(wx), 198 - tim.height + Math.round(hash2(i, 7, seed) * 14)); x.globalAlpha = 1; }
     // ground
     const ground = this.biome === B.DESERT || this.biome === B.BEACH ? [214, 190, 130] : winter || this.biome === B.SNOW ? [232, 238, 246] : autumn ? [150, 150, 70] : [96, 156, 70];
     P(0, 214, Wd, 56, tint(ground, L, 0.5));
@@ -304,7 +341,9 @@ export class SceneView {
     let wx = 30;
     const back = [];
     for (const [i, it] of this.row.entries()) {
-      const img = it.kind === 'house' ? (this.race === 'orcs' ? tent(this.color, it.v) : house(this.race, this.tier, it.v)) : it.kind === 'windmill' ? windmill(Math.floor(this.t * 3) % 4) : special(it.kind, this.race, this.color);
+      const img = it.kind === 'house' ? (this.race === 'orcs' ? art('scene_tent', null, it.v % 2, this.color) || tent(this.color, it.v) : art('scene_house_' + this.race, 'tier' + Math.max(1, this.tier), it.v) || house(this.race, this.tier, it.v))
+        : it.kind === 'windmill' ? art('scene_windmill', 'turn', Math.floor(this.t * 3) % 4) || windmill(Math.floor(this.t * 3) % 4)
+          : art('scene_special', SPECIAL_ART[it.kind] || it.kind, 0, this.color) || special(it.kind, this.race, this.color);
       if (!img) continue;
       if (it.kind === 'house' && i % 3 === 1) { back.push([img, wx + 6]); wx += 12; continue; }
       it.img = img; it.wx = wx; wx += img.width + 4 + (hash2(i, 5, this.seed) * 6 | 0);
@@ -332,9 +371,9 @@ export class SceneView {
       const sx = Math.round(pos - this.cam);
       if (sx < -6 || sx > Wd + 6) continue;
       const fr = Math.floor(this.t * 6 + i) % 4, [body, hat] = roles[p.role % roles.length];
-      const img = walker(body, skin, hat, fr, p.small);
-      x.save(); if (p.sp < 0) { x.translate(sx * 2 + 5, 0); x.scale(-1, 1); }
-      x.drawImage(img, sx, 224 + (i % 3) * 3 - 9);
+      const img = art('scene_walker_' + this.race, p.small ? 'child' : 'r' + (p.role % 5), fr, this.color, false) || walker(body, skin, hat, fr, p.small);
+      x.save(); if (p.sp < 0) { x.translate(sx * 2 + img.width, 0); x.scale(-1, 1); }
+      x.drawImage(img, sx, 224 + (i % 3) * 3 - img.height);
       x.restore();
     }
     // a cart and a dog
@@ -360,7 +399,9 @@ export class SceneView {
         const py = 236 + lane * 6 - row * 2 + (cls === 'cav' ? -2 : 0);
         const jitter = u > 0.55 && !routed ? Math.round(Math.sin(this.t * 9 + i) * 1.5) : 0;
         if (fallen) { P(px, py + 7, 7, 2, mix([90, 30, 30], hex(A.civ.color), 0.5)); return; }
-        const img = cls === 'cav' ? rider(A.civ.color, skin, Math.floor(this.t * 7 + i)) : soldier(A.civ.color, skin, cls, Math.floor(this.t * 6 + i), A.civ.era || 0);
+        const race = A.civ.race;
+        const img = cls === 'cav' ? art('scene_rider_' + race, 'ride', Math.floor(this.t * 7 + i), A.civ.color, false) || rider(A.civ.color, skin, Math.floor(this.t * 7 + i))
+          : art('scene_soldier_' + race, cls === 'rng' ? 'rng' : (A.civ.era || 0) >= 3 ? 'gun' : 'inf', Math.floor(this.t * 6 + i), A.civ.color, false) || soldier(A.civ.color, skin, cls, Math.floor(this.t * 6 + i), A.civ.era || 0);
         x.save(); if (dir < 0) { x.translate(Math.round(px + jitter) * 2 + img.width, 0); x.scale(-1, 1); }
         x.drawImage(img, Math.round(px + jitter), py - img.height + 6);
         x.restore();

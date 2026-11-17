@@ -1,0 +1,79 @@
+{ "frames": [
+   {
+    "filename": "scene_tree 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 24, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 24, "h": 32 },
+    "sourceSize": { "w": 24, "h": 32 },
+    "duration": 1000
+   },
+   {
+    "filename": "scene_tree 1.aseprite",
+    "frame": { "x": 24, "y": 0, "w": 24, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 24, "h": 32 },
+    "sourceSize": { "w": 24, "h": 32 },
+    "duration": 1000
+   },
+   {
+    "filename": "scene_tree 2.aseprite",
+    "frame": { "x": 48, "y": 0, "w": 24, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 24, "h": 32 },
+    "sourceSize": { "w": 24, "h": 32 },
+    "duration": 1000
+   },
+   {
+    "filename": "scene_tree 3.aseprite",
+    "frame": { "x": 72, "y": 0, "w": 24, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 24, "h": 32 },
+    "sourceSize": { "w": 24, "h": 32 },
+    "duration": 1000
+   },
+   {
+    "filename": "scene_tree 4.aseprite",
+    "frame": { "x": 96, "y": 0, "w": 24, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 24, "h": 32 },
+    "sourceSize": { "w": 24, "h": 32 },
+    "duration": 1000
+   },
+   {
+    "filename": "scene_tree 5.aseprite",
+    "frame": { "x": 120, "y": 0, "w": 24, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 24, "h": 32 },
+    "sourceSize": { "w": 24, "h": 32 },
+    "duration": 1000
+   },
+   {
+    "filename": "scene_tree 6.aseprite",
+    "frame": { "x": 144, "y": 0, "w": 24, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 24, "h": 32 },
+    "sourceSize": { "w": 24, "h": 32 },
+    "duration": 1000
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.18.6-arm64",
+  "image": "scene_tree.png",
+  "format": "RGBA8888",
+  "size": { "w": 168, "h": 32 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "oak", "from": 0, "to": 2, "direction": "forward", "color": "#000000ff" },
+   { "name": "pine", "from": 3, "to": 4, "direction": "forward", "color": "#000000ff" },
+   { "name": "palm", "from": 5, "to": 6, "direction": "forward", "color": "#000000ff" }
+  ]
+ }
+}

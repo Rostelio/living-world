@@ -55,16 +55,16 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 
 | id | what it is | where in code (file:line) | in-game size, px | states / animations | frames (estimate) | priority | status |
 |---|---|---|---|---|---|---|---|
-| `scene_walker` | townsperson walking along the street | src/render/scene.js:120 `walker` | 5×9 ⚠ | walk (4) | 4 × 6 races = 24 | 3 | code-drawn |
-| `scene_soldier` | soldier in the battle line | src/render/scene.js:129 `soldier` | 10×13 ⚠ | march/fight (4) | 4 | 3 | code-drawn |
-| `scene_rider` | cavalry in the battle line | src/render/scene.js:144 `rider` | 14×14 ⚠ | gallop (2) | 2 | 3 | code-drawn |
+| `scene_walker` | townsperson walking along the street | src/render/scene.js:120 `walker` | 5×9 ⚠ | walk (4) | 4 × 6 races = 24 | 3 | Aseprite (scripts/art) |
+| `scene_soldier` | soldier in the battle line | src/render/scene.js:129 `soldier` | 10×13 ⚠ | march/fight (4) | 4 | 3 | Aseprite (scripts/art) |
+| `scene_rider` | cavalry in the battle line | src/render/scene.js:144 `rider` | 14×14 ⚠ | gallop (2) | 2 | 3 | Aseprite (scripts/art) |
 
 ### Portraits
 
 | id | what it is | where in code (file:line) | in-game size, px | states / animations | frames (estimate) | priority | status |
 |---|---|---|---|---|---|---|---|
-| `portrait_{race}` | ruler / heir / character portrait, put together from layers (face, hair, beard, crown, traits) by age band | src/render/sprites.js:359 `portraitUrl`, :446 `portraitImg` | 32×32 | age band (4: child, adult, middle, old) × crown (2) | 8 per race; hair and beard as parts → see note | 2 | code-drawn |
-| `advisor_portrait` | the advisor face in the advisor bubble | src/ui/advisor.js:49 `portrait` | ~24×24 | idle (1) | 1 | 2 | code-drawn |
+| `portrait_{race}` | ruler / heir / character portrait, put together from layers (face, hair, beard, crown, traits) by age band | src/render/sprites.js:359 `portraitUrl`, :446 `portraitImg` | 32×32 | age band (4: child, adult, middle, old) × crown (2) | 8 per race; hair and beard as parts → see note | 2 | Aseprite (scripts/art) |
+| `advisor_portrait` | the advisor face in the advisor bubble | src/ui/advisor.js:49 `portrait` | ~24×24 | idle (1) | 1 | 2 | Aseprite (scripts/art) |
 
 > Portraits are built procedurally per character (every ruler looks different). In Aseprite this is best done as **parts sheets** (faces, hair, beards, crowns per race) that the code stacks, rather than one image per person.
 
@@ -139,7 +139,7 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 | `atlas_paper` | parchment texture under the atlas | src/render/atlas.js:20 `bakeAtlas` | 64×64 (repeating) | static (1) | 1 | 2 | code-drawn |
 | `scene_sky` | sky behind side-view scenes | src/render/scene.js:24 `sky` | 480×270 | time of day (4: dawn, day, dusk, night) | 4 | 3 | code-drawn |
 | `scene_hills_{far\|mid\|near}` | parallax hills | src/render/scene.js:245 `paint` | 480×~120, repeating | static (1) | 1 | 3 | code-drawn |
-| `scene_{house\|tent\|special\|windmill\|tree}` | side-view buildings and trees (per race for houses) | src/render/scene.js:50 `house`, :69 `tent`, :76 `special`, :92 `windmill`, :100 `tree` | 20–60 tall | windmill sails (4); others static | 1–4 | 3 | code-drawn |
+| `scene_{house\|tent\|special\|windmill\|tree}` | side-view buildings and trees (per race for houses) | src/render/scene.js:50 `house`, :69 `tent`, :76 `special`, :92 `windmill`, :100 `tree` | 20–60 tall | windmill sails (4); others static | 1–4 | 3 | Aseprite (scripts/art) |
 | `title_backdrop` | title-screen background | src/ui/titlebg.js:7 `showTitleBackdrop` | full screen (redraws the live map) | static (1) | 1 | 3 | code-drawn |
 
 ---
@@ -242,6 +242,16 @@ Sprites marked **exact** replace a ready-made picture of that size, so the canva
 | caravan | 32×32 | move | |
 | windmill | 32×48 exact | turn | |
 | great_work_* | 64×64 exact | | |
+| portrait_* | 64×64 | m, f, beard, crown, scar | |
+| advisor_portrait | 48×48 exact | | |
+| scene_house_* | 32×48 | tier1, tier2, tier3 | |
+| scene_tent | 24×24 | | |
+| scene_special | 64×64 | town_hall, castle, temple, market, library, granary, barracks, port, mine, lumber_camp | |
+| scene_windmill | 32×48 | turn | |
+| scene_tree | 24×32 | oak, pine, palm | |
+| scene_walker_* | 8×12 | r0, r1, r2, r3, r4, child | |
+| scene_soldier_* | 12×16 | inf, rng, gun | |
+| scene_rider_* | 16×16 | ride | |
 | fx_flame | 12×20 exact | burn | |
 | fx_puff | 64×64 | | |
 | fx_meteor | 32×32 | fall | |
