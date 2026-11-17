@@ -9,7 +9,10 @@ const NAMES = {
   [B.BEACH]: 'beach', [B.TUNDRA]: 'tundra', [B.SNOW]: 'snow', [B.HILLS]: 'hills', [B.MOUNTAIN]: 'mountain', [B.SWAMP]: 'swamp',
 };
 const SEASONS = ['spring', 'summer', 'autumn', 'winter'];
-export const GROUND_W = 256, GROUND_H = 512;
+// Water rows (deep, ocean, shallow, lake) hold the 8 frames of their flow animation instead of
+// seasons, and row 16 the shore foam (scripts/art/water.mjs).
+const WATER_ROWS = { [B.DEEP]: 'tile_deep', [B.OCEAN]: 'tile_ocean', [B.SHALLOW]: 'tile_shallow', [B.LAKE]: 'tile_lake', 16: 'shore_foam' };
+export const GROUND_W = 256, GROUND_H = 544;
 
 let atlas; // undefined: not built yet; null: no ground sprites
 export function groundAtlas() {
@@ -27,6 +30,10 @@ export function groundAtlas() {
         if (f) { x.drawImage(f, (si * 2 + v) * 32, +b * 32); any = true; }
       }
     });
+  }
+  for (const [row, id] of Object.entries(WATER_ROWS)) {
+    if (!SPRITES.sheets.has(id)) continue;
+    for (let k = 0; k < 8; k++) { const f = frameCanvas(id, tagFrame(id, 'flow', k), [32, 32]); if (f) { x.drawImage(f, k * 32, +row * 32); any = true; } }
   }
   atlas = any ? c : null;
   return atlas;

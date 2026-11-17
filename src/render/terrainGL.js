@@ -70,16 +70,29 @@ void main() {
       col = pal(15.0, min(i + (pos - i > bayer(A32) ? 1.0 : 0.0), 5.0));
       if (depth < 0.16) { float cs = abs(vn(a + vec2(uTime * 2.0, 0.0), 5.0, 31.0) - vn(a + vec2(9.0 - uTime * 1.5, -4.0), 5.0, 32.0)); if (cs < 0.035) col = mix(col, vec3(0.745, 0.925, 0.925), 0.45); }
     }
+    // Aseprite water: the biome's flow frame, darkened with depth (row = biome, column = frame)
+    bool art = false;
+    if (uHasGround > 0.5) {
+      float fr = mod(floor(uTime * 3.0), 8.0);
+      float dq = depth + (bayer(A32) - 0.5) * 0.12, wrow = b > 14.5 ? 15.0 : dq < 0.13 ? 2.0 : dq < 0.5 ? 1.0 : 0.0; // the sea's texture follows the depth
+      vec4 wt = texture2D(uGround, (vec2(fr * 32.0, wrow * 32.0) + mod(A32, 32.0) + 0.5) / vec2(256.0, 544.0));
+      if (wt.a > 0.5) { art = true; col = wt.rgb * (1.08 - depth * 0.22); if (depth < 0.16 && b < 14.5) { float cs = abs(vn(a + vec2(uTime * 2.0, 0.0), 5.0, 31.0) - vn(a + vec2(9.0 - uTime * 1.5, -4.0), 5.0, 32.0)); if (cs < 0.03) col = mix(col, vec3(0.745, 0.925, 0.925), 0.35); } }
+    }
     // moving wave strokes
     float wv = sin(a.x * 0.45 + a.y * 0.9 + uTime * 1.3 + mod(t.y * 3.1, 6.0)) + sin(a.x * 0.17 - a.y * 0.31 - uTime * 0.7);
-    if (wv > 1.72 + h2(t) * 0.2 && h2(vec2(floor(a.x / 4.0), a.y)) < 0.6) col = mix(col, vec3(0.9, 0.96, 1.0), 0.2);
+    if (!art && wv > 1.72 + h2(t) * 0.2 && h2(vec2(floor(a.x / 4.0), a.y)) < 0.6) col = mix(col, vec3(0.9, 0.96, 1.0), 0.2);
     if (b > 14.5 && uSnow > 1.5 && d.b < 0.38) col = mix(col, vec3(0.86, 0.925, 0.97), 0.75); // frozen lake
     // surf: foam where land is near (checks the warped grid a few pixels away), pulsing
     float near = 0.0;
     for (int k = 0; k < 8; k++) { float ang = float(k) * 1.5708 + (k < 4 ? 0.0 : 0.785); vec2 o = vec2(cos(ang), sin(ang)) * (k < 4 ? 2.0 : 4.0); if (!isWater(floor(tileAt(tileOf(a + o)).r * 255.0 + 0.5))) { near = k < 4 ? 2.0 : max(near, 1.0); } }
-    if (near > 0.0 && b < 14.5) { float pulse = 0.5 + 0.5 * sin(uTime * 1.6 + h2(t) * 6.0); col = mix(col, vec3(0.93, 0.97, 1.0), near > 1.5 ? 0.45 + 0.2 * pulse : 0.12 + 0.1 * pulse); }
+    if (art && near > 0.0 && b < 14.5) {
+      float fr2 = mod(floor(uTime * 3.0), 8.0);
+      vec4 fo = texture2D(uGround, (vec2(fr2 * 32.0, 16.0 * 32.0) + mod(A32, 32.0) + 0.5) / vec2(256.0, 544.0));
+      col = mix(col, vec3(0.93, 0.97, 1.0), near > 1.5 ? 0.22 : 0.0);
+      if (fo.a > 0.1) col = mix(col, fo.rgb, (near > 1.5 ? 0.95 : 0.5) * fo.a);
+    } else if (near > 0.0 && b < 14.5) { float pulse = 0.5 + 0.5 * sin(uTime * 1.6 + h2(t) * 6.0); col = mix(col, vec3(0.93, 0.97, 1.0), near > 1.5 ? 0.45 + 0.2 * pulse : 0.12 + 0.1 * pulse); }
     // sky glints
-    if (h2(a + floor(uTime * 0.8)) < 0.0025) col = mix(col, vec3(1.0), 0.6);
+    if (!art && h2(a + floor(uTime * 0.8)) < 0.0025) col = mix(col, vec3(1.0), 0.6);
   } else {
     float temp = d.b, hgt = d.g * 2.0 - 1.0;
     float set = uSeason > 1.5 && uSeason < 2.5 ? 1.0 : 0.0;
@@ -100,7 +113,7 @@ void main() {
     if (!snowy && (b > 3.5 && b < 6.5 || b > 11.5 && b < 12.5)) { float tb = h2(a + 7.0); if (tb < 0.02) col = pal(set * 5.0 + 4.0, b); else if (tb < 0.032) col = pal(set * 5.0 + 1.0, b); }
     if (uHasGround > 0.5) { // hand-made texture, lit by the same slope and soft patches
       float sb = snowy ? 11.0 : b, sc = snowy ? 3.0 : uSeason, vv = h2(t + 31.0) < 0.5 ? 0.0 : 1.0;
-      vec4 tx = texture2D(uGround, (vec2((sc * 2.0 + vv) * 32.0, sb * 32.0) + mod(A32, 32.0) + 0.5) / vec2(256.0, 512.0));
+      vec4 tx = texture2D(uGround, (vec2((sc * 2.0 + vv) * 32.0, sb * 32.0) + mod(A32, 32.0) + 0.5) / vec2(256.0, 544.0));
       if (tx.a > 0.5) col = tx.rgb * (1.0 + clamp((tt - 0.52) * 0.55, -0.22, 0.22));
     }
     if (b > 13.5 && b < 14.5 && !snowy) { float pv = vn(a, 5.0, 7.0) * 0.7 + vn(a, 13.0, 8.0) * 0.3; if (pv > 0.6) col = pv > 0.66 && h2(a + 9.0) < 0.05 ? pal(15.0, 14.0) : pal(15.0, 13.0); else if (pv > 0.57) col = pal(15.0, 12.0); }

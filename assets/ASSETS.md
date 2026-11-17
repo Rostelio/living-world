@@ -88,7 +88,7 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 | id | what it is | where in code (file:line) | in-game size, px | states / animations | frames (estimate) | priority | status |
 |---|---|---|---|---|---|---|---|
 | `tile_{grass\|plains\|forest\|jungle\|taiga\|desert\|tundra\|snow\|hills\|mountain\|swamp\|beach}` | ground for each land biome; currently dithered per pixel | src/render/tiles16.js (Tiles16 chunk baking, ground pass), :597 `terrainPalette`; GPU version src/render/terrainGL.js | 16×16 | season (4: spring, summer, autumn, winter) × 4 variants | 16 | 1 | Aseprite (scripts/art) |
-| `tile_{deep\|ocean\|shallow\|lake}` | water bands | src/render/tiles16.js (water bands); terrainGL.js shader | 16×16 | wave (4); winter ice for lake | 4 (+1 ice) | 1 | code-drawn |
+| `tile_{deep\|ocean\|shallow\|lake}`, `shore_foam` | water bands and shore foam, darkened with depth in code (ice stays in code) | src/render/ground-art.js atlas rows; terrainGL.js shader; tiles16.js (static first frame) | 32×32 | flow (8) | 8 | 1 | Aseprite (scripts/art) |
 | `shore_autotile` | coast and biome edges | src/render/tiles16.js (shorelines) | 16×16 | 16 edge/corner cases (4-bit mask) | 16 | 1 | code-drawn |
 | `river_autotile` | rivers | src/render/tiles16.js (rivers) | 16×16 | 16 masks | 16 | 1 | code-drawn |
 | `scar_{burn\|crater\|flood}` | marks left by disasters | src/render/fx.js:267 `drawScars`, :891 `makeScarSprite` | ~16×16 | fade is done in code | 1 each | 3 | code-drawn |
@@ -242,6 +242,8 @@ Sprites marked **exact** replace a ready-made picture of that size, so the canva
 | caravan | 32×32 | move | |
 | windmill | 32×48 exact | turn | |
 | great_work_* | 64×64 exact | | |
+| tile_deep, tile_ocean, tile_shallow, tile_lake | 32×32 exact | flow | |
+| shore_foam | 32×32 exact | flow | |
 | ribbon | 10×12 | normal, capital | |
 | flag_parts | 30×20 | cloth, emblem | |
 | vignette_* | 48×36 exact | | |

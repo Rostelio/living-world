@@ -27,7 +27,7 @@ export const SPRITE_IDS = [
   ...each('creature', ['dragon', 'wyvern', 'giant', 'troll']), 'lair', ...each('wildlife', ['deer', 'boar', 'goat', 'wolf', 'bear']), 'sea_whale', 'sea_serpent',
   // tiles and backgrounds
   ...each('tile', ['grass', 'plains', 'forest', 'jungle', 'taiga', 'desert', 'tundra', 'snow', 'hills', 'mountain', 'swamp', 'beach', 'deep', 'ocean', 'shallow', 'lake']),
-  'shore_autotile', 'river_autotile', 'scar_burn', 'scar_crater', 'scar_flood',
+  'shore_autotile', 'shore_foam', 'river_autotile', 'scar_burn', 'scar_crater', 'scar_flood',
   ...each('tree', ['oak', 'birch', 'pine', 'palm', 'jungle', 'dead']),
   ...each('nature', ['bush', 'rock', 'mound', 'peak', 'peak_snow', 'tuft', 'pebbles', 'mushroom', 'lily', 'reeds', 'cactus', 'flowers']),
   'road_dirt', 'road_stone', 'road_paved', 'bridge', 'yard', 'plaza_plain', 'plaza_well', 'plaza_fountain', 'wall_stone', 'wall_palisade', 'wall_tower', 'wall_gate', 'fence', 'field',

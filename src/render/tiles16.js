@@ -406,11 +406,13 @@ export class Tiles16 {
           void p; void shallow; void deep;
           // Phase 20: banded depth with dithered steps, and light ripples of sand under the shallows
           col = b === B.LAKE ? dith(LAKE5, depth * 1.1, gx, gy) : dith(SEA5, Math.pow(depth, 0.8) * 1.05 + (vn(gx, gy, 14, S + 30) - 0.5) * 0.08, gx, gy);
+          const dq = depth + (((gx & 3) * 4 + (gy & 3)) / 16 - 0.5) * 0.12, wt = GT && GT.texel(b === B.LAKE ? B.LAKE : dq < 0.13 ? B.SHALLOW : dq < 0.5 ? B.OCEAN : B.DEEP, 0, gx & 15, gy & 15); // Aseprite water (first flow frame; the CPU bake is static)
+          if (wt) { const k = 1.08 - depth * 0.22; col = [wt[0] * k, wt[1] * k, wt[2] * k]; }
           if (depth < 0.16 && b !== B.LAKE) { const cs = Math.abs(vn(gx, gy, 5, S + 31) - vn(gx + 9, gy - 4, 5, S + 32)); if (cs < 0.035) col = mix(col, [190, 236, 236], 0.45); }
           // gentle wave strokes
           const wv = Math.sin(gx * 0.45 + gy * 0.9 + (sy * 3.1) % 6) + Math.sin(gx * 0.17 - gy * 0.31);
           const wh = hash2(sx, sy, S + 12);
-          if (wv > 1.72 + wh * 0.2 && hash2(gx >> 2, gy, S + 13) < 0.6) col = mix(col, [230, 245, 255], 0.2);
+          if (!wt && wv > 1.72 + wh * 0.2 && hash2(gx >> 2, gy, S + 13) < 0.6) col = mix(col, [230, 245, 255], 0.2);
           if (b === B.LAKE && snow >= 2 && temp[i] < 0.38) col = mix(col, [220, 236, 248], 0.75); // frozen
         } else {
           let p = PAL[b] || PAL[B.GRASS];

@@ -49,3 +49,5 @@ import { ribbonSheet, flagSheet, vignetteSheet, VIGNETTE_KINDS } from './banners
 GENERATORS.ribbon = ribbonSheet;
 GENERATORS.flag_parts = flagSheet;
 for (const k of VIGNETTE_KINDS) GENERATORS['vignette_' + k] = () => vignetteSheet(k);
+import { WATER } from './water.mjs';
+for (const [id, fn] of Object.entries(WATER)) GENERATORS[id] = () => ({ layer: id, ...fn() });
