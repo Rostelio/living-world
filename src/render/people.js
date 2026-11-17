@@ -9,7 +9,7 @@ import { SPECIES } from '../sim/wildlife.js';
 import { hash2 } from '../core/rng.js';
 import { TILE } from './terrain.js';
 import { SETTINGS } from '../ui/settings.js';
-import { hasSprite, pickTag, animate, tagFrame, draw as drawSprite, mark, SPRITES } from '../sprites.js';
+import { hasSprite, pickTag, animate, tagFrame, tintedFrame, draw as drawSprite, mark, SPRITES } from '../sprites.js';
 import { ART_PER_WORLD } from '../sprite-config.js';
 import { VIEW, legacyFigure, legacyFarmAnimal, legacyWildlife } from '../legacy-draw.js';
 export { VIEW };
@@ -52,9 +52,32 @@ export function figure(ctx, x, y, o) {
       drawSprite(ctx, id, x, y, { frame: fr, flipX: (o.dir || 1) < 0, scale: MAP });
       return;
     }
+    // soldiers: soldier_<race> (spear / bow / gun), tunic and shield in the realm's colour
+    const sid = 'soldier_' + (o.race || 'humans');
+    if (!o.role && tiny && hasSprite(sid)) {
+      const kind = o.bow ? 'bow' : o.gun ? 'gun' : 'spear', st = STATE(o);
+      const fr = tagFrame(sid, pickTag(sid, [`${kind}_${st}`, `${kind}_idle`]), o.moving ? Math.floor(o.phase * 8) : o.working ? Math.floor(o.phase * 5) : 0);
+      ctx.fillStyle = 'rgba(20,14,30,0.22)'; ctx.fillRect(snap(x - 1), snap(y - 0.5), 2.5, 0.5);
+      if (drawTinted(ctx, sid, fr, o.body, x, y, o.dir || 1)) return;
+    }
     if (SPRITES.debug) { if (tiny) mark(ctx, snap(x - 1.75), snap(y - 4.5), 3.5, 4.5, x, y); else mark(ctx, x - 2.5, y - 5.5, 5, 6, x, y); }
   }
   legacyFigure(ctx, x, y, o);
+}
+
+// draw a sheet frame tinted with a realm colour, feet (bottom centre) at x, y
+function drawTinted(ctx, id, fi, color, x, y, dir) {
+  const c = fi >= 0 && tintedFrame(id, fi, color || '#c0392b');
+  if (!c) return false;
+  const w = c.width * MAP, h = c.height * MAP, X = Math.round(x / MAP) * MAP, Y = Math.round(y / MAP) * MAP;
+  const prev = ctx.imageSmoothingEnabled;
+  ctx.imageSmoothingEnabled = ctx.getTransform().a * MAP < 1;
+  ctx.save();
+  if (dir < 0) { ctx.translate(X * 2, 0); ctx.scale(-1, 1); }
+  ctx.drawImage(c, X - w / 2, Y - h, w, h);
+  ctx.restore();
+  ctx.imageSmoothingEnabled = prev;
+  return true;
 }
 
 // Farm animals as Aseprite sprites (livestock_<kind>); false when there is none
@@ -410,6 +433,11 @@ export function animal(ctx, x, y, o) {
   ctx.fillStyle = '#111'; ctx.fillRect(hx + (d > 0 ? 0.45 : 0.15), y - 0.9 - o.h, 0.15, 0.15);
 }
 export function cavalry(ctx, x, y, color, skin, dir, ph, moving, heavy, race) {
+  const cid = 'cavalry_' + (race || 'humans');
+  if (VIEW.hd && hasSprite(cid)) {
+    const fr = tagFrame(cid, `${heavy ? 'heavy' : 'light'}_${moving ? 'ride' : 'idle'}`, Math.floor(ph * 8));
+    if (drawTinted(ctx, cid, fr, color, x, y, dir)) return;
+  }
   if (VIEW.hd) {
     // Phase 20: town scale — a small horse and rider
     const horse = farmAnimal('horse', moving ? Math.floor(ph * 7) % 2 : 0, dir);
@@ -427,6 +455,7 @@ export function cavalry(ctx, x, y, color, skin, dir, ph, moving, heavy, race) {
   ctx.fillStyle = '#cfd6dd'; ctx.fillRect(x + 0.4 * dir, y - 4.6, 0.18, 2.6);
 }
 export function siegeEngine(ctx, x, y, cannon, dir, fire) {
+  if (VIEW.hd && hasSprite('siege_engine') && drawTinted(ctx, 'siege_engine', tagFrame('siege_engine', cannon ? 'cannon' : 'catapult', fire ? 1 : 0), null, x, y, dir)) return;
   ctx.fillStyle = 'rgba(0,0,0,0.25)'; ctx.fillRect(x - 1.4, y - 0.1, 2.8, 0.35);
   ctx.fillStyle = '#4a3420'; ctx.fillRect(x - 1, y - 0.7, 0.6, 0.6); ctx.fillRect(x + 0.5, y - 0.7, 0.6, 0.6);
   if (cannon) {

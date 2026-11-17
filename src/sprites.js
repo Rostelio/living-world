@@ -279,6 +279,14 @@ export function tintKey(src, color) {
   c.getContext('2d').putImageData(d, 0, 0);
   return c;
 }
+// a frame with its KEY colours swapped for `color`, cached (soldiers, riders: the realm's colour)
+const TINTC = new Map();
+export function tintedFrame(id, fi, color) {
+  const k = id + '#' + fi + '#' + color;
+  let c = TINTC.get(k);
+  if (c === undefined) { const f = frameCanvas(id, fi); c = f ? tintKey(f, color) : null; TINTC.set(k, c); }
+  return c;
+}
 // Is any sprite whose id starts with one of these prefixes loaded?
 export const anySheet = (...prefixes) => [...SPRITES.sheets.keys()].some((id) => prefixes.some((p) => id.startsWith(p)));
 

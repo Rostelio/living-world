@@ -28,3 +28,5 @@ import { TOWN } from './town.mjs';
 for (const [id, fn] of Object.entries(TOWN)) GENERATORS[id] = () => ({ layer: id, ...fn() });
 import { UI } from './ui.mjs';
 for (const [id, fn] of Object.entries(UI)) GENERATORS[id] = () => ({ layer: id, ...fn() });
+import { ARMY } from './army.mjs';
+for (const [id, fn] of Object.entries(ARMY)) GENERATORS[id] = fn;

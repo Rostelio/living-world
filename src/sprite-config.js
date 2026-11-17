@@ -19,7 +19,7 @@ const each = (prefix, list) => list.map((k) => `${prefix}_${k}`);
 
 export const SPRITE_IDS = [
   // characters
-  ...each('townsfolk', RACES), ...each('person', RACES), 'soldier_infantry', 'soldier_archer', 'cavalry', 'siege_engine', 'explorer',
+  ...each('townsfolk', RACES), ...each('person', RACES), ...each('soldier', RACES), ...each('cavalry', RACES), 'siege_engine', 'explorer',
   'caravan', 'cart', 'fishing_boat', 'ship_war', 'ship_transport',
   ...each('livestock', ['sheep', 'cow', 'pig', 'goat', 'horse', 'chicken', 'dog']), ...each('beast', ['sheep', 'cow', 'horse', 'warhorse']),
   'scene_walker', 'scene_soldier', 'scene_rider', ...each('portrait', RACES), 'advisor_portrait',

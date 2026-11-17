@@ -4,6 +4,7 @@
 // Frames per role: 0..3 walk, 4..5 work, 6 idle — the same frame numbers the game asks for.
 import { Pix } from './pix.mjs';
 import { R, SKIN, INK } from './palette.mjs';
+import { KEY } from './kit.mjs';
 
 export const ROLES = ['farmer', 'woodcutter', 'miner', 'crafter', 'merchant', 'priest', 'guard', 'noble', 'child', 'hauler'];
 
@@ -20,6 +21,10 @@ const DRESS = {
   noble: { shirt: R.purple, pants: R.purple, boots: R.ink[2], robe: true, trim: R.gold, cape: R.red },
   child: { shirt: R.ochre, pants: R.brown, boots: R.wood[1] },
   hauler: { shirt: R.cream, pants: R.wood, boots: R.wood[0] },
+  // soldiers (soldier_<race>): tunics and shields in KEY colours, tinted with the realm colour in game
+  spear: { shirt: KEY, pants: R.brown, boots: R.ink[2] },
+  bow: { shirt: KEY, pants: R.brown, boots: R.wood[0] },
+  gun: { shirt: KEY, pants: R.steel, boots: R.ink[2] },
 };
 
 export function townsfolkFrame(race, role, f) {
@@ -119,7 +124,7 @@ export function townsfolkFrame(race, role, f) {
   if (race === 'lizardfolk') { g.p(ex + 1, ey, R.gold[3]).p(ex + 1, ey + 1, INK); }
   else { g.r(ex, ey + (eyeH === 1 ? 1 : 0), 1, eyeH, INK).r(ex + 2, ey + (eyeH === 1 ? 1 : 0), 1, eyeH, INK); }
   if (race === 'orcs') { g.r(ex - 1, ey, 4, 1, skin[0]); g.p(ex + 2, H(headH - 1), R.cream[3]).p(ex - 1, H(headH - 1), R.cream[2]); }
-  if (race !== 'lizardfolk' && race !== 'orcs' && role !== 'guard') g.p(ex + 3, ey + 2, R.pink[2]);     // blush
+  if (race !== 'lizardfolk' && race !== 'orcs' && role !== 'guard' && !SOLDIER.has(role)) g.p(ex + 3, ey + 2, R.pink[2]);     // blush
   g.p(hx + 1, H(4), skin[1]);                                                 // ear
 
   // ---- hair ----
@@ -150,7 +155,9 @@ export function townsfolkFrame(race, role, f) {
   if (role === 'farmer') { g.r(hx - 2, H(1), hw + 4, 1, R.straw[2]).r(hx + 1, H(-1), hw - 2, 2, R.straw[2]).r(hx + 1, H(-1), hw - 2, 1, R.straw[3]).r(hx + 1, H(0), hw - 2, 1, R.red[2]); }
   if (role === 'miner') { g.r(hx + 1, H(-1), hw - 2, 1, R.gold[2]).r(hx, H(0), hw, 2, R.gold[2]).r(hx + 1, H(-1), 2, 1, R.gold[3]).r(hx, H(1), hw, 1, R.gold[1]).p(hx + hw - 2, H(0), R.fire[4]); }
   if (role === 'merchant') { g.r(hx, H(1), hw + 1, 1, R.red[1]).r(hx + 1, H(-1), hw - 2, 2, R.red[2]).p(hx + 1, H(-2), R.cream[3]).p(hx, H(-3), R.cream[3]); }
-  if (role === 'guard') { g.r(hx, H(-1), hw, 3, R.steel[2]).r(hx + 1, H(-1), hw - 3, 1, R.steel[3]).r(hx, H(2), 3, 2, R.steel[1]).p(hx + 3, H(-2), R.red[2]); }
+  if (role === 'bow') g.r(hx, H(-1), hw, 3, R.green[2]).r(hx, H(-1), hw - 2, 1, R.green[3]).r(hx - 1, H(2), 2, 4, R.green[1]);
+  if (role === 'gun') g.r(hx, H(-1), hw, 2, R.ink[2]).r(hx - 1, H(1), hw + 2, 1, R.ink[2]).p(hx + 3, H(-1), R.gold[2]);
+  if (role === 'guard' || role === 'spear') { g.r(hx, H(-1), hw, 3, R.steel[2]).r(hx + 1, H(-1), hw - 3, 1, R.steel[3]).r(hx, H(2), 3, 2, R.steel[1]).p(hx + 3, H(-2), R.red[2]); }
   if (role === 'noble') { for (const x of [1, 3, 5]) g.p(hx + x + (child ? 0 : 0), H(-2), R.gold[3]); g.r(hx + 1, H(-1), hw - 2, 1, R.gold[2]).p(hx + 3, H(-1), R.red[2]); }
   if (role === 'priest' && race !== 'lizardfolk') g.r(hx, H(0), 1, 6, D.shirt[1]).r(hx - 1, H(1), 1, 6, D.shirt[1]); // hood back
 
@@ -159,11 +166,20 @@ export function townsfolkFrame(race, role, f) {
   const hand = (x, y) => g.p(x, y, skin[2]);
   const sleeve = (x, y, n) => g.r(x, y, 1, n, D.shirt[2]);
   const T = { farmer: 'hoe', woodcutter: 'axe', miner: 'pick', crafter: 'hammer' }[role];
-  if (role === 'guard') {
+  if (role === 'guard' || role === 'spear') {
     const thrust = f === 4 ? 1 : 0;
     const sx = fa + 1 + thrust;
     g.line(sx, ht - 4, sx, feetY, R.wood[2]).r(sx, ht - 6, 1, 2, R.steel[3]).p(sx, ht - 7, R.steel[4]);
     sleeve(fa, bodyTop, 2); hand(fa + thrust, bodyTop + 2);
+  } else if (role === 'bow') {
+    const bx2 = fa + 2, by2 = bodyTop - 1, drawn = f === 4;
+    for (let dy = -5; dy <= 5; dy++) g.p(bx2 + (Math.abs(dy) < 3 ? 1 : 0) + (Math.abs(dy) < 5 ? 0 : -1), by2 + dy, R.wood[2]);
+    g.line(bx2 - (drawn ? 2 : 0), by2, bx2 - 1, by2 - 5, R.cream[3]).line(bx2 - (drawn ? 2 : 0), by2, bx2 - 1, by2 + 5, R.cream[3]);
+    if (work) g.line(bx2 - 3, by2, bx2 + 4, by2, R.wood[1]).p(bx2 + 5, by2, R.steel[3]);
+    sleeve(fa, bodyTop, 2); hand(fa + 1, by2);
+  } else if (role === 'gun') {
+    if (work) { g.line(bx, bodyTop + 1, fa + 6, bodyTop + 1, R.wood[1]).line(fa + 2, bodyTop, fa + 7, bodyTop, R.ink[2]); if (f === 4) g.r(fa + 8, bodyTop - 1, 2, 3, R.fire[3]).p(fa + 10, bodyTop, R.fire[4]); sleeve(fa, bodyTop, 2); hand(fa + 1, bodyTop + 1); }
+    else { g.line(fa, bodyTop + 3, fa + 3, ht - 3, R.ink[2]).line(fa - 1, bodyTop + 3, fa, bodyTop + 1, R.wood[1]); sleeve(fa, bodyTop + swing, 2); hand(fa, bodyTop + swing + 2); }
   } else if (work && T) {
     const hy = bodyTop + 1;
     sleeve(fa, bodyTop - (up ? 2 : 0), 2); hand(fa + 1, hy - (up ? 3 : -1));
@@ -200,8 +216,20 @@ export function townsfolkFrame(race, role, f) {
     if (role === 'merchant') g.r(bx + 1, bodyBot - 1, 2, 2, R.wood[2]).p(bx + 1, bodyBot - 1, R.gold[3]);  // coin pouch
   }
 
+  if (role === 'spear') g.r(bx - 2, bodyTop, 4, 5, KEY[2]).r(bx - 2, bodyTop, 4, 1, KEY[3]).r(bx - 2, bodyTop + 4, 4, 1, KEY[1]).p(bx - 1, bodyTop + 2, R.gold[3]).p(bx, bodyTop + 2, R.gold[3]);
   g.outline(INK);
   return g;
+}
+
+const SOLDIER = new Set(['spear', 'bow', 'gun']);
+export function soldiers(race) {
+  const frames = [], tags = [];
+  for (const role of SOLDIER) {
+    const s = frames.length;
+    for (let f = 0; f < 7; f++) frames.push(townsfolkFrame(race, role, f));
+    tags.push([`${role}_walk`, s, s + 3, 140], [`${role}_work`, s + 4, s + 5, 220], [`${role}_idle`, s + 6, s + 6, 500]);
+  }
+  return { frames, tags, layer: 'soldier' };
 }
 
 export function townsfolk(race) {

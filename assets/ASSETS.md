@@ -36,11 +36,11 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 |---|---|---|---|---|---|---|---|
 | `townsfolk_{humans\|elves\|dwarves\|orcs\|lizardfolk\|halflings}` ⚠ | small villager. One sheet per race; roles (farmer, woodcutter, miner, crafter, merchant, priest, guard, noble, child, hauler) differ by clothes, hat, tool and carried item | src/render/sprites16.js:126 `tinyPerson`; used in src/render/people.js:94 `settlementPeople` | 7×9 | walk (4), work (2), idle (1) — `frameOf`, people.js:35 | 7 × 10 roles = 70 | 1 | Aseprite (scripts/art) |
 | `person_{humans\|elves\|dwarves\|orcs\|lizardfolk\|halflings}` ⚠ | larger figure at close zoom: settlers, explorers, soldiers in formation | src/render/sprites16.js:27 `personSprite`; src/render/people.js:37 `figure` | 10×12 | walk (4), work/attack (2), idle (1) | 7 × 6 looks (worker, soldier, archer, guard, noble, settler) = 42 | 2 | code-drawn |
-| `soldier_{infantry\|archer}` | army soldiers in formations and battles (shield or bow on `person_*`) | src/render/people.js:294 `army`, :341 `battle`; src/render/warfx.js:19 `formation`, :65 `battleScene` | 10×12 | march (4), fight (2), idle (1) | 7 | 2 | code-drawn |
-| `cavalry` | rider on a horse | src/render/people.js:417 `cavalry` (rider + `farmAnimal('horse')`) | 10×12 rider on 10×7 horse | gallop (2), stand (1) | 3 | 2 | code-drawn |
-| `siege_engine` | catapult / cannon at sieges | src/render/people.js:434 `siegeEngine` | ~12×10 | idle (1), fire (1) | 2 | 3 | code-drawn |
+| `soldier_{humans\|elves\|dwarves\|orcs\|lizardfolk\|halflings}` | army soldiers (spear, bow, gun; tunic and shield tinted with the realm colour) in formations and battles (shield or bow on `person_*`) | src/render/people.js:294 `army`, :341 `battle`; src/render/warfx.js:19 `formation`, :65 `battleScene` | 10×12 | march (4), fight (2), idle (1) | 7 | 2 | Aseprite (scripts/art) |
+| `cavalry_{humans\|elves\|dwarves\|orcs\|lizardfolk\|halflings}` | rider on a horse (light, heavy) | src/render/people.js:417 `cavalry` (rider + `farmAnimal('horse')`) | 10×12 rider on 10×7 horse | gallop (2), stand (1) | 3 | 2 | Aseprite (scripts/art) |
+| `siege_engine` | catapult / cannon at sieges | src/render/people.js:434 `siegeEngine` | ~12×10 | idle (1), fire (1) | 2 | 3 | Aseprite (scripts/art) |
 | `explorer` | explorer and settler units moving on the map | src/render/renderer.js:807 `drawExplorers`, :1294 `drawUnit` | ~10×12 | walk (4), idle (1) | 5 | 2 | code-drawn |
-| `caravan` | trade caravan (cart and ox) | src/render/town16.js:400 `caravan16`; renderer.js:98 `drawCaravans` | 16×10 | move (2) | 2 | 2 | code-drawn |
+| `caravan` | trade caravan (cart and ox) | src/render/town16.js:400 `caravan16`; renderer.js:98 `drawCaravans` | 16×10 | move (2) | 2 | 2 | Aseprite (scripts/art) |
 | `cart`, `fishing_boat` | small life near towns | src/render/fx.js:359 `drawLife` | ~8×6 | move (2) | 2 each | 2 | code-drawn |
 | `ship_{war\|transport}` | fleets at sea | src/render/renderer.js:965 `drawShip`, :987 `drawFleetsWorld` | ~16×12 at scale 1 | sail (1); the bob is done in code | 1 each | 2 | code-drawn |
 
@@ -74,8 +74,8 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 
 | id | what it is | where in code (file:line) | in-game size, px | states / animations | frames (estimate) | priority | status |
 |---|---|---|---|---|---|---|---|
-| `creature_{dragon\|wyvern\|giant\|troll}` | monsters that raid from lairs | src/render/town16.js:428 `creature16`; drawn in renderer.js (monster markers) | 24×18 | fly / walk (2) | 2 | 3 | code-drawn |
-| `lair` | creature lair (cave mouth with bones and gold) | src/render/town16.js:420 `lair16` | 16×12 | static (1) | 1 | 3 | code-drawn |
+| `creature_{dragon\|wyvern\|giant\|troll}` | monsters that raid from lairs | src/render/town16.js:428 `creature16`; drawn in renderer.js (monster markers) | 24×18 | fly / walk (2) | 2 | 3 | Aseprite (scripts/art) |
+| `lair` | creature lair (cave mouth with bones and gold) | src/render/town16.js:420 `lair16` | 16×12 | static (1) | 1 | 3 | Aseprite (scripts/art) |
 | `wildlife_{deer\|boar\|goat\|wolf\|bear}` | wild animals that roam, breed and hunt | src/render/sprites16.js:91 `animalSprite`; people.js:260 `wildlife`, :401 `animal` | 14×11 | walk (2) | 2 | 2 | Aseprite (scripts/art) |
 | `sea_{whale\|serpent}` | sea creatures painted on the atlas | src/render/atlas.js:20 `bakeAtlas` | ~12×8 | static (1) | 1 | 3 | code-drawn |
 
@@ -228,6 +228,9 @@ Sprites marked **exact** replace a ready-made picture of that size, so the canva
 |---|---|---|---|
 | townsfolk_* | 32×32 | {role}_walk, {role}_work, {role}_idle | |
 | person_* | 32×32 | walk, work, idle | {role}_walk, {role}_work, {role}_idle |
+| soldier_* | 32×32 | spear_walk, spear_work, spear_idle, bow_walk, bow_work, bow_idle, gun_walk, gun_work, gun_idle | |
+| cavalry_* | 32×32 | light_ride, light_idle, heavy_ride, heavy_idle | |
+| siege_engine | 32×32 | catapult, cannon | |
 | livestock_* | 32×32 | walk | graze, idle |
 | wildlife_* | 32×32 | walk | idle |
 | creature_dragon, creature_wyvern | 64×64 | fly | idle |
