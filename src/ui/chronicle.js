@@ -3,6 +3,7 @@
 // Built only from the saved chronicle and ruler list — it never changes the game state.
 import { S, player } from '../sim/state.js';
 import { makeCanvas } from '../render/sprites.js';
+import { frameCanvas } from '../sprites.js';
 import { escapeHtml as E } from '../core/util.js';
 import { rulerFullName } from '../sim/government.js';
 import { HERO_KINDS } from '../sim/stories.js';
@@ -12,6 +13,8 @@ import { t } from './i18n.js';
 const VIG = {};
 function vignette(kind) {
   if (VIG[kind]) return VIG[kind];
+  const art = frameCanvas('vignette_' + kind, 0, [48, 36]);
+  if (art) return (VIG[kind] = art.toDataURL());
   const c = makeCanvas(24, 18);
   const x = c.getContext('2d');
   const P = (px, py, w, h, col) => { x.fillStyle = col; x.fillRect(px, py, w, h); };

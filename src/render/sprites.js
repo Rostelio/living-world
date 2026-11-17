@@ -68,7 +68,45 @@ const EMBLEMS = [
   ['xxxxx', 'x.x.x', 'xxxxx', '.x.x.', '.....'], // skull-ish
   ['x...x', '.x.x.', '..x..', '.x.x.', 'x...x'], // saltire
 ];
+// Aseprite flag parts (scripts/art/banners.mjs flag_parts): the field and pattern are painted at
+// 30×20, the emblem frame is tinted with the third colour, then the cloth's folds go on top.
+const FLAG_ART = new Map();
+function flagArt(flag) {
+  if (!SPRITES.sheets.has('flag_parts')) return null;
+  const key = JSON.stringify(flag);
+  if (FLAG_ART.has(key)) return FLAG_ART.get(key);
+  const c = makeCanvas(30, 20), x = c.getContext('2d');
+  drawFlagField(x, flag, 0, 0, 30, 20);
+  const em = frameCanvas('flag_parts', tagFrame('flag_parts', 'emblem', flag.emblem % EMBLEMS.length));
+  if (em) {
+    const t = makeCanvas(30, 20), tx = t.getContext('2d');
+    tx.drawImage(em, 0, 0); tx.globalCompositeOperation = 'multiply';
+    tx.fillStyle = flag.c3 === flag.c1 || flag.c3 === flag.c2 ? '#f5f0e1' : flag.c3; tx.fillRect(0, 0, 30, 20);
+    tx.globalCompositeOperation = 'destination-in'; tx.drawImage(em, 0, 0);
+    x.drawImage(t, 0, 0);
+  }
+  const cl = frameCanvas('flag_parts', tagFrame('flag_parts', 'cloth', 0));
+  if (cl) x.drawImage(cl, 0, 0);
+  FLAG_ART.set(key, c);
+  return c;
+}
+function drawFlagField(ctx, flag, x, y, w, h) {
+  const { pattern, c1, c2 } = flag;
+  ctx.fillStyle = c1; ctx.fillRect(x, y, w, h);
+  ctx.fillStyle = c2;
+  switch (pattern) {
+    case 1: ctx.fillRect(x, y + (h >> 1), w, h - (h >> 1)); break;
+    case 2: ctx.fillRect(x + (w >> 1), y, w - (w >> 1), h); break;
+    case 3: ctx.fillRect(x + Math.round(w / 3), y, Math.round(w / 3), h); break;
+    case 4: ctx.fillRect(x, y + Math.round(h / 3), w, Math.round(h / 3)); break;
+    case 5: { const b = Math.max(1, Math.round(h / 10)); ctx.fillRect(x, y, w, b); ctx.fillRect(x, y + h - b, w, b); ctx.fillRect(x, y, b, h); ctx.fillRect(x + w - b, y, b, h); break; }
+    case 6: for (let i = 0; i < w; i++) ctx.fillRect(x + i, y + Math.floor((i / w) * h), 1, h - Math.floor((i / w) * h)); break;
+    default: break;
+  }
+}
 export function drawFlag(ctx, flag, x, y, w = 15, h = 10) {
+  const art = flagArt(flag);
+  if (art) { const sm = ctx.imageSmoothingEnabled; ctx.imageSmoothingEnabled = w < 30; ctx.drawImage(art, x, y, w, h); ctx.imageSmoothingEnabled = sm; return; }
   const { pattern, c1, c2, c3, emblem } = flag;
   ctx.fillStyle = c1; ctx.fillRect(x, y, w, h);
   ctx.fillStyle = c2;
@@ -92,6 +130,8 @@ const flagUrlCache = new Map();
 export function flagUrl(civ) {
   const key = JSON.stringify(civ.flag);
   if (flagUrlCache.has(key)) return flagUrlCache.get(key);
+  const art = flagArt(civ.flag);
+  if (art) { const u = art.toDataURL(); flagUrlCache.set(key, u); return u; }
   const c = makeCanvas(15, 10);
   drawFlag(c.getContext('2d'), civ.flag, 0, 0);
   const url = c.toDataURL();

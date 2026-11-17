@@ -17,7 +17,7 @@ import { battleScene, formation, siegeCamp, siegeAngle, isBreached, seaClash, ar
 import { setSun, castShadow, snowCap } from './pixelkit.js';
 import { yard16, path16, bridge16, plaza16, wall16, tower16, gate16, prop16, PROPS_BY_RACE, treehouse16, hillhome16, tent16, stilt16, boardwalk16, ropeBridge, fence16, pixelRing, townhouse16, work16, campTent8, windmill16, caravan16, lair16, creature16 } from './town16.js';
 import { findPath } from '../sim/pathfind.js';
-import { hasSprite, draw as drawSprite, animate, pickTag, frameAt, frameCanvas, beginFrame, drawDebug, crisp, mark, SPRITES } from '../sprites.js';
+import { hasSprite, draw as drawSprite, animate, pickTag, frameAt, frameCanvas, beginFrame, drawDebug, crisp, mark, SPRITES, tagFrame, tintKey } from '../sprites.js';
 import { legacyLair, legacyCreature, legacyCaravan } from '../legacy-draw.js';
 import { ART_PER_WORLD, ART_SCALE } from '../sprite-config.js';
 const SPX = 1 / ART_PER_WORLD; // world px per Aseprite pixel
@@ -1545,7 +1545,29 @@ export class Renderer {
 }
 
 // Phase 20: a parchment ribbon name tag — folded tails in the realm's colour, crisp pixel edges
+// Aseprite ribbon (scripts/art/banners.mjs): left end, middle (tiled), right end, 10×12 each, the
+// tails tinted with the realm colour
+const RIBBON = new Map();
+function ribbonParts(color, capital) {
+  const key = color + (capital ? 'c' : 'n');
+  if (RIBBON.has(key)) return RIBBON.get(key);
+  const tag = capital ? 'capital' : 'normal';
+  const parts = [0, 1, 2].map((k) => { const f = frameCanvas('ribbon', tagFrame('ribbon', tag, k)); return f && tintKey(f, color); });
+  const v = parts.every(Boolean) ? parts : null;
+  RIBBON.set(key, v);
+  return v;
+}
 function drawRibbon(ctx, x, y, w, h, color, capital) {
+  const P = SPRITES.sheets.has('ribbon') && ribbonParts(color, capital);
+  if (P) {
+    const k = h / 12, pw = 10 * k, lx = x - 1 - 6 * k, rx = x + w + 1 - 4 * k;
+    const sm = ctx.imageSmoothingEnabled; ctx.imageSmoothingEnabled = false;
+    for (let mx = lx + pw; mx < rx; mx += pw) { const ww = Math.min(pw, rx - mx); ctx.drawImage(P[1], 0, 0, Math.max(1, Math.round(ww / k)), 12, mx, y, ww, h); }
+    ctx.drawImage(P[0], lx, y, pw, h); ctx.drawImage(P[2], rx, y, pw, h);
+    ctx.imageSmoothingEnabled = sm;
+    if (capital) { ctx.fillStyle = '#c89a2a'; ctx.fillRect(x + Math.floor(w / 2) - 2, y - 3, 5, 2); ctx.fillRect(x + Math.floor(w / 2) - 2, y - 4, 1, 1); ctx.fillRect(x + Math.floor(w / 2), y - 4, 1, 1); ctx.fillRect(x + Math.floor(w / 2) + 2, y - 4, 1, 1); }
+    return;
+  }
   const t = 5; // tail width
   // tails: behind the band, a notch cut into each end
   ctx.fillStyle = '#2c1c10';

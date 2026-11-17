@@ -45,3 +45,7 @@ for (const r of RACES) {
   GENERATORS['scene_rider_' + r] = () => riderSheet(r);
 }
 for (const [id, fn] of Object.entries(SCENE)) GENERATORS[id] = fn;
+import { ribbonSheet, flagSheet, vignetteSheet, VIGNETTE_KINDS } from './banners.mjs';
+GENERATORS.ribbon = ribbonSheet;
+GENERATORS.flag_parts = flagSheet;
+for (const k of VIGNETTE_KINDS) GENERATORS['vignette_' + k] = () => vignetteSheet(k);

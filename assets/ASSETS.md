@@ -149,15 +149,15 @@ This file lists every one of them so they can be redrawn in Aseprite and exporte
 | id | what it is | where in code (file:line) | in-game size, px | states / animations | frames (estimate) | priority | status |
 |---|---|---|---|---|---|---|---|
 | `icon_{food\|wood\|stone\|iron\|gold\|knowledge\|pop\|stability\|defense\|housing}` | resource icons in the top bar and panels | src/render/sprites.js:25 `ICONS`, :38 `iconCanvas` | 8×8 | static (1) | 1 | 1 | Aseprite (scripts/art) |
-| `flag_parts` | realm flags (field pattern + charge + colours per realm) | src/render/sprites.js:69 `drawFlag`, :90 `flagUrl` | 12×8 | patterns as frames, colours applied in code | ~12 | 1 | code-drawn |
-| `ribbon` | name tags over towns (9-slice) | src/render/renderer.js:1511 `drawRibbon` | 9-slice, 3×3 parts | normal, capital | 2 | 1 | code-drawn |
+| `flag_parts` | realm flags (field pattern + charge + colours per realm) | src/render/sprites.js:69 `drawFlag`, :90 `flagUrl` | 12×8 | patterns as frames, colours applied in code | ~12 | 1 | Aseprite (scripts/art) |
+| `ribbon` | name tags over towns (9-slice) | src/render/renderer.js:1511 `drawRibbon` | 9-slice, 3×3 parts | normal, capital | 2 | 1 | Aseprite (scripts/art) |
 | `ui_frame_{wood\|paper\|pixel}` | panel and dialog frames (9-slice) | src/ui/skin.js:16 `wood`, :31 `paper`, :42 `frame`; src/ui/pixelskin.js:6 `frame` | 9-slice, ~24×24 | static (1) | 1 | 1 | Aseprite (scripts/art) |
 | `cursor` | mouse cursor | src/ui/pixelskin.js:89 `cursorUrl` | 16×16 (shown ×2) | normal (1) | 1 | 1 | Aseprite (scripts/art) |
 | `compass` | compass rose on the atlas | src/render/atlas.js:169 `drawCompass` | ~32×32 | static (1) | 1 | 2 | code-drawn |
 | `army_badge` | banner over armies (strength, colour) | src/render/renderer.js:1076 `drawArmyBadges` | ~10×12 | static (1) | 1 | 2 | code-drawn |
 | `siege_ring` | ring around a besieged town | src/render/renderer.js:948 `drawSiegeRing` | 16×16 | turning (4) | 4 | 3 | code-drawn |
 | `god_cursor` | sandbox power cursor | src/render/renderer.js:832 `drawGodCursor` | 16×16 | per power (≈10) | 10 | 3 | code-drawn |
-| `vignette_{alliance\|city\|crown\|death\|era\|faith\|hero\|plague\|revolt\|ship\|war}` | small pictures in the Chronicle | src/ui/chronicle.js:13 `vignette` | 24×18 | static (1) | 1 | 3 | code-drawn |
+| `vignette_{alliance\|city\|crown\|death\|era\|faith\|hero\|plague\|revolt\|ship\|war\|scroll}` | small pictures in the Chronicle | src/ui/chronicle.js:13 `vignette` | 24×18 | static (1) | 1 | 3 | Aseprite (scripts/art) |
 
 ---
 
@@ -242,6 +242,9 @@ Sprites marked **exact** replace a ready-made picture of that size, so the canva
 | caravan | 32×32 | move | |
 | windmill | 32×48 exact | turn | |
 | great_work_* | 64×64 exact | | |
+| ribbon | 10×12 | normal, capital | |
+| flag_parts | 30×20 | cloth, emblem | |
+| vignette_* | 48×36 exact | | |
 | portrait_* | 64×64 | m, f, beard, crown, scar | |
 | advisor_portrait | 48×48 exact | | |
 | scene_house_* | 32×48 | tier1, tier2, tier3 | |
